@@ -11,13 +11,23 @@ class RegisterForm extends Component {
 		verifypassword: "",
 	};
 
+	verifyPassword = () => {
+		if (this.state.password === this.state.verifypassword) {
+			this.registerUser();
+		} else {
+			alert("password does not match");
+		}
+	};
+
 	registerUser = (event) => {
-		event.preventDefault();
+		// event.preventDefault();
 
 		this.props.dispatch({
 			type: "REGISTER",
 			payload: {
-				username: this.state.username,
+				firstname: this.state.firstname,
+				lastname: this.state.lastname,
+				email: this.state.email,
 				password: this.state.password,
 			},
 		});
@@ -30,8 +40,9 @@ class RegisterForm extends Component {
 	};
 
 	render() {
+		console.log("this is our state:", this.state);
 		return (
-			<form className='formPanel' onSubmit={this.registerUser}>
+			<form className='formPanel' onSubmit={this.verifyPassword}>
 				<h2>Register User</h2>
 				{this.props.store.errors.registrationMessage && (
 					<h3 className='alert' role='alert'>
@@ -44,9 +55,9 @@ class RegisterForm extends Component {
 						<input
 							type='text'
 							name='firstname'
-							// value={this.state.username}
+							value={this.state.firstname}
 							required
-							// onChange={this.handleInputChangeFor('username')}
+							onChange={this.handleInputChangeFor("firstname")}
 						/>
 					</label>
 				</div>
@@ -56,9 +67,9 @@ class RegisterForm extends Component {
 						<input
 							type='text'
 							name='Lastname'
-							// value={this.state.username}
+							value={this.state.lastname}
 							required
-							// onChange={this.handleInputChangeFor('username')}
+							onChange={this.handleInputChangeFor("lastname")}
 						/>
 					</label>
 				</div>
@@ -68,9 +79,9 @@ class RegisterForm extends Component {
 						<input
 							type='text'
 							name='email'
-							// value={this.state.username}
+							value={this.state.email}
 							required
-							// onChange={this.handleInputChangeFor('username')}
+							onChange={this.handleInputChangeFor("email")}
 						/>
 					</label>
 				</div>
@@ -93,25 +104,13 @@ class RegisterForm extends Component {
 						<input
 							type='password'
 							name='verifypassword'
-							// value={this.state.password}
+							value={this.state.verifypassword}
 							required
-							// onChange={this.handleInputChangeFor('password')}
+							onChange={this.handleInputChangeFor("verifypassword")}
 						/>
 					</label>
 				</div>
-				<div>
-					User social Oauth
-					{/* <label htmlFor="Verifypassword">
-            Verify password:
-            <input
-              type="password"
-              name="verifypassword"
-              // value={this.state.password}
-              required
-              // onChange={this.handleInputChangeFor('password')}
-            />
-          </label> */}
-				</div>
+
 				<div>
 					<input className='btn' type='submit' name='submit' value='Register' />
 				</div>
