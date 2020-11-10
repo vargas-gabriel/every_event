@@ -1,0 +1,24 @@
+Nov 10th
+
+Base mode:
+
+[] registration
+    [x] update input fields
+    - server side code
+    - database 
+
+[]Components
+    -homepage
+    -create event 
+    - create post
+    -create phase
+    -edit phase
+    - edit post
+    -edit user
+
+    Stretch: 
+
+[] Get routes
+[]Post routes
+   - registration 
+   -create event
