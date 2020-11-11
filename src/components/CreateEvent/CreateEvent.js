@@ -15,7 +15,19 @@ class CreateEvent extends Component {
 
 	createEvent=()=>{
         console.log('creating event');
-
+        this.props.dispatch({
+            type: 'CREATE_EVENT',
+            payload: {
+                eventName: this.state.eventName,
+                eventAcronym: this.state.eventAcronym,
+                eventWebsite: this.state.eventWebsite,
+                eventRegistration: this.state.eventRegistration,
+                eventOAuth: this.state.eventOAuth,
+                campaignStart: this.state.campaignStart,
+                campaignEnd: this.state.campaignEnd,
+            }
+            
+        });
     }
 
 	handleInputChangeFor = (propertyName) => (event) => {
@@ -27,7 +39,8 @@ class CreateEvent extends Component {
 	render() {
         console.log('this state:', this.state);
 		return (
-			<form className='formPanel' onSubmit={this.createEvent}>
+            // <form className='formPanel' onSubmit={this.createEvent}>
+            <div>
 				<h2>Create Event</h2>
 				
 				<div>
@@ -116,9 +129,11 @@ class CreateEvent extends Component {
 				</div>                                                          
 
 				<div>
-					<input className='btn' type='submit' name='submit' value='Create Event' />
-				</div>
-			</form>
+					{/* <input className='btn' type='submit' name='submit' value='Create Event' /> */}
+				<button onClick={this.createEvent}>Create Event</button>
+                </div>
+                </div>
+			// </form>
 		);
 	}
 }
