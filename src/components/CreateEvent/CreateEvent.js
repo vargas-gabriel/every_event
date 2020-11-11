@@ -13,7 +13,10 @@ class CreateEvent extends Component {
         campaignEnd: '',
 	};
 
-	
+	createEvent=()=>{
+        console.log('creating event');
+
+    }
 
 	handleInputChangeFor = (propertyName) => (event) => {
 		this.setState({
@@ -24,7 +27,7 @@ class CreateEvent extends Component {
 	render() {
         console.log('this state:', this.state);
 		return (
-			<form className='formPanel' onSubmit={this.login}>
+			<form className='formPanel' onSubmit={this.createEvent}>
 				<h2>Create Event</h2>
 				
 				<div>
