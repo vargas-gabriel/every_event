@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import CreateEvent from '../CreateEvent/CreateEvent';
 import './App.css';
 
 class App extends Component {
@@ -54,6 +54,7 @@ class App extends Component {
               path="/user"
               component={UserPage}
             />
+            
 
             <ProtectedRoute
               // logged in shows InfoPage else shows LoginPage
@@ -61,6 +62,12 @@ class App extends Component {
               path="/info"
               component={InfoPage}
             />
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/createevent"
+              component={CreateEvent}
+            />            
 
             {/* When a value is supplied for the authRedirect prop the user will
             be redirected to the path supplied when logged in, otherwise they will
