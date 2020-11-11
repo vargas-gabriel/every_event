@@ -11,7 +11,8 @@ class RegisterForm extends Component {
 		verifypassword: "",
 	};
 
-	verifyPassword = () => {
+	verifyPassword = (event) => {
+		event.preventDefault();
 		if (this.state.password === this.state.verifypassword) {
 			this.registerUser();
 		} else {
@@ -19,8 +20,7 @@ class RegisterForm extends Component {
 		}
 	};
 
-	registerUser = (event) => {
-		// event.preventDefault();
+	registerUser = () => {
 
 		this.props.dispatch({
 			type: "REGISTER",
