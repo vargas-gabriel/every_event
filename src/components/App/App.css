@@ -14,6 +14,49 @@ img {
   max-width: 100%;
 }
 
+#outline{
+  outline: solid black 1px;
+  width: 50%;
+}
+
+#collabOutline{
+  outline: solid black 1px;
+  overflow: scroll;
+  width: 50%;
+  height: 100px;
+}
+
+#editUserDiv{
+  outline: solid black 1px;
+  width: 35%;
+}
+
+#eventPromotionDuration{
+  float: right;
+  padding-left: 60px;
+  margin-top: 60px;
+  margin-right: 10%;
+  outline: solid black 1px;
+  width: 550px;
+}
+
+#eventSocial{
+  margin-left: 30px;
+  outline: solid black 1px;
+  width: 30%;
+}
+
+#eventCollaborators{
+  margin-left: 30px;
+  outline: solid black 1px;
+  width: 30%;
+}
+
+#eventHashtags{
+  margin-left: 30px;
+  outline: solid black 1px;
+  width: 30%;
+}
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
