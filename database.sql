@@ -14,13 +14,13 @@ CREATE TABLE event (
     name VARCHAR(255) NOT NULL,
     acronym VARCHAR(255),
     event_image BYTEA,
-    type INTEGER NOT NULL,
+    type Varchar,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     website VARCHAR(512),
     registration_link VARCHAR(512),
     linkedin_account VARCHAR(512),
-    hastag TEXT,
+    hashtag TEXT,
     linkedin_oauth VARCHAR(1000) -- will be inserted after token received
 );
 CREATE TABLE user_event (
