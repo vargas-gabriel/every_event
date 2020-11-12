@@ -7,10 +7,13 @@ class UserPage extends Component {
 	state = {
 		hour: null,
 		greeting: "",
-		defaultImg: 'https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png'
+		defaultImg: 'https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png',
+		userEvents: []
 	};
 	componentDidMount() {
 		this.getGreeting();
+        this.props.dispatch({type: 'GET_USER_EVENT'})
+    
 	}
 	// this sets the greeting for the user based on the time of day
 	getGreeting = () => {

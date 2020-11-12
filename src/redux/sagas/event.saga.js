@@ -29,9 +29,23 @@ function* getEvent(){
     }
 }
 
+function* getUserEvent(action){
+    console.log('grabbing all of this users events:')
+    let response = yield axios({
+        method: 'GET',
+        url: 'api/user_event'
+    })
+    console.log('back from get user_event with:', response.data);
+    yield put({
+        type: 'SET_USER_EVENTS',
+        payload: response.data
+    })
+}
+
 function* eventSaga() {
   yield takeLatest('CREATE_EVENT', createEvent);
   yield takeLatest('GET_EVENT', getEvent);
+  yield takeLatest('GET_USER_EVENT', getUserEvent);
 }
 
 export default eventSaga;
