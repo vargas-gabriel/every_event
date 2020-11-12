@@ -14,7 +14,7 @@ CREATE TABLE event (
     name VARCHAR(255) NOT NULL,
     acronym VARCHAR(255),
     event_image BYTEA,
-    type Varchar,
+    type VARCHAR,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     website VARCHAR(512),
