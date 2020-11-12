@@ -8,6 +8,13 @@ class EditEvent extends Component {
 
     state = {
     //    defaultImage: 'https://cdn.onlinewebfonts.com/svg/img_98811.png'
+        eventName: this.props.store.temp.name,
+        eventAcronym: this.props.store.temp.acronym,
+        eventWebsite: this.props.store.temp.website,
+        eventRegistration: this.props.store.temp.registration_link,
+        eventOAuth: this.props.store.temp.linkedin_oauth,
+        campaignStart: this.props.store.temp.start_date,
+        campaignEnd: this.props.store.temp.end_date,
     }
    
     editEvent=() =>{
@@ -37,6 +44,7 @@ class EditEvent extends Component {
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
         // console.log('user is:', this.props.store.user);
+        console.log('EditEvent props:', this.props);
         return (  
             <div id="editEventDiv">
                 
@@ -49,6 +57,8 @@ class EditEvent extends Component {
                         type='date'
                         name='campaignStart'
                         required
+                        value={this.state.campaignStart.split('T', 1)[0]}
+						onChange={(event) => this.handleChange(event, "campaignStart")}
                     />
                 </label>
 
@@ -58,6 +68,8 @@ class EditEvent extends Component {
                         type='date'
                         name='campaignEnd'
                         required
+                        value={this.state.campaignEnd.split('T', 1)[0]}
+						onChange={(event) => this.handleChange(event, "campaignEnd")}
                     />
                 </label> 
                 <br/>

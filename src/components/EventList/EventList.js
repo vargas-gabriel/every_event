@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import EventItem from '../EventItem/EventItem';
+
 class EventList extends Component {
 	state = {
         
@@ -18,10 +19,13 @@ class EventList extends Component {
 
 	render() {
 		console.log("this is our state:", this.state);
+		console.log('EventList props:', this.props);
 		return (
 			<div>
-                <EventItem/>
-            </div>
+				{this.props.store.userEvent.map(event => 
+					<EventItem key={event.id} event={event}/>
+				)}
+         </div>
 		);
 	}
 }
