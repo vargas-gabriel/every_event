@@ -15,6 +15,8 @@ class EditEvent extends Component {
         eventOAuth: this.props.store.temp.linkedin_oauth,
         campaignStart: this.props.store.temp.start_date,
         campaignEnd: this.props.store.temp.end_date,
+        eventImg: this.props.store.temp.event_image,
+        toggleEdit: false,
     }
    
     editEvent=() =>{
@@ -40,6 +42,44 @@ class EditEvent extends Component {
         })
     }
 
+    toggleEditSocial = () => {
+        //console.log('toggle triggered');
+        this.setState({
+            ...this.state,
+            toggleEdit: !this.state.toggleEdit,
+        });
+    }
+
+    saveDate = () => {
+        console.log('state is', this.state);
+        // this.props.dispatch({
+        //     type: "UPDATE_EVENT",
+        //     payload: {
+        //         event: this.state,
+        //         id: this.props.store.temp.id,
+        //     }
+        // });
+    }
+
+    saveEdit = () => {
+        //console.log('saveEdit trig');
+        this.props.dispatch({
+            type: "UPDATE_EVENT",
+            payload: {
+                event: this.state,
+                id: this.props.store.temp.id,
+            }
+        });
+        this.setState({
+            ...this.state,
+            toggleEdit: !this.state.toggleEdit,
+        });
+    }
+
+    toggleEditFunction = () => {
+        
+    }
+
     render(){
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
@@ -58,7 +98,9 @@ class EditEvent extends Component {
                         name='campaignStart'
                         required
                         value={this.state.campaignStart.split('T', 1)[0]}
-						onChange={(event) => this.handleChange(event, "campaignStart")}
+                        onChange={(event) => this.handleChange(event, "campaignStart")}
+                        //onChange={this.saveDate} handle the dispatch in a date specific onChange
+                        // fix bug to toggle switch on save button click
                     />
                 </label>
 
@@ -127,10 +169,26 @@ class EditEvent extends Component {
 
                 <div id="eventSocial">
                     <h4>Event Social</h4>
-                    <img src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/>
-                    <input placeholder="Event Acronym"></input><br/>
-                    <input placeholder="Event Website"></input><br/>
-                    <button>Save</button><br/><br/>
+                    <label className="switch" onChange={this.toggleEditSocial}>
+                        <input type="checkbox"/>
+                        <span className="slider round"></span>
+                    </label>
+                    {this.state.toggleEdit === false &&
+                        <>
+                            <img src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/>
+                            <h5>{this.state.eventAcronym}</h5>
+                            <h5>{this.state.eventWebsite}</h5>
+                        </>
+                    }
+                    {this.state.toggleEdit === true &&
+                        <>
+                            <input onChange={(event) => this.handleChange(event, "eventName")} placeholder={this.state.eventName}/>
+                            <input onChange={(event) => this.handleChange(event, "eventAcronym")} placeholder={this.state.eventAcronym}/>
+                            <input onChange={(event) => this.handleChange(event, "eventWebsite")} placeholder={this.state.eventWebsite}/>
+                            <button onClick={this.saveEdit}>Save</button>
+                        </>
+                    }
+                    <br/><br/>
                 </div>
 
                 <div id="eventCollaborators">

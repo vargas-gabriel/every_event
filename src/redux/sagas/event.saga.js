@@ -42,10 +42,22 @@ function* getUserEvent(action){
     })
 }
 
+function* updateEvent(action){
+    console.log('updating event, sending:', action.payload);
+    let response = yield axios({
+        method: 'PUT',
+        url: `api/event/${action.payload.id}`,
+        data: action.payload,
+    }) // no yield put in place yet to update Edit page, but somehow the
+       // temp reducer and edit page local state are being updated...
+       // is this a result of React re-rendering on variable changes default setting?
+}
+
 function* eventSaga() {
   yield takeLatest('CREATE_EVENT', createEvent);
   yield takeLatest('GET_EVENT', getEvent);
   yield takeLatest('GET_USER_EVENT', getUserEvent);
+  yield takeLatest('UPDATE_EVENT', updateEvent);
 }
 
 export default eventSaga;
