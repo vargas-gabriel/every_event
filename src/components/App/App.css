@@ -57,6 +57,14 @@ img {
   outline: solid black 1px;
   width: 30%;
 }
+
+#eventItemDiv{
+  display: inline-block;
+  margin-left: 30px;
+  outline: solid black 1px;
+  width: 30%;
+  margin-bottom: 25px;
+}
 /* --------------------------------------------------------------------------------
 Container
 -------------------------------------------------------------------------------- */
