@@ -23,7 +23,9 @@ import CreateEvent from '../CreateEvent/CreateEvent';
 import EditUser from '../EditUser/EditUser';
 import EditEvent from '../EditEvent/EditEvent';
 import EventList from '../EventList/EventList';
+import EditPhase from '../EditPhase/EditPhase';
 import './App.css';
+
 
 class App extends Component {
   componentDidMount() {
@@ -131,7 +133,15 @@ class App extends Component {
               exact
               path="/eventlist"
               component={EventList}
-            />            
+            /> 
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/editphase"
+              component={EditPhase}
+            />                                
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>

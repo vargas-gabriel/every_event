@@ -53,6 +53,9 @@ const Nav = (props) => {
         <Link className="nav-link" to="/editevent">
           Edit Event
         </Link>
+        <Link className="nav-link" to="/editphase">
+          Edit Phase
+        </Link>        
       </div>
     </div>
   );

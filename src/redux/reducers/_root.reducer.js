@@ -4,6 +4,7 @@ import user from './user.reducer';
 import event from './event.reducer';
 import temp from './temp.reducer';
 import userEvent from './userEvent.reducer';
+import tempPhase from './temp.phase.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   user,
   event,// will have an id and username if someone is logged in
   temp,
-  userEvent
+  userEvent,
+  tempPhase
 });
 
 export default rootReducer;

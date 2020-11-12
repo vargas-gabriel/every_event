@@ -59,7 +59,7 @@ class UserPage extends Component {
 					<LogOutButton className='log-in' />
 					
 				</div>
-
+				
 				<div id="outline">
 					<h4>This is where we could put events</h4>
 					<EventList/>
