@@ -4,15 +4,11 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class EventItem extends Component {
 	state = {
-		eventName : "",
-		eventAcronym: "",
-		email: "",
-		password: "",
-		verifypassword: "",
+        
 	};
 
 	
-
+  
 
 	handleInputChangeFor = (propertyName) => (event) => {
 		this.setState({
