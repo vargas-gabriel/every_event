@@ -48,4 +48,28 @@ router.post("/logout", (req, res) => {
 	res.sendStatus(200);
 });
 
+router.put('/:id', (req, res) => {
+	console.log('in edit user', req.body);
+	const query = `
+	UPDATE "user"
+	SET 
+	"first_name" = $1,
+	"last_name" = $2,
+	"image" = $3,
+	"linkedin_account"= $4,
+	"linkedin_oauth" = $5
+	WHERE "id" = $6
+	;`;
+	pool.query(query, [req.body.firstName, req.body.lastName, req.body.image, req.body.linkedin_account, req.body.linkedin_oauth, req.body.id])
+	.then(() => 
+	res.sendStatus(200))
+	.catch(error => {
+	  console.log('ERROR:', error);
+	})
+  });
+
+
+
+
+
 module.exports = router;
