@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-
+import EventItem from '../EventItem/EventItem';
 class UserPage extends Component {
 	state = {
 		hour: null,
@@ -59,6 +59,10 @@ class UserPage extends Component {
 
 				<div id="outline">
 					<h4>This is where we could put events</h4>
+					<EventItem/>
+					<EventItem/>
+					<EventItem/>
+
 				</div>
 
 				<div id="outline">
