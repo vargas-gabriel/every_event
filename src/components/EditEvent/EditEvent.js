@@ -99,7 +99,8 @@ class EditEvent extends Component {
                         required
                         value={this.state.campaignStart.split('T', 1)[0]}
                         onChange={(event) => this.handleChange(event, "campaignStart")}
-                        //onChange={this.saveDate}
+                        //onChange={this.saveDate} handle the dispatch in a date specific onChange
+                        // fix bug to toggle switch on save button click
                     />
                 </label>
 
