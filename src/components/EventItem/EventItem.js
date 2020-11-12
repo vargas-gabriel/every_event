@@ -34,17 +34,8 @@ class EventItem extends Component {
 							onChange={this.handleInputChangeFor("campaignStart")}
 						/>
 					</label>
-                    <br/>
-					<label htmlFor='campaignEnd'>
-						Campaign End:<br/>
-						<input
-							type='date'
-							name='campaignEnd'
-							required
-							value={this.state.campaignEnd}
-							onChange={this.handleInputChangeFor("campaignEnd")}
-						/>
-					</label>
+
+                    
             </div>
 		);
 	}

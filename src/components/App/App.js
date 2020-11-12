@@ -22,7 +22,7 @@ import RegisterPage from '../RegisterPage/RegisterPage';
 import CreateEvent from '../CreateEvent/CreateEvent';
 import EditUser from '../EditUser/EditUser';
 import EditEvent from '../EditEvent/EditEvent';
-import EventItem from '../EventItem/EventItem';
+import EventList from '../EventList/EventList';
 import './App.css';
 
 class App extends Component {
@@ -116,14 +116,22 @@ class App extends Component {
               path="/editevent"
               component={EditEvent}
             />
-            <ProtectedRoute
+            {/* <ProtectedRoute
               // with authRedirect:
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
               path="/eventitem"
               component={EventItem}
-            />
+            /> */}
+            <ProtectedRoute
+              // with authRedirect:
+              // - if logged in, redirects to "/user"
+              // - else shows LandingPage at "/home"
+              exact
+              path="/eventlist"
+              component={EventList}
+            />            
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
