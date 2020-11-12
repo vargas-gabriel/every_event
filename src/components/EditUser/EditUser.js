@@ -100,6 +100,7 @@ class EditUser extends Component {
                             <br/>
                             <button type="submit">Save Changes</button>
                         </form>
+                        <button onClick={this.navHome}>Home</button>
                     </div>
                     
 

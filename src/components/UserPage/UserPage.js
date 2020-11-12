@@ -32,6 +32,13 @@ class UserPage extends Component {
 			});
 		}
 	};
+
+
+	editUserNav=()=>{
+	  this.props.history.push('/edituser')
+	}
+
+	
 	// this component doesn't do much to start, just renders some user info to the DOM
 	render() {
 		return (
@@ -43,6 +50,7 @@ class UserPage extends Component {
 				<p>Your ID is: {this.props.store.user.id}</p>
 
 				
+				<button onClick={this.editUserNav}>Edit User</button><br/>
 				<LogOutButton className='log-in' />
 			</div>
 		);
