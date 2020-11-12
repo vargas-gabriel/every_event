@@ -7,6 +7,7 @@ class UserPage extends Component {
 	state = {
 		hour: null,
 		greeting: "",
+		defaultImg: 'https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png'
 	};
 	componentDidMount() {
 		this.getGreeting();
@@ -32,18 +33,42 @@ class UserPage extends Component {
 			});
 		}
 	};
+
+
+	editUserNav=()=>{
+	  this.props.history.push('/edituser')
+	}
+
+	
 	// this component doesn't do much to start, just renders some user info to the DOM
 	render() {
 		return (
 			<div>
-				<h1 id='welcome'>
-					{" "}
-					{this.state.greeting}, {this.props.store.user.first_name}
-				</h1>
-				<p>Your ID is: {this.props.store.user.id}</p>
+				<div id="outline">
+					<h1 id='welcome'>
+						{" "}
+						{this.state.greeting}, {this.props.store.user.first_name}
+					</h1>
+					<hr/>
+					{/* <p>Your ID is: {this.props.store.user.id}</p> */}
+					<img src={this.state.defaultImg} width='100px'></img><br/>
+					<button onClick={this.editUserNav}>Edit User</button><br/>
+					<LogOutButton className='log-in' />
+					
+				</div>
 
-				
-				<LogOutButton className='log-in' />
+				<div id="outline">
+					<h4>This is where we could put events</h4>
+				</div>
+
+				<div id="outline">
+					<h4>This is where we could put past events</h4>
+				</div>
+
+				<div id="outline">
+					<h4>This is where we could put active/current events</h4>
+				</div>
+
 			</div>
 		);
 	}

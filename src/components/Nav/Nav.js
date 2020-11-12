@@ -49,6 +49,10 @@ const Nav = (props) => {
         <Link className="nav-link" to="/edituser">
           Edit User
         </Link>
+
+        <Link className="nav-link" to="/editevent">
+          Edit Event
+        </Link>
       </div>
     </div>
   );
