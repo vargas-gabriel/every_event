@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
 
     // const eventId = result.rows[0]
 
-    pool 
+    pool //transaction
      .query(queryText, [
         req.body.eventName, 
         req.body.eventAcronym,

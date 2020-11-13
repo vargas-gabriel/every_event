@@ -20,7 +20,7 @@ class EventItem extends Component {
 	eventClick = (event) => {
 		console.log('this event was clicked', event.id);
 		this.props.dispatch({
-			type: 'SET_TEMP',
+			type: 'SET_TEMP',//active event
 			payload: event,
 		});
 		this.editEventNav();
