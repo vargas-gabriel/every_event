@@ -7,23 +7,13 @@ import mapStoreToProps from '../../redux/mapStoreToProps';
 
 class EditEvent extends Component {
 
-
     state = {
-    //    defaultImage: 'https://cdn.onlinewebfonts.com/svg/img_98811.png'
-        // eventName: this.props.store.temp.name,
-        // eventAcronym: this.props.store.temp.acronym,
-        // eventWebsite: this.props.store.temp.website,
-        // eventRegistration: this.props.store.temp.registration_link,
-        // eventOAuth: this.props.store.temp.linkedin_oauth,
-        // campaignStart: this.props.store.temp.start_date.split('T', 1)[0],
-        // campaignEnd: this.props.store.temp.end_date.split('T', 1)[0],
-        // eventImg: this.props.store.temp.event_image,
         toggleEdit: false,
     }
 
     componentDidMount = () => {
         this.props.dispatch({type: 'GET_USER_EVENT'});
-        //this.findActiveEvent();
+        //this.findActiveEvent();   moved this into render()
     }
 
 
@@ -112,13 +102,13 @@ class EditEvent extends Component {
 
     saveEdit = () => {
         console.log('saveEdit trig');
-        // this.props.dispatch({
-        //     type: "UPDATE_EVENT",
-        //     payload: {
-        //         event: this.state,
-        //         id: this.props.store.temp.id,
-        //     }
-        // });
+        this.props.dispatch({
+            type: "UPDATE_EVENT",
+            payload: {
+                event: this.props.store.temp,
+                id: this.props.store.temp.id,
+            }
+        });
         this.setState({
             ...this.state,
             toggleEdit: !this.state.toggleEdit,
