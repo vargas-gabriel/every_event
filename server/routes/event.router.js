@@ -95,7 +95,7 @@ router.put('/:id', (req, res) => {
         req.body.event.eventWebsite,
         req.body.id,
     ];
-    //console.log('router put hit, queryText, queryParams', queryText, queryParams);
+    //console.log('router put hit with queryText, queryParams', queryText, queryParams);
     pool.query(queryText, queryParams)
     .then(result => {
       res.sendStatus(201);

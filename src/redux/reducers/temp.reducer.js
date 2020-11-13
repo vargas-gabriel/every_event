@@ -1,4 +1,4 @@
-const tempReducer = (state = {}, action) => {
+const tempReducer = (state = [], action) => {
     switch (action.type) {
       case 'SET_TEMP':
         return action.payload;
