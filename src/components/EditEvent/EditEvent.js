@@ -69,7 +69,7 @@ class EditEvent extends Component {
         console.log('changing date:', event.target.value);
         // this.setState({
         //     ...this.state,
-        //     [ propertyName ]: event.target.value
+        //     [ propertyName ]: event.target.value 
         // });
         this.props.dispatch({
             type: "UPDATE_ACTIVE_EVENT",
