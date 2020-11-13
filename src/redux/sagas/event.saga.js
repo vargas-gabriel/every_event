@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, takeLatest, select } from 'redux-saga/effects';
 
 function* createEvent(action) {
   console.log('creating event with', action);
@@ -43,11 +43,14 @@ function* getUserEvent(action){
 }
 
 function* updateEvent(action){
-    console.log('updating event, sending:', action.payload);
+    //console.log('updating event, sending:', action.payload);
+
+    let updatedEvent = yield select(state => state.temp);
+    console.log('updating event, sending:', updatedEvent);
     let response = yield axios({
         method: 'PUT',
-        url: `api/event/${action.payload.id}`,
-        data: action.payload,
+        url: `api/event/${updatedEvent.id}`,
+        data: updatedEvent,
     }) // no yield put in place yet to update Edit page, but somehow the
        // temp reducer and edit page local state are being updated...
        // is this a result of React re-rendering on variable changes default setting?

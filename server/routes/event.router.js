@@ -87,13 +87,19 @@ router.put('/:id', (req, res) => {
     let queryText = `UPDATE "event" SET
                         "event_image" = $1,
                         "acronym" = $2,
-                        "website" = $3
+                        "website" = $3,
+                        "start_date" = $5,
+                        "end_date" = $6,
+                        "type" = $7
                         WHERE "id" = $4;`;
     let queryParams = [
-        req.body.event.event_image,
-        req.body.event.acronym,
-        req.body.event.website,
+        req.body.event_image,
+        req.body.acronym,
+        req.body.website,
         req.body.id,
+        req.body.start_date,
+        req.body.end_date,
+        req.body.type,
     ];
     //console.log('router put hit with queryText, queryParams', queryText, queryParams);
     pool.query(queryText, queryParams)
