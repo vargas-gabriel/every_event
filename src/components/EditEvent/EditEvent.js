@@ -72,7 +72,7 @@ class EditEvent extends Component {
         //     [ propertyName ]: event.target.value
         // });
         this.props.dispatch({
-            type: "UPDATE_EVENT",
+            type: "UPDATE_ACTIVE_EVENT",
             payload: {
                 [ propertyName ]: event.target.value,
             }
@@ -91,13 +91,13 @@ class EditEvent extends Component {
 
     saveDate = () => {
         console.log('save date triggered');
-        // this.props.dispatch({
-        //     type: "UPDATE_EVENT",
-        //     payload: {
-        //         event: this.state,
-        //         id: this.props.store.temp.id,
-        //     }
-        // });
+        this.props.dispatch({
+            type: "UPDATE_EVENT",
+            payload: {
+                event: this.props.store.temp,
+                id: this.props.store.temp.id,
+            }
+        });
     }
 
     saveEdit = () => {
@@ -130,24 +130,30 @@ class EditEvent extends Component {
                 
                 <label htmlFor='campaignStart'>
                     Event Promotion Start
-                    <input
-                        type='date'
-                        name='campaignStart'
-                        required
-                        //value={this.props.store.temp.start_date.split('T', 1)[0]}
-                        onChange={(event) => this.handleDateChange(event, "campaignStart")}
-                    />
+                    {this.props.store.temp.start_date === undefined ?
+                        <></> :
+                        <input
+                            type='date'
+                            name='campaignStart'
+                            required
+                            defaultValue={this.props.store.temp.start_date.split('T', 1)[0]}
+                            onChange={(event) => this.handleDateChange(event, "start_date")}
+                        />
+                    }
                 </label>
 
                 <label htmlFor='campaignEnd'>
                     Event Promotion End
-                    <input
-                        type='date'
-                        name='campaignEnd'
-                        required
-                        //value={this.props.store.temp.end_date.split('T', 1)[0]}
-						onChange={(event) => this.handleDateChange(event, "campaignEnd")}
-                    />
+                    {this.props.store.temp.end_date === undefined ?
+                        <></> :
+                        <input
+                            type='date'
+                            name='campaignEnd'
+                            required
+                            defaultValue={this.props.store.temp.end_date.split('T', 1)[0]}
+                            onChange={(event) => this.handleDateChange(event, "end_date")}
+                        />
+                    }
                 </label> 
                 <br/>
                 
