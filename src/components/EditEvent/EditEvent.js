@@ -4,7 +4,9 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
+
 class EditEvent extends Component {
+
 
     state = {
     //    defaultImage: 'https://cdn.onlinewebfonts.com/svg/img_98811.png'
@@ -17,6 +19,32 @@ class EditEvent extends Component {
         // campaignEnd: this.props.store.temp.end_date.split('T', 1)[0],
         // eventImg: this.props.store.temp.event_image,
         toggleEdit: false,
+    }
+
+    componentDidMount = () => {
+        let myPromise = new Promise(function(myResolve, myReject) {
+            this.props.dispatch({type: 'GET_USER_EVENT'});
+            alert('darn');
+        });
+        myPromise.then(
+            function(value) {this.findActiveEvent()},
+            function(error) {alert('darn')}
+        );
+    }
+
+    findActiveEvent = () => {
+        const activeId = this.props.history.location.pathname.split('/')[2];
+        const userEvents = this.props.store.userEvent;
+        console.log('activeId', activeId);
+        console.log('userEvents', userEvents);
+        // for(let i=0; i<userEvents.length; i++){  this must happen after dispatch to get all a users events
+        //     if(activeId = userEvents[i].id){
+        //         this.props.dispatch({
+        //             type: 'SET_TEMP',
+        //             payload: userEvents[i],
+        //         });
+        //     }
+        // }
     }
    
     editEvent=() =>{
@@ -36,9 +64,11 @@ class EditEvent extends Component {
     }
     
     handleChange = (event, propertyName) => {
-        this.setState({
-            ...this.state,
-            [ propertyName ]: event.target.value
+        this.props.dispatch({
+            type: 'UPDATE_ACTIVE_EVENT',
+            payload: {
+                [ propertyName ]: event.target.value,
+            }
         })
     }
 
@@ -51,7 +81,7 @@ class EditEvent extends Component {
         this.props.dispatch({
             type: "UPDATE_EVENT",
             payload: {
-                [propertyName]: event.target.value,
+                [ propertyName ]: event.target.value,
             }
         });
         //console.log('then sending state:', this.state);
@@ -93,6 +123,7 @@ class EditEvent extends Component {
     }
 
     render(){
+        console.log('userEvent', this.props.store.userEvent);
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
         // console.log('user is:', this.props.store.user);
@@ -109,7 +140,7 @@ class EditEvent extends Component {
                         type='date'
                         name='campaignStart'
                         required
-                        value={this.props.store.temp.start_date.split('T', 1)[0]}
+                        //value={this.props.store.temp.start_date.split('T', 1)[0]}
                         onChange={(event) => this.handleDateChange(event, "campaignStart")}
                     />
                 </label>
@@ -120,7 +151,7 @@ class EditEvent extends Component {
                         type='date'
                         name='campaignEnd'
                         required
-                        value={this.props.store.temp.end_date.split('T', 1)[0]}
+                        //value={this.props.store.temp.end_date.split('T', 1)[0]}
 						onChange={(event) => this.handleDateChange(event, "campaignEnd")}
                     />
                 </label> 
@@ -194,9 +225,9 @@ class EditEvent extends Component {
                     }
                     {this.state.toggleEdit === true &&
                         <>
-                            <input onChange={(event) => this.handleChange(event, "eventName")} placeholder={this.props.store.temp.name}/>
-                            <input onChange={(event) => this.handleChange(event, "eventAcronym")} placeholder={this.props.store.temp.acronym}/>
-                            <input onChange={(event) => this.handleChange(event, "eventWebsite")} placeholder={this.props.store.temp.website}/>
+                            <input onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/>
+                            <input onChange={(event) => this.handleChange(event, "acronym")} placeholder={this.props.store.temp.acronym}/>
+                            <input onChange={(event) => this.handleChange(event, "website")} placeholder={this.props.store.temp.website}/>
                             <button onClick={this.saveEdit}>Save</button>
                         </>
                     }
