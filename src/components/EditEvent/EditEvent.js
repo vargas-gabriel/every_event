@@ -95,10 +95,10 @@ class EditEvent extends Component {
         console.log('save date triggered');
         this.props.dispatch({
             type: "UPDATE_EVENT",
-            payload: {
-                event: this.props.store.temp,
-                id: this.props.store.temp.id,
-            }
+            // payload: {
+            //     event: this.props.store.temp,
+            //     id: this.props.store.temp.id,
+            // }
         });
     }
 
@@ -160,7 +160,10 @@ class EditEvent extends Component {
                 <br/>
                 
                 <label htmlFor="eventType">Event Type:</label>
-                <select name="eventType" id="eventType">Event Type
+                <select name="eventType" value={this.props.store.temp.type} 
+                    id="eventType"
+                    onChange={(event) => this.handleDateChange(event, "type")}
+                    >Event Type
                     <option value="InPerson">In Person</option>
                     <option value="Virtual">Virtual</option>
                     <option value="Hybrid">Hybrid</option>
