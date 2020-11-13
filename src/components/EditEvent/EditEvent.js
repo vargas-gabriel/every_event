@@ -22,29 +22,32 @@ class EditEvent extends Component {
     }
 
     componentDidMount = () => {
-        let myPromise = new Promise(function(myResolve, myReject) {
-            this.props.dispatch({type: 'GET_USER_EVENT'});
-            alert('darn');
-        });
-        myPromise.then(
-            function(value) {this.findActiveEvent()},
-            function(error) {alert('darn')}
-        );
+        this.props.dispatch({type: 'GET_USER_EVENT'});
+        //this.findActiveEvent();
     }
 
+
     findActiveEvent = () => {
-        const activeId = this.props.history.location.pathname.split('/')[2];
+        const activeId = Number(this.props.history.location.pathname.split('/')[2]);
         const userEvents = this.props.store.userEvent;
-        console.log('activeId', activeId);
+        console.log('this.props.store.userEvent', this.props.store.userEvent);
         console.log('userEvents', userEvents);
-        // for(let i=0; i<userEvents.length; i++){  this must happen after dispatch to get all a users events
-        //     if(activeId = userEvents[i].id){
-        //         this.props.dispatch({
-        //             type: 'SET_TEMP',
-        //             payload: userEvents[i],
-        //         });
-        //     }
-        // }
+        if(this.props.store.temp.id === undefined){
+            console.log('temp is 0');
+            for(let i=0; i<userEvents.length; i++){
+                console.log('in for id', userEvents[i].id);
+                console.log('activeId', activeId);
+                if(activeId === userEvents[i].id){
+                    console.log('match!');
+                    let eventToTemp = userEvents[i];
+                    console.log('eventToTemp', eventToTemp);
+                    this.props.dispatch({
+                        type: 'SET_TEMP',
+                        payload: eventToTemp,
+                    });
+                }
+            }
+        }
     }
    
     editEvent=() =>{
@@ -123,9 +126,10 @@ class EditEvent extends Component {
     }
 
     render(){
-        console.log('userEvent', this.props.store.userEvent);
+        //console.log('userEvent', this.props.store.userEvent);
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
+        this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
         console.log('EditEvent props:', this.props);
         return (  
