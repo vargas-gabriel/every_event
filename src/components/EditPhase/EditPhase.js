@@ -69,7 +69,7 @@ class EditPhase extends Component {
         return (  
             <div id="editEventDiv">
                 
-                <h1>event title</h1>
+                <h1></h1>
                 <h2>Phase Title Here</h2>
                 
                 <label htmlFor='campaignStart'>
@@ -151,15 +151,18 @@ class EditPhase extends Component {
                     <h4>Posts</h4>
                     <div>
                         <table id="outline">
+                            <tbody>
                             <tr>
                                 <td>
-                                <h4 class='' onClick={()=>this.loadPost()}>post title</h4>
+                                <h4 className='' onClick={()=>this.loadPost()}>post title</h4>
                                 </td>
                                 <td>
                                 <button onClick={()=>this.deletePost()}>Delete Post</button>
                                 </td>
                             </tr>
+                            </tbody>
                         </table>
+                        
                     </div>
                     <button onClick={()=>this.newPost()}>New Post</button><br/><br/>
                 </div>
@@ -169,7 +172,7 @@ class EditPhase extends Component {
 
                 <div id="eventHashtags">
                     <h4>Event Hashtags</h4>
-                    <textarea rows="8">#YOLO, #YOLO</textarea><br/><br/>
+                    <textarea rows="8" defaultValue= "#YOLO, #YOLO"></textarea><br/><br/>
                     <button onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>
                 </div>
 

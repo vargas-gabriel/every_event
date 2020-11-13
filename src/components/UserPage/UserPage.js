@@ -12,8 +12,7 @@ class UserPage extends Component {
 	};
 	componentDidMount() {
 		this.getGreeting();
-        this.props.dispatch({type: 'GET_USER_EVENT'})
-    
+      this.props.dispatch({type: 'GET_USER_EVENT'});
 	}
 	// this sets the greeting for the user based on the time of day
 	getGreeting = () => {
