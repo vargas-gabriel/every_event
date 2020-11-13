@@ -23,11 +23,12 @@ class EventItem extends Component {
 			type: 'SET_TEMP',
 			payload: event,
 		});
-		this.editEventNav();
+		this.editEventNav(event);
 	}
 
-	editEventNav = () => {
-		this.props.history.push('/editevent')
+	editEventNav = (event) => {
+		//console.log('event', event);
+		this.props.history.push(`/editevent/${event.id}`)
 	}
 
 	render() {

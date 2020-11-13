@@ -4,19 +4,40 @@ import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
 
 
+
 class EditEvent extends Component {
 
     state = {
-    //    defaultImage: 'https://cdn.onlinewebfonts.com/svg/img_98811.png'
-        eventName: this.props.store.temp.name,
-        eventAcronym: this.props.store.temp.acronym,
-        eventWebsite: this.props.store.temp.website,
-        eventRegistration: this.props.store.temp.registration_link,
-        eventOAuth: this.props.store.temp.linkedin_oauth,
-        campaignStart: this.props.store.temp.start_date,
-        campaignEnd: this.props.store.temp.end_date,
-        eventImg: this.props.store.temp.event_image,
         toggleEdit: false,
+    }
+
+    componentDidMount = () => {
+        this.props.dispatch({type: 'GET_USER_EVENT'});
+        //this.findActiveEvent();   moved this into render()
+    }
+
+
+    findActiveEvent = () => {
+        const activeId = Number(this.props.history.location.pathname.split('/')[2]);
+        const userEvents = this.props.store.userEvent;
+        console.log('this.props.store.userEvent', this.props.store.userEvent);
+        console.log('userEvents', userEvents);
+        if(this.props.store.temp.id === undefined){
+            console.log('temp is 0');
+            for(let i=0; i<userEvents.length; i++){
+                console.log('in for id', userEvents[i].id);
+                console.log('activeId', activeId);
+                if(activeId === userEvents[i].id){
+                    console.log('match!');
+                    let eventToTemp = userEvents[i];
+                    console.log('eventToTemp', eventToTemp);
+                    this.props.dispatch({
+                        type: 'SET_TEMP',
+                        payload: eventToTemp,
+                    });
+                }
+            }
+        }
     }
    
     editEvent=() =>{
@@ -36,10 +57,28 @@ class EditEvent extends Component {
     }
     
     handleChange = (event, propertyName) => {
-        this.setState({
-            ...this.state,
-            [ propertyName ]: event.target.value
+        this.props.dispatch({
+            type: 'UPDATE_ACTIVE_EVENT',
+            payload: {
+                [ propertyName ]: event.target.value,
+            }
         })
+    }
+
+    handleDateChange = (event, propertyName) => {
+        console.log('changing date:', event.target.value);
+        // this.setState({
+        //     ...this.state,
+        //     [ propertyName ]: event.target.value
+        // });
+        this.props.dispatch({
+            type: "UPDATE_ACTIVE_EVENT",
+            payload: {
+                [ propertyName ]: event.target.value,
+            }
+        });
+        //console.log('then sending state:', this.state);
+        this.saveDate();
     }
 
     toggleEditSocial = () => {
@@ -51,22 +90,22 @@ class EditEvent extends Component {
     }
 
     saveDate = () => {
-        console.log('state is', this.state);
-        // this.props.dispatch({
-        //     type: "UPDATE_EVENT",
-        //     payload: {
-        //         event: this.state,
-        //         id: this.props.store.temp.id,
-        //     }
-        // });
-    }
-
-    saveEdit = () => {
-        //console.log('saveEdit trig');
+        console.log('save date triggered');
         this.props.dispatch({
             type: "UPDATE_EVENT",
             payload: {
-                event: this.state,
+                event: this.props.store.temp,
+                id: this.props.store.temp.id,
+            }
+        });
+    }
+
+    saveEdit = () => {
+        console.log('saveEdit trig');
+        this.props.dispatch({
+            type: "UPDATE_EVENT",
+            payload: {
+                event: this.props.store.temp,
                 id: this.props.store.temp.id,
             }
         });
@@ -76,13 +115,11 @@ class EditEvent extends Component {
         });
     }
 
-    toggleEditFunction = () => {
-        
-    }
-
     render(){
+        //console.log('userEvent', this.props.store.userEvent);
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
+        this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
         console.log('EditEvent props:', this.props);
         return (  
@@ -93,26 +130,30 @@ class EditEvent extends Component {
                 
                 <label htmlFor='campaignStart'>
                     Event Promotion Start
-                    <input
-                        type='date'
-                        name='campaignStart'
-                        required
-                        value={this.state.campaignStart.split('T', 1)[0]}
-                        onChange={(event) => this.handleChange(event, "campaignStart")}
-                        //onChange={this.saveDate} handle the dispatch in a date specific onChange
-                        // fix bug to toggle switch on save button click
-                    />
+                    {this.props.store.temp.start_date === undefined ?
+                        <></> :
+                        <input
+                            type='date'
+                            name='campaignStart'
+                            required
+                            defaultValue={this.props.store.temp.start_date.split('T', 1)[0]}
+                            onChange={(event) => this.handleDateChange(event, "start_date")}
+                        />
+                    }
                 </label>
 
                 <label htmlFor='campaignEnd'>
                     Event Promotion End
-                    <input
-                        type='date'
-                        name='campaignEnd'
-                        required
-                        value={this.state.campaignEnd.split('T', 1)[0]}
-						onChange={(event) => this.handleChange(event, "campaignEnd")}
-                    />
+                    {this.props.store.temp.end_date === undefined ?
+                        <></> :
+                        <input
+                            type='date'
+                            name='campaignEnd'
+                            required
+                            defaultValue={this.props.store.temp.end_date.split('T', 1)[0]}
+                            onChange={(event) => this.handleDateChange(event, "end_date")}
+                        />
+                    }
                 </label> 
                 <br/>
                 
@@ -169,22 +210,24 @@ class EditEvent extends Component {
 
                 <div id="eventSocial">
                     <h4>Event Social</h4>
-                    <label className="switch" onChange={this.toggleEditSocial}>
-                        <input type="checkbox"/>
+                    <label className="switch">
+                        <input type="checkbox" 
+                            checked={this.state.toggleEdit} 
+                            onChange={this.toggleEditSocial}/>
                         <span className="slider round"></span>
                     </label>
                     {this.state.toggleEdit === false &&
                         <>
                             <img src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/>
-                            <h5>{this.state.eventAcronym}</h5>
-                            <h5>{this.state.eventWebsite}</h5>
+                            <h5>{this.props.store.temp.acronym}</h5>
+                            <h5>{this.props.store.temp.website}</h5>
                         </>
                     }
                     {this.state.toggleEdit === true &&
                         <>
-                            <input onChange={(event) => this.handleChange(event, "eventName")} placeholder={this.state.eventName}/>
-                            <input onChange={(event) => this.handleChange(event, "eventAcronym")} placeholder={this.state.eventAcronym}/>
-                            <input onChange={(event) => this.handleChange(event, "eventWebsite")} placeholder={this.state.eventWebsite}/>
+                            <input onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/>
+                            <input onChange={(event) => this.handleChange(event, "acronym")} placeholder={this.props.store.temp.acronym}/>
+                            <input onChange={(event) => this.handleChange(event, "website")} placeholder={this.props.store.temp.website}/>
                             <button onClick={this.saveEdit}>Save</button>
                         </>
                     }

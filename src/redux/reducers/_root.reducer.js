@@ -17,7 +17,8 @@ const rootReducer = combineReducers({
   event,// will have an id and username if someone is logged in
   temp,
   userEvent,
-  tempPhase
+  tempPhase,
+  
 });
 
 export default rootReducer;

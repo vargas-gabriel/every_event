@@ -83,19 +83,19 @@ router.get('/', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    //console.log('router.put hit, req is', req.body, req.params);
+    console.log('router.put hit, req is', req.body, req.params);
     let queryText = `UPDATE "event" SET
                         "event_image" = $1,
                         "acronym" = $2,
                         "website" = $3
                         WHERE "id" = $4;`;
     let queryParams = [
-        req.body.event.eventImg,
-        req.body.event.eventAcronym,
-        req.body.event.eventWebsite,
+        req.body.event.event_image,
+        req.body.event.acronym,
+        req.body.event.website,
         req.body.id,
     ];
-    //console.log('router put hit, queryText, queryParams', queryText, queryParams);
+    //console.log('router put hit with queryText, queryParams', queryText, queryParams);
     pool.query(queryText, queryParams)
     .then(result => {
       res.sendStatus(201);
