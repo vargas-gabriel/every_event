@@ -7,63 +7,112 @@ body,
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
+  background: rgb(36, 36, 36);
+  color: white;
 }
 
 img {
   display: inline-block;
   max-width: 100%;
 }
-
+.centeredDiv{
+  background: mediumseagreen;
+}
+.centeredImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.centered{
+  /* background: chartreuse; */
+  text-align: center;
+}
+.rounded{
+  box-shadow: 0 0 1pt 1pt black;
+  border-radius: 15px;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: white;
+  color: black;
+}
 #outline{
   outline: solid black 1px;
   width: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #collabOutline{
   outline: solid black 1px;
   overflow: scroll;
-  width: 50%;
-  height: 100px;
+  width: 200px;
+  height: 200px;
+}
+.collabTable{
+  padding-left: 20px;
+}
+#userDiv{
+  background-color: white;
+  color: black;
+  margin-left: 20px;
+  float: left;
+  border-radius: 15px;
+  box-shadow: 0 0 1pt 1pt black;
+  width: 300px;
 }
 
 #editUserDiv{
-  outline: solid black 1px;
   width: 35%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#centeredButton{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #eventPromotionDuration{
   float: right;
-  padding-left: 60px;
-  margin-top: 60px;
+  /* padding-left: 60px; */
+  /* margin-top: 60px; */
+  margin-top: 12px;
   margin-right: 10%;
-  outline: solid black 1px;
   width: 550px;
+}
+.phaseTable{
+  padding-left: 30px;
 }
 
 #eventSocial{
   margin-left: 30px;
-  outline: solid black 1px;
   width: 30%;
 }
 
 #eventCollaborators{
   margin-left: 30px;
-  outline: solid black 1px;
   width: 30%;
 }
 
 #eventHashtags{
   margin-left: 30px;
-  outline: solid black 1px;
   width: 30%;
 }
 
 #eventItemDiv{
   display: inline-block;
   margin-left: 30px;
-  outline: solid black 1px;
-  width: 30%;
+  box-shadow: 0 0 1pt 1pt black;
+  width: 35%;
   margin-bottom: 25px;
+  border-radius: 15px;
+}
+#eventItemDiv:hover{
+  box-shadow: 0 0 2pt 2pt teal;
+
 }
 /* --------------------------------------------------------------------------------
 Container
@@ -118,7 +167,7 @@ Button
   border-radius: 0;
   background: none;
   font: inherit;
-  color: #444;
+  color: white;
 }
 
 .btn_asLink:hover {
@@ -127,6 +176,18 @@ Button
   color: #008183;
 }
 
+#userBtns{
+  width: 100px;
+  padding-top: 30px;
+  padding-right: 30px;
+  float: right;
+}
+#userImage{
+  margin-left: 40px;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  float: left;
+}
 /* --------------------------------------------------------------------------------
 Alert
 -------------------------------------------------------------------------------- */
@@ -147,6 +208,7 @@ Form Treatment
 -------------------------------------------------------------------------------- */
 
 .formPanel {
+  color: black  ;
   box-sizing: border-box;
   width: 400px;
   max-width: 100%;

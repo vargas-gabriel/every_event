@@ -28,6 +28,9 @@ class CreateEvent extends Component {
             }
             
         });
+
+        alert('Event Created!')
+        this.props.history.push('/user')//need condition to check if event was created 
     }
 
 	handleInputChangeFor = (propertyName) => (event) => {

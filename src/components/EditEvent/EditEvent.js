@@ -55,7 +55,9 @@ class EditEvent extends Component {
     navHome=()=>{
         this.props.history.push('/user');
     }
-    
+    phaseNav=()=>{
+        this.props.history.push('/editphase')
+    }
     handleChange = (event, propertyName) => {
         this.props.dispatch({
             type: 'UPDATE_ACTIVE_EVENT',
@@ -125,38 +127,40 @@ class EditEvent extends Component {
         return (  
             <div id="editEventDiv">
                 
-                <h1>Edit Event</h1>
-                <h2>Event Title Here</h2>
-                
-                <label htmlFor='campaignStart'>
-                    Event Promotion Start
-                    {this.props.store.temp.start_date === undefined ?
-                        <></> :
-                        <input
-                            type='date'
-                            name='campaignStart'
-                            required
-                            defaultValue={this.props.store.temp.start_date.split('T', 1)[0]}
-                            onChange={(event) => this.handleDateChange(event, "start_date")}
-                        />
-                    }
-                </label>
+                <h2 className="centered">Edit Event</h2>
+                <h2 className="centered">{this.props.store.temp.name}</h2>
+                <div className="centered">
+                    <label htmlFor='campaignStart'>
+                        Event Promotion Start
+                        {this.props.store.temp.start_date === undefined ?
+                            <></> :
+                            <input
+                                type='date'
+                                name='campaignStart'
+                                required
+                                defaultValue={this.props.store.temp.start_date.split('T', 1)[0]}
+                                onChange={(event) => this.handleDateChange(event, "start_date")}
+                            />
+                        }
+                    </label>
 
-                <label htmlFor='campaignEnd'>
-                    Event Promotion End
-                    {this.props.store.temp.end_date === undefined ?
-                        <></> :
-                        <input
-                            type='date'
-                            name='campaignEnd'
-                            required
-                            defaultValue={this.props.store.temp.end_date.split('T', 1)[0]}
-                            onChange={(event) => this.handleDateChange(event, "end_date")}
-                        />
-                    }
-                </label> 
+                    <label htmlFor='campaignEnd'>
+                        Event Promotion End
+                        {this.props.store.temp.end_date === undefined ?
+                            <></> :
+                            <input
+                                type='date'
+                                name='campaignEnd'
+                                required
+                                defaultValue={this.props.store.temp.end_date.split('T', 1)[0]}
+                                onChange={(event) => this.handleDateChange(event, "end_date")}
+                            />
+                        }
+                    </label> 
+                </div>
                 <br/>
                 
+                <div className="centered">
                 <label htmlFor="eventType">Event Type:</label>
                 <select name="eventType" value={this.props.store.temp.type} 
                     id="eventType"
@@ -165,12 +169,13 @@ class EditEvent extends Component {
                     <option value="InPerson">In Person</option>
                     <option value="Virtual">Virtual</option>
                     <option value="Hybrid">Hybrid</option>
-                </select>               
+                </select> 
+                </div>
                 <hr/>
 
-                <div id="eventPromotionDuration">
+                <div id="eventPromotionDuration" className="rounded">
                     
-                    <table>
+                    <table className="phaseTable">
                         <thead>
                             <tr>
                                 <th></th>
@@ -185,7 +190,7 @@ class EditEvent extends Component {
                                     <button>Delete</button> 
                                 </td>
                                 <td>
-                                    <h4>General</h4>
+                                    <h4 onClick={this.phaseNav}>General</h4>
                                 </td>
                                 <td>
                                     <label htmlFor='phaseStart'>
@@ -211,44 +216,48 @@ class EditEvent extends Component {
                     
                 </div>
 
-                <div id="eventSocial">
-                    <h4>Event Social</h4>
+                <div id="eventSocial" className="rounded">
+                    <h4 className="centered">Event Social</h4>
                     <label className="switch">
                         <input type="checkbox" 
                             checked={this.state.toggleEdit} 
                             onChange={this.toggleEditSocial}/>
                         <span className="slider round"></span>
-                    </label>
+                    </label><br/>
                     {this.state.toggleEdit === false &&
                         <>
-                            <img src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/>
-                            <h5>{this.props.store.temp.acronym}</h5>
-                            <h5>{this.props.store.temp.website}</h5>
+                            <img className="centeredImage"src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/>
+                            <h5 className="centered">{this.props.store.temp.name}</h5>
+                            <h5 className="centered">{this.props.store.temp.acronym}</h5>
+                            <h5 className="centered">{this.props.store.temp.website}</h5>
+                            
                         </>
                     }
                     {this.state.toggleEdit === true &&
                         <>
-                            <input onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/>
-                            <input onChange={(event) => this.handleChange(event, "acronym")} placeholder={this.props.store.temp.acronym}/>
-                            <input onChange={(event) => this.handleChange(event, "website")} placeholder={this.props.store.temp.website}/>
-                            <button onClick={this.saveEdit}>Save</button>
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "image")} placeholder={this.props.store.temp.image}/><br/>                        
+                            <br/><br/><br/><br/>
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/><br/>
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "acronym")} placeholder={this.props.store.temp.acronym}/><br/>
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "website")} placeholder={this.props.store.temp.website}/><br/>
+                            <button className="centeredImage" onClick={this.saveEdit}>Save</button>
                         </>
                     }
                     <br/><br/>
                 </div>
 
-                <div id="eventCollaborators">
-                    <h4>Event Collaborators</h4>
+                <div id="eventCollaborators" className="rounded">
+                    <h4 className="centered">Event Collaborators</h4>
 
-                    <div id="collabOutline">
-                        <table >
-                            <tbody>
+                    <div id="collabOutline" className="centeredImage">
+                        <table className="collabTable">
+                            <tbody >
                             <tr>
                                 <td>
                                     <h5> John Smith</h5>
                                 </td>
                                 <td>
-                                    <button>Delete</button>
+                                    <button>Remove</button>
                                 </td>
                             </tr>
                             <tr>
@@ -256,33 +265,33 @@ class EditEvent extends Component {
                                     <h5> John Smith</h5>
                                 </td>
                                 <td>
-                                    <button>Delete</button>
+                                    <button>Remove</button>
                                 </td>
                             </tr><tr>
                                 <td>
                                     <h5> John Smith</h5>
                                 </td>
                                 <td>
-                                    <button>Delete</button>
+                                    <button>Remove</button>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
                        
                     </div><br/>
-                    <button>Add Collaborator</button><br/><br/>
+                    <button className="centeredImage">Add Collaborator</button><br/><br/>
 
                 </div>
 
 
-                <div id="eventHashtags">
-                    <h4>Event Hashtags</h4>
-                    <textarea rows="8">#YOLO, #YOLO</textarea><br/><br/>
-                    <button>Save Hashtags</button><br/><br/>
+                <div id="eventHashtags" className="rounded">
+                    <h4 className="centered">Event Hashtags</h4>
+                    <textarea className="centeredImage" rows="8">#YOLO, #YOLO</textarea><br/><br/>
+                    <button className="centeredImage">Save Hashtags</button><br/><br/>
                 </div>
 
 
-                <button onClick={this.navHome}>Home</button>
+                {/* <button onClick={this.navHome}>Home</button> */}
             </div>
         );
     }

@@ -22,7 +22,7 @@ router.post('/', (req, res, next) => {
 
     // const eventId = result.rows[0]
 
-    pool 
+    pool //transaction
      .query(queryText, [
         req.body.eventName, 
         req.body.eventAcronym,
@@ -56,6 +56,22 @@ router.post('/', (req, res, next) => {
                 res.sendStatus(500);
             });
         // Catch for first query
+        // .then((result)=>
+        // console.log("new event id is:", result.rows[0].id);
+
+        // const queryText3 = result.rows[0].id;
+        // const insertPhasesQuery = `
+        // INSERT INTO "phase" 
+        // (
+        //     "event_id",
+        //     "name",
+        //     "start_date",
+        //     "end_date"
+        // )
+        // `
+        // )
+    
+    
     })
     .catch((err) => {
         console.log("error first query", err);

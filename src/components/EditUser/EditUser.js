@@ -25,7 +25,8 @@ class EditUser extends Component {
             type: 'UPDATE_USER',
             payload: this.state
         })
-    //    this.navHome();
+        alert('Saved!')
+       this.navHome();
     }
     
 
@@ -46,38 +47,40 @@ class EditUser extends Component {
         console.log('state is', this.state);
         // console.log('user is:', this.props.store.user);
         return (  
-            <div id="editUserDiv">
-                <h1>Edit User</h1>
+            <div id="editUserDiv" className="rounded">
+                <h1 className="centered">Edit User</h1>
                 <hr/>
                 <form onSubmit={this.editUser}>
-                    <h6 id="editInfoTag">First Name</h6>
+                    <h6 id="editInfoTag" className="centered">First Name</h6>
                     <input 
+                    className="centeredImage"
                     type="text"
                     placeholder="firstName" 
                     value={this.state.firstName} 
                     onChange={(event)=>this.handleChange(event, 'firstName')}>
                     </input>
                     
-                    <h6 id="editInfoTag">Last Name</h6>
+                    <h6 id="editInfoTag" className="centered">Last Name</h6>
                     <input 
+                    className="centeredImage"
                     type="text"
                     placeholder="lastName" 
                     value={this.state.lastName} 
                     onChange={(event)=>this.handleChange(event, 'lastName')}>
                     </input>
 
-                    <br/>
-                    <h6 id="editInfoTag">Image URL</h6>
+                    <h6 id="editInfoTag" className="centered">Image URL</h6>
                     <input 
+                    className="centeredImage"
                     type="text"
                     placeholder="image_url" 
-                    value={this.state.img_url} 
-                    onChange={(event)=>this.handleChange(event, 'img_url')}>
+                    value={this.state.image} 
+                    onChange={(event)=>this.handleChange(event, 'image')}>
                     </input> 
 
-                    <br/>
-                    <h6 id="editInfoTag">Email</h6>
+                    <h6 id="editInfoTag" className="centered">Email</h6>
                     <input 
+                    className="centeredImage"
                     type="text"
                     placeholder="Email" 
                     value={this.state.email} 
@@ -94,9 +97,10 @@ class EditUser extends Component {
                     </input>  */}
 
                     <br/>
-                    <button type="submit">Save Changes</button>
+                    <button type="submit" className="centeredImage">Save Changes</button>
+                    <br/>
                 </form>
-                <button onClick={this.navHome}>Home</button>
+                {/* <button onClick={this.navHome}>Home</button> */}
             </div>
         );
     }
