@@ -4,7 +4,7 @@ CREATE TABLE "user" (
     last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL, -- becomes username?
     password VARCHAR(1000) NOT NULL,
-    image BYTEA, -- assumes upload
+    image VARCHAR(255), -- assumes img url
     auth_level VARCHAR(255), -- future use, do we want a default?
     linkedin_account VARCHAR(512), -- what will this be?
     linkedin_oauth VARCHAR(1000) -- will be inserted after token received

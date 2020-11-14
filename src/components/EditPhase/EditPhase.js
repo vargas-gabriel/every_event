@@ -15,7 +15,6 @@ class EditPhase extends Component {
         send_time: "",
         post_text:  "",
         image: "",
-  
     }
 
 
@@ -68,53 +67,57 @@ class EditPhase extends Component {
         console.log('EditEvent props:', this.props);
         return (  
             <div id="editEventDiv">
-                
-                <h1></h1>
-                <h2>Phase Title Here</h2>
-                
-                <label htmlFor='campaignStart'>
-                    Phase Start
-                    <input
-                        type='date'
-                        name='campaignStart'
-                        required
-                        // value={this.state.campaignStart.split('T', 1)[0]}
-						onChange={(event) => this.handleChange(event, "start_date")}
-                    />
-                </label>
+                <h1 className="centered">Event Name Here</h1>
+                <h2 className="centered">{this.props.store.temp.name}</h2>
 
-                <label htmlFor='campaignEnd'>
-                    Phase End
-                    <input
-                        type='date'
-                        name='campaignEnd'
-                        required
-                        // value={this.state.campaignEnd.split('T', 1)[0]}
-						onChange={(event) => this.handleChange(event, "end_date")}
-                    />
-                </label> 
-                <br/>
-                <button onClick={()=>this.savePhaseDuration()}>Save</button>
-            
-
-                <div id="eventPromotionDuration">
-                    
-                    <div>
-                        <label htmlFor='postText'>
-                        Post Name:
+                <h2 className="centered">Phase Title Here</h2>
+                <div className="centered">
+                    <label htmlFor='campaignStart'>
+                        Phase Start
                         <input
-                            type='text'
-                            name='postText'
-                            placeholder='this.state.tempPhase.name'
-                            // value={this.state.postText}
-                            // required
-                            onChange={(event)=>this.handleChange(event, "name")}
+                            type='date'
+                            name='campaignStart'
+                            required
+                            // value={this.state.campaignStart.split('T', 1)[0]}
+                            onChange={(event) => this.handleChange(event, "start_date")}
                         />
-                        </label>
+                    </label>
+
+                    <label htmlFor='campaignEnd'>
+                        Phase End
+                        <input
+                            type='date'
+                            name='campaignEnd'
+                            required
+                            // value={this.state.campaignEnd.split('T', 1)[0]}
+                            onChange={(event) => this.handleChange(event, "end_date")}
+                        />
+                    </label> 
+                </div>
+                <br/>
+                <button className="centeredImage" onClick={()=>this.savePhaseDuration()}>Save(necessary?)</button>
+                <hr/>
+
+                <div id="eventPromotionDuration" className="rounded">
+                    
+                    <div >
+                        <div className="centered">
+                            <label htmlFor='postText'>
+                            Post Name:
+                            <input
+                                type='text'
+                                name='postText'
+                                placeholder='this.state.tempPhase.name'
+                                // value={this.state.postText}
+                                // required
+                                onChange={(event)=>this.handleChange(event, "name")}
+                            />
+                            </label>
+                        </div>
                         <br/>
-                        <textarea onChange={(event)=>this.handleChange(event, 'post_text')}defaultValue="temphase" rows="10" cols="60"></textarea><br/>
-                        <button onClick={()=>this.addHashtags()}>Add Hashtags</button><br/>
-                        <button onClick={()=>this.uploadImage()}>Upload Post Image</button>
+                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')}defaultValue="temphase" rows="10" cols="60"></textarea><br/>
+                        <button id="centeredButton" onClick={()=>this.addHashtags()}>Add Hashtags</button><br/>
+                        <button id="centeredButton" onClick={()=>this.uploadImage()}>Upload Post Image</button>
 
                     </div>
                     <hr/>
@@ -132,23 +135,24 @@ class EditPhase extends Component {
                     </div> */}
 
                     <div>
-                        <label htmlFor='postTime'>
-                            Post Scheduling<br/>
+                            <h6 className="centered">Post Scheduling</h6>
                             <input
+                                className="centeredImage"
                                 type='datetime-local'
                                 name='postTime'
                                 required
                                 // value={this.state.campaignEnd.split('T', 1)[0]}
                                 onChange={(event) => this.handleChange(event, "send_date")}
                             />
-                        </label> <br/>
-                        <button onClick={()=>this.savePost()}>Save Post</button><br/><br/>
+                        <br/>                            
+                        <hr/>
+                        <button className="centeredImage" onClick={()=>this.savePost()}>Save Post</button><br/><br/>
                     </div>
                  
                 </div>
 
-                <div id="eventSocial">
-                    <h4>Posts</h4>
+                <div id="eventSocial" className="rounded">
+                    <h4 className="centered">Posts</h4>
                     <div>
                         <table id="outline">
                             <tbody>
@@ -164,16 +168,17 @@ class EditPhase extends Component {
                         </table>
                         
                     </div>
-                    <button onClick={()=>this.newPost()}>New Post</button><br/><br/>
+                    <br/>
+                    <button className="centeredImage" onClick={()=>this.newPost()}>New Post</button><br/><br/>
                 </div>
 
                
 
 
-                <div id="eventHashtags">
-                    <h4>Event Hashtags</h4>
-                    <textarea rows="8" defaultValue= "#YOLO, #YOLO"></textarea><br/><br/>
-                    <button onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>
+                <div id="eventHashtags" className="rounded">
+                    <h4 className="centered">Event Hashtags</h4>
+                    <textarea className="centeredImage" rows="8" defaultValue= "#YOLO, #YOLO"></textarea><br/><br/>
+                    <button className="centeredImage" onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>
                 </div>
 
 

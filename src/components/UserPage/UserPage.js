@@ -45,22 +45,26 @@ class UserPage extends Component {
 	// this component doesn't do much to start, just renders some user info to the DOM
 	render() {
 		return (
-			<div class="centeredDiv">
-				<div id="outline" >
-					<h1 id='welcome'>
+			<div >
+				<div id="userDiv" >
+					<h2 id='welcome' className="centered">
 						{" "}
 						{this.state.greeting}, {this.props.store.user.first_name}
-					</h1>
+					</h2>
 					<hr/>
 					{/* <p>Your ID is: {this.props.store.user.id}</p> */}
-					<img src={this.state.defaultImg} width='100px'></img><br/>
-					<button onClick={this.editUserNav}>Edit User</button><br/>
-					<LogOutButton className='log-in' />
+					<img id="userImage"  src={this.props.store.user.image} width='100px'></img>
 					
+					<div id="userBtns">
+						<button className="centeredImage" onClick={this.editUserNav}>Edit User</button><br/>
+						<LogOutButton className='log-in, centeredImage' />
+					</div>
+					<br/>
 				</div>
 				
-				<div id="outline">
-					<h4>This is where we could put events</h4>
+				<div  className="rounded">
+					<h4 className="centered">{this.props.store.user.first_name}'s Event's</h4>
+					<hr/>
 					<EventList/>
 					
 
