@@ -45,8 +45,8 @@ class UserPage extends Component {
 	// this component doesn't do much to start, just renders some user info to the DOM
 	render() {
 		return (
-			<div>
-				<div id="outline">
+			<div class="centeredDiv">
+				<div id="outline" >
 					<h1 id='welcome'>
 						{" "}
 						{this.state.greeting}, {this.props.store.user.first_name}

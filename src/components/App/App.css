@@ -13,7 +13,9 @@ img {
   display: inline-block;
   max-width: 100%;
 }
-
+.centeredDiv{
+  background-color: blue;
+}
 #outline{
   outline: solid black 1px;
   width: 50%;
