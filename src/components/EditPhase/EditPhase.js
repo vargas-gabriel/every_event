@@ -7,14 +7,15 @@ class EditPhase extends Component {
 
     state = {
         event_id: this.props.store.tempPhase,
-        name: "",
+        name: "selected post name",
         start_date: "",
         end_date: "",
         phasee_id: "",
         send_date: "",
         send_time: "",
-        post_text:  "",
+        post_text:  "THIS TEXT IS CURRENTLY IN LOCAL STATE",
         image: "",
+        hashtags: "#YOLO, #HASHTAG, #FTW"
     }
 
 
@@ -51,10 +52,14 @@ class EditPhase extends Component {
     }
 
     addHashtags=()=>{
-        console.log('clicked add hashtags');
+        console.log('adding:', this.state.hashtags);
+        this.setState({
+            ...this.state,
+            post_text: this.state.post_text + ' ' + this.state.hashtags
+        })
     }
     saveHashtags=()=>{
-        console.log('clicked save hashtags');
+        console.log('clicked save hashtags with:', this.state.hashtags);
     }
 
     uploadImage=()=>{
@@ -67,10 +72,10 @@ class EditPhase extends Component {
         console.log('EditEvent props:', this.props);
         return (  
             <div id="editEventDiv">
-                <h1 className="centered">Event Name Here</h1>
-                <h2 className="centered">{this.props.store.temp.name}</h2>
+                {/* <h1 className="centered">Event Name Here</h1> */}
+                <h1 className="centered">{this.props.store.temp.name}</h1>
 
-                <h2 className="centered">Phase Title Here</h2>
+                <h2 className="centered">Edit Phase (Title Here)</h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Phase Start
@@ -107,6 +112,7 @@ class EditPhase extends Component {
                             <input
                                 type='text'
                                 name='postText'
+                                value={this.state.name}
                                 placeholder='this.state.tempPhase.name'
                                 // value={this.state.postText}
                                 // required
@@ -115,7 +121,8 @@ class EditPhase extends Component {
                             </label>
                         </div>
                         <br/>
-                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')}defaultValue="temphase" rows="10" cols="60"></textarea><br/>
+                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')} value={this.state.post_text} rows="10" cols="60"></textarea>
+                        <p className="centered">Character Counter: {this.state.post_text.length}</p>
                         <button id="centeredButton" onClick={()=>this.addHashtags()}>Add Hashtags</button><br/>
                         <button id="centeredButton" onClick={()=>this.uploadImage()}>Upload Post Image</button>
 
@@ -154,7 +161,7 @@ class EditPhase extends Component {
                 <div id="eventSocial" className="rounded">
                     <h4 className="centered">Posts</h4>
                     <div>
-                        <table id="outline">
+                        <table  id="postTable">
                             <tbody>
                             <tr>
                                 <td>
@@ -177,7 +184,15 @@ class EditPhase extends Component {
 
                 <div id="eventHashtags" className="rounded">
                     <h4 className="centered">Event Hashtags</h4>
-                    <textarea className="centeredImage" rows="8" defaultValue= "#YOLO, #YOLO"></textarea><br/><br/>
+                    <textarea 
+                        className="centeredImage" 
+                        rows="4" 
+                        cols="35"
+                        defaultValue={this.state.hashtags} 
+                        onChange={(event) => this.handleChange(event, "hashtags")}>
+                    </textarea>
+                    <p className="centered">Hashtags Character Counter {this.state.hashtags.length}</p>
+                    <br/><br/>
                     <button className="centeredImage" onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>
                 </div>
 

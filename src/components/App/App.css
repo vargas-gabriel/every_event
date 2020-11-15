@@ -10,7 +10,9 @@ body {
   background: rgb(36, 36, 36);
   color: white;
 }
-
+td{
+  text-align: center ;
+}
 img {
   display: inline-block;
   max-width: 100%;
@@ -42,7 +44,11 @@ img {
   margin-left: auto;
   margin-right: auto;
 }
-
+#postTable{
+  outline: solid black 1px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;}
 #collabOutline{
   outline: solid black 1px;
   overflow: scroll;
