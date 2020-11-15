@@ -63,7 +63,7 @@ class UserPage extends Component {
 				</div>
 				
 				<div  className="rounded">
-					<h4 className="centered">{this.props.store.user.first_name}'s Event's</h4>
+					<h1 className="centered">{this.props.store.user.first_name}'s Event's</h1>
 					<hr/>
 					<EventList/>
 					

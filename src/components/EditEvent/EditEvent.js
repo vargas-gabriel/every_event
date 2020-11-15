@@ -126,9 +126,8 @@ class EditEvent extends Component {
         console.log('EditEvent props:', this.props);
         return (  
             <div id="editEventDiv">
-                
+                <h1 className="centered">{this.props.store.temp.name}</h1>                
                 <h2 className="centered">Edit Event</h2>
-                <h2 className="centered">{this.props.store.temp.name}</h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Event Promotion Start

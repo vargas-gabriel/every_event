@@ -23,57 +23,58 @@ router.post('/', (req, res, next) => {
     // const eventId = result.rows[0]
 
     pool //transaction
-     .query(queryText, [
-        req.body.eventName, 
-        req.body.eventAcronym,
-        req.body.eventWebsite,
-        req.body.eventRegistration,
-        req.body.eventOAuth,
-        req.body.campaignStart,
-        req.body.campaignEnd,
+        .query(queryText, [
+            req.body.eventName, 
+            req.body.eventAcronym,
+            req.body.eventWebsite,
+            req.body.eventRegistration,
+            req.body.eventOAuth,
+            req.body.campaignStart,
+            req.body.campaignEnd,
         ])
-     .then((result)=>{
-         console.log("new event id is:", result.rows[0].id);
+        .then((result)=>{
+            console.log("new event id is:", result.rows[0].id);
 
-         const queryText2 = result.rows[0].id;
-         const insertEventJunctionQuery = `
-         INSERT INTO "user_event" ("user_id", "event_id")
-         VALUES  ($1, $2);
-         `;
+            const queryText2 = result.rows[0].id;
+            const insertEventJunctionQuery = `
+            INSERT INTO "user_event" ("user_id", "event_id")
+            VALUES  ($1, $2);
+            `;
 
-         
-        // SECOND QUERY MAKES USER FOR THAT NEW MEAL
-        pool
+            
+            // SECOND QUERY MAKES USER FOR THAT NEW MEAL
+            pool
             .query(insertEventJunctionQuery, [req.user.id, queryText2])
+
+
             .then((result) => {
                 //Now that both are done, send back success!
                 res.sendStatus(201);
                 console.log("here is your success message");
+            
+                console.log("3RD event id is:", queryText2);
+
+                // const queryText3 = result.rows[0].id;
+                const insertDefaultPhases = `
+                INSERT INTO "phase" ( "event_id", "name", "start_date", "end_date")
+                VALUES  ($1, $2, $3, $4);
+                `;
+                console.log('inserting into phases');
+                pool.query(insertDefaultPhases, [queryText2, 'General', req.body.campaignStart, req.body.campaignEnd])
+                pool.query(insertDefaultPhases, [queryText2, 'Ticketing', req.body.campaignStart, req.body.campaignEnd])
+                pool.query(insertDefaultPhases, [queryText2, 'Speakers', req.body.campaignStart, req.body.campaignEnd])
+                pool.query(insertDefaultPhases, [queryText2, 'Sponsors', req.body.campaignStart, req.body.campaignEnd])
+                pool.query(insertDefaultPhases, [queryText2, 'Post Event', req.body.campaignStart, req.body.campaignEnd])
+
             })
             .catch((err) => {
                 // catch for second query
                 console.log("error second query", err);
                 res.sendStatus(500);
             });
-        // Catch for first query
-        // .then((result)=>
-        // console.log("new event id is:", result.rows[0].id);
-
-        // const queryText3 = result.rows[0].id;
-        // const insertPhasesQuery = `
-        // INSERT INTO "phase" 
-        // (
-        //     "event_id",
-        //     "name",
-        //     "start_date",
-        //     "end_date"
-        // )
-        // `
-        // )
     
-    
-    })
-    .catch((err) => {
+        })
+        .catch((err) => {
         console.log("error first query", err);
         res.sendStatus(500);
     });
