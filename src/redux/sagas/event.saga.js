@@ -57,13 +57,17 @@ function* updateEvent(action){
 }
 
 function* updateTempEvent(action){
-    let updatedEvent = yield select(state => state.tempPhase);
+    //let updatedEvent = yield select(state => state.tempPhase);
     //console.log('updatedEvent', updatedEvent);
     console.log('updateTempEvent action.payload', action.payload);
     let response = yield axios({
         method: 'PUT',
         url: `api/tempEvent/${action.payload}`,
         data: action.payload
+    })
+    yield put({
+        type: 'SET_TEMP',
+        payload: response.data
     })
 }
 

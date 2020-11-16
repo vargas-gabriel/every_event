@@ -19,40 +19,46 @@ class EditPhase extends Component {
     }
 
     componentDidMount = () => {
-        const activephaseId = Number(this.props.history.location.pathname.split('/')[2]);
+        const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
         //const activeEventId = Number(this.props.store.tempPhase.event_id);
         //this.props.dispatch({type: 'GET_USER_EVENT'});
-        this.props.dispatch({type: 'GET_TEMP_PHASE', payload: activephaseId});
+        //this.props.dispatch({type: 'GET_TEMP_PHASE', payload: activephaseId});
         //this.props.dispatch({type: 'GET_TEMP_EVENT', payload: activeEventId});
-        //this.props.dispatch({type: 'FETCH_PHASE'})
+        //this.props.dispatch({type: 'FETCH_PHASE'});
+        this.findActivePhase();
     }
 
     findActiveEvent = () => {
-        const activeEventId = Number(this.props.store.tempPhase.event_id);
+        const activeEventId = this.props.store.tempPhase.event_id;
         console.log('activeEventId', activeEventId);
         this.props.dispatch({type: 'GET_TEMP_EVENT', payload: activeEventId});
     }
     findActivePhase=()=>{
         const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
-        const tempPhase = this.props.store.phase;
-        console.log('activePhaseId', activePhaseId);
-        console.log('tempPhase',tempPhase);
-        if(this.props.store.tempPhase.id === undefined){
-            console.log('tempPhase is 0');
-            for(let i=0; i<tempPhase.length; i++){
-                console.log('in for id', tempPhase[i].id);
-                console.log('activePhaseId', activePhaseId);
-                if(activePhaseId === tempPhase[i].id){
-                    console.log('match!');
-                    let eventToTempPhase = tempPhase[i];
-                    console.log('eventToTempPhase', eventToTempPhase);
-                    this.props.dispatch({
-                        type: 'SET_TEMP_PHASE',
-                        payload: eventToTempPhase,
-                    });
-                }
-            }
-        }
+        this.props.dispatch({type: 'GET_TEMP_PHASE', payload: activePhaseId});
+        this.findActiveEvent(); // we want this to happen after GET_TEMP_PHASE is done
+
+
+        // const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
+        // const tempPhase = this.props.store.phase;
+        // console.log('activePhaseId', activePhaseId);
+        // console.log('tempPhase',tempPhase);
+        // if(this.props.store.tempPhase.id === undefined){
+        //     console.log('tempPhase is 0');
+        //     for(let i=0; i<tempPhase.length; i++){
+        //         console.log('in for id', tempPhase[i].id);
+        //         console.log('activePhaseId', activePhaseId);
+        //         if(activePhaseId === tempPhase[i].id){
+        //             console.log('match!');
+        //             let eventToTempPhase = tempPhase[i];
+        //             console.log('eventToTempPhase', eventToTempPhase);
+        //             this.props.dispatch({
+        //                 type: 'SET_TEMP_PHASE',
+        //                 payload: eventToTempPhase,
+        //             });
+        //         }
+        //     }
+        // }
     }
     
     seperateDateTime=()=>{
@@ -102,18 +108,22 @@ class EditPhase extends Component {
         console.log('clicked upload post image');
     }
     render(){
-        console.log('state is:', this.state);
-        console.log('this.props.store.phase:', this.props.store.phase);
+        //console.log('state is:', this.state);
+        //console.log('this.props.store.phase:', this.props.store.phase);
         const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
-        console.log('includedPhases', includedPhases);
+        //console.log('includedPhases', includedPhases);
         const selectedPhase = includedPhases.filter(selected => selected.event_id === this.props.store.tempPhase.id)
-        console.log('selectedPhase is', selectedPhase );
-        this.findActiveEvent();
-        this.findActivePhase();
+        //console.log('selectedPhase is', selectedPhase );
+        //this.findActiveEvent();
+        if(this.props.store.tempPhase.event_id === undefined){
+            console.log('this.props.store.tempPhase.event_id', this.props.store.tempPhase.event_id);
+            //this.findActiveEvent()
+        }
+        //this.findActivePhase();
 
         // console.log('recentCard state:',this.state);
-        console.log('state is', this.state);
-        console.log('tempPhase is:', this.props.store.tempPhase);
+        //console.log('state is', this.state);
+        //console.log('tempPhase is:', this.props.store.tempPhase);
         //const phaseStartDate = this.props.store.tempPhase.start_date.split('T', 1)[0]
         //const phaseEndDate = this.props.store.tempPhase.end_date.split('T', 1)[0]
 
@@ -123,12 +133,18 @@ class EditPhase extends Component {
 
         // console.log('user is:', this.props.store.user);
         console.log('EditEvent props:', this.props);
+        console.log('this.props.store.tempPhase[0]', this.props.store.tempPhase[0]);
+        const phase = this.props.store.tempPhase[0];
         return (  
             <div id="editEventDiv">
+
+
                 {/* <h1 className="centered">Event Name Here</h1> */}
                 {/* <h1 className="centered">{this.props.store.temp.name}</h1> */}
-            
-                <h2 className="centered">Editing Phase: {this.props.store.tempPhase.name}  </h2>
+                {this.props.store.tempPhase.name === undefined ?
+                    <></>:
+                    <h2 className="centered">Editing Phase: {phase.name}  </h2>
+                }
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Phase Start

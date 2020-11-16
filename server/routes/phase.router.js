@@ -30,7 +30,7 @@ router.put('/:id', (req, res) => {
     console.log('phase post', req.user.id, req.params);
     let checkParams = [req.user.id, req.params.id];
     let query = `
-        SELECT * FROM "phase"
+        SELECT "phase"."id", "phase"."name", "event"."id" AS "event_id", "event"."start_date", "event"."end_date" FROM "phase"
         JOIN "event"
         ON "phase"."event_id" = "event"."id"
         JOIN "user_event"

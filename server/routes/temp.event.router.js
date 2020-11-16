@@ -19,7 +19,7 @@ router.put('/:id', (req, res) => {
    pool.query(queryText, checkParams)
    .then(result => {
       console.log('result', result.rows);
-      //res.sendStatus(201);
+      res.send(result.rows);
    }).catch(err => {
       console.log('we have an error in put', err);
       res.sendStatus(500);
