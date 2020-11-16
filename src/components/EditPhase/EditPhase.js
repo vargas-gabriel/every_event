@@ -127,12 +127,12 @@ class EditPhase extends Component {
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
         console.log('tempPhase is:', this.props.store.tempPhase);
-        const phaseStartDate = this.props.store.tempPhase.start_date.split('T', 1)[0]
-        const phaseEndDate = this.props.store.tempPhase.end_date.split('T', 1)[0]
+        // const phaseStartDate = this.props.store.tempPhase.start_date.split('T', 1)[0]
+        // const phaseEndDate = this.props.store.tempPhase.end_date.split('T', 1)[0]
 
         
-        console.log('phaseStartDate:',phaseStartDate);
-        console.log('phaseEndDate:', phaseEndDate);
+        // console.log('phaseStartDate:',phaseStartDate);
+        // console.log('phaseEndDate:', phaseEndDate);
 
         // console.log('user is:', this.props.store.user);
         console.log('EditEvent props:', this.props);
@@ -149,7 +149,7 @@ class EditPhase extends Component {
                             type='date'
                             name='campaignStart'
                             required
-                            defaultValue={phaseStartDate}
+                            //defaultValue={phaseStartDate}
                             onChange={(event) => this.handleChange(event, "start_date")}
                         />
                     </label>
@@ -160,7 +160,7 @@ class EditPhase extends Component {
                             type='date'
                             name='campaignEnd'
                             required
-                            defaultValue={phaseEndDate}
+                            //defaultValue={phaseEndDate}
                             onChange={(event) => this.handleChange(event, "end_date")}
                         />
                     </label> 
