@@ -139,7 +139,7 @@ class App extends Component {
               // - if logged in, redirects to "/user"
               // - else shows LandingPage at "/home"
               exact
-              path="/editphase"
+              path="/editphase/:id"
               component={EditPhase}
             />                                
             {/* If none of the other routes matched, we will show a 404. */}

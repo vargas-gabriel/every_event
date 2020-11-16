@@ -13,6 +13,7 @@ class EditEvent extends Component {
 
     componentDidMount = () => {
         this.props.dispatch({type: 'GET_USER_EVENT'});
+        this.props.dispatch({type: 'FETCH_PHASE'})
         //this.findActiveEvent();   moved this into render()
     }
 
@@ -55,8 +56,13 @@ class EditEvent extends Component {
     navHome=()=>{
         this.props.history.push('/user');
     }
-    phaseNav=()=>{
-        this.props.history.push('/editphase')
+
+    phaseNav=(phase)=>{
+        this.props.dispatch({
+			type: 'SET_TEMP_PHASE',//active phase
+			payload: phase,
+		});
+		this.props.history.push(`/editphase/${phase.id}`)
     }
     handleChange = (event, propertyName) => {
         this.props.dispatch({
@@ -118,8 +124,9 @@ class EditEvent extends Component {
     }
 
     render(){
-        //console.log('userEvent', this.props.store.userEvent);
-        // console.log('recentCard state:',this.state);
+
+        const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.temp.event_id);
+        console.log('includedPhases', includedPhases);
         console.log('state is', this.state);
         this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
@@ -161,7 +168,7 @@ class EditEvent extends Component {
                 
                 <div className="centered">
                 <label htmlFor="eventType">Event Type:</label>
-                <select name="eventType" value={this.props.store.temp.type} 
+                <select name="eventType" defaultValue={this.props.store.temp.type} 
                     id="eventType"
                     onChange={(event) => this.handleDateChange(event, "type")}
                     >Event Type
@@ -184,12 +191,14 @@ class EditEvent extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+
+                        {includedPhases.map((phase) =>
+                        <tr key={phase.id}>
                                 <td>
                                     <button>Delete</button> 
                                 </td>
                                 <td>
-                                    <h4 onClick={this.phaseNav}>General</h4>
+                                    <h4 className="hoverText"onClick={()=>this.phaseNav(phase)}>{phase.name}</h4>
                                 </td>
                                 <td>
                                     <label htmlFor='phaseStart'>
@@ -197,6 +206,9 @@ class EditEvent extends Component {
                                             type='date'
                                             name='phaseStart'
                                             required
+                                            defaultValue={phase.start_date.split('T', 1)[0]}
+                                            // onChange={(event) => this.handleDateChange(event, "start_date")}
+            
                                         />
                                     </label>
                                 </td>
@@ -206,12 +218,17 @@ class EditEvent extends Component {
                                             type='date'
                                             name='phaseEnd'
                                             required
+                                            defaultValue={phase.end_date.split('T', 1)[0]}
+
                                         />
                                     </label>
                                 </td>
                             </tr>
+                        )}
+                            
                         </tbody>
                     </table>
+                    <button className="centeredImage">New Phase</button><br/>
                     
                 </div>
 
@@ -285,7 +302,8 @@ class EditEvent extends Component {
 
                 <div id="eventHashtags" className="rounded">
                     <h4 className="centered">Event Hashtags</h4>
-                    <textarea className="centeredImage" rows="8">#YOLO, #YOLO</textarea><br/><br/>
+                    <textarea className="centeredImage" rows="8" defaultValue={this.props.store.temp.hashtag} 
+                    ></textarea><br/><br/>
                     <button className="centeredImage">Save Hashtags</button><br/><br/>
                 </div>
 

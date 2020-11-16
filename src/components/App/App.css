@@ -38,6 +38,10 @@ img {
   background-color: white;
   color: black;
 }
+.hoverText:hover{
+  color: teal;
+  text-decoration: underline;
+}
 #outline{
   outline: solid black 1px;
   width: 50%;

@@ -32,14 +32,19 @@ function* updatePhase(action) {
     data: action.payload
 }) 
   yield put ({
-    type: 'FETCH_USER'
+    type: 'FETCH_PHASE'
   })
+}
+
+function* getTempPhase(action){
+  console.log('in getTempPhase', action);
 }
 
 
 function* phaseSaga() {
   yield takeLatest('FETCH_PHASE', fetchPhase);
   yield takeLatest('UPDATE_PHASE', updatePhase);
+  yield takeLatest('GET_TEMP_PHASE', getTempPhase)
 }
 
 export default phaseSaga;
