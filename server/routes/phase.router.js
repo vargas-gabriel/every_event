@@ -25,8 +25,29 @@ router.get('/', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
-  // POST route code here
+router.put('/:id', (req, res) => {
+    // POST route code here
+    console.log('phase post', req.user.id, req.params);
+    let checkParams = [req.user.id, req.params.id];
+    let query = `
+        SELECT * FROM "phase"
+        JOIN "event"
+        ON "phase"."event_id" = "event"."id"
+        JOIN "user_event"
+        ON "user_event"."event_id" = "event"."id"
+        WHERE "user_id" = $1
+        AND "phase"."id" = $2;
+        `
+    pool.query(query, checkParams)
+    .then(result => {
+        //console.log('result.rows', result.rows);
+        res.send(result.rows);
+    })
+    .catch(err => {
+        console.log('error in phase put, you might not have access', err);
+        res.sendStatus(500);
+    });
+
 });
 
 module.exports = router;

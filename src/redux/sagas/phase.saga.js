@@ -30,7 +30,7 @@ function* updatePhase(action) {
     method: 'PUT',
     url: `/api/phase/${action.payload.id}`,
     data: action.payload
-}) 
+  }) 
   yield put ({
     type: 'FETCH_PHASE'
   })
@@ -38,6 +38,12 @@ function* updatePhase(action) {
 
 function* getTempPhase(action){
   console.log('in getTempPhase', action);
+  let response = yield axios ({
+    method: 'PUT',
+    url: `/api/phase/${action.payload}`,
+    data: action.payload
+  })
+  yield put({ type: 'SET_TEMP_PHASE', payload: response.data });
 }
 
 
