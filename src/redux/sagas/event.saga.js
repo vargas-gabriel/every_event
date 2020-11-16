@@ -56,11 +56,27 @@ function* updateEvent(action){
        // is this a result of React re-rendering on variable changes default setting?
 }
 
+function* updateTempEvent(action){
+    //let updatedEvent = yield select(state => state.tempPhase);
+    //console.log('updatedEvent', updatedEvent);
+    console.log('updateTempEvent action.payload', action.payload);
+    let response = yield axios({
+        method: 'PUT',
+        url: `api/tempEvent/${action.payload}`,
+        data: action.payload
+    })
+    yield put({
+        type: 'SET_TEMP',
+        payload: response.data
+    })
+}
+
 function* eventSaga() {
   yield takeLatest('CREATE_EVENT', createEvent);
   yield takeLatest('GET_EVENT', getEvent);
   yield takeLatest('GET_USER_EVENT', getUserEvent);
   yield takeLatest('UPDATE_EVENT', updateEvent);
+  yield takeLatest('GET_TEMP_EVENT', updateTempEvent);
 }
 
 export default eventSaga;
