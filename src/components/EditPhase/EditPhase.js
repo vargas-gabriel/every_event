@@ -126,13 +126,21 @@ class EditPhase extends Component {
 
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
+        console.log('tempPhase is:', this.props.store.tempPhase);
+        const phaseStartDate = this.props.store.tempPhase.start_date.split('T', 1)[0]
+        const phaseEndDate = this.props.store.tempPhase.end_date.split('T', 1)[0]
+
+        
+        console.log('phaseStartDate:',phaseStartDate);
+        console.log('phaseEndDate:', phaseEndDate);
+
         // console.log('user is:', this.props.store.user);
         console.log('EditEvent props:', this.props);
         return (  
             <div id="editEventDiv">
                 {/* <h1 className="centered">Event Name Here</h1> */}
-                <h1 className="centered">{this.props.store.temp.name}</h1>
-
+                {/* <h1 className="centered">{this.props.store.temp.name}</h1> */}
+            
                 <h2 className="centered">Editing Phase: {this.props.store.tempPhase.name}  </h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
@@ -141,7 +149,7 @@ class EditPhase extends Component {
                             type='date'
                             name='campaignStart'
                             required
-                            // value={this.props.store.tempPhase.start_date.split('T', 1)[0]}
+                            defaultValue={phaseStartDate}
                             onChange={(event) => this.handleChange(event, "start_date")}
                         />
                     </label>
@@ -152,7 +160,7 @@ class EditPhase extends Component {
                             type='date'
                             name='campaignEnd'
                             required
-                            // value={this.props.store.tempPhase.end_date.split('T', 1)[0]}
+                            defaultValue={phaseEndDate}
                             onChange={(event) => this.handleChange(event, "end_date")}
                         />
                     </label> 
