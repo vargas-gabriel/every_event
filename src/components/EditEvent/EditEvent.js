@@ -60,7 +60,7 @@ class EditEvent extends Component {
     phaseNav=(phase)=>{
         const activeId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({
-			type: 'SET_TEMP_PHASE',//active phase
+			type: 'SET_TEMP_PHASE', //active phase
 			payload: phase,
 		});
 		this.props.history.push(`/editphase/${phase.id}`)

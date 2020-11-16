@@ -14,6 +14,7 @@ const eventRouter = require('./routes/event.router');
 const user_eventRouter = require('./routes/user_event.router');
 const phaseRouter = require('./routes/phase.router');
 const tempEventRouter = require('./routes/temp.event.router');
+const tempPhaseRouter = require('./routes/temp.phase.router');
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -31,6 +32,7 @@ app.use('/api/event', eventRouter);
 app.use('/api/user_event', user_eventRouter);
 app.use('/api/phase', phaseRouter);
 app.use('/api/tempEvent', tempEventRouter);
+app.use('/api/tempPhase', tempPhaseRouter);
 // Serve static files
 app.use(express.static('build'));
 

@@ -28,37 +28,15 @@ class EditPhase extends Component {
         this.findActivePhase();
     }
 
-    findActiveEvent = () => {
-        const activeEventId = this.props.store.tempPhase.event_id;
-        console.log('activeEventId', activeEventId);
-        this.props.dispatch({type: 'GET_TEMP_EVENT', payload: activeEventId});
-    }
+    // findActiveEvent = () => {
+    //     const activeEventId = this.props.store.tempPhase.event_id;
+    //     console.log('activeEventId', activeEventId);
+    //     this.props.dispatch({type: 'GET_TEMP_EVENT', payload: activeEventId});
+    // }
     findActivePhase=()=>{
         const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({type: 'GET_TEMP_PHASE', payload: activePhaseId});
-        this.findActiveEvent(); // we want this to happen after GET_TEMP_PHASE is done
-
-
-        // const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
-        // const tempPhase = this.props.store.phase;
-        // console.log('activePhaseId', activePhaseId);
-        // console.log('tempPhase',tempPhase);
-        // if(this.props.store.tempPhase.id === undefined){
-        //     console.log('tempPhase is 0');
-        //     for(let i=0; i<tempPhase.length; i++){
-        //         console.log('in for id', tempPhase[i].id);
-        //         console.log('activePhaseId', activePhaseId);
-        //         if(activePhaseId === tempPhase[i].id){
-        //             console.log('match!');
-        //             let eventToTempPhase = tempPhase[i];
-        //             console.log('eventToTempPhase', eventToTempPhase);
-        //             this.props.dispatch({
-        //                 type: 'SET_TEMP_PHASE',
-        //                 payload: eventToTempPhase,
-        //             });
-        //         }
-        //     }
-        // }
+        //this.findActiveEvent();
     }
     
     seperateDateTime=()=>{
@@ -75,8 +53,23 @@ class EditPhase extends Component {
         })
     }
 
+    handleDateChange = (event, propertyName) => {
+        this.props.dispatch({
+            type: "UPDATE_ACTIVE_PHASE",
+            payload: {
+                [ propertyName ]: event.target.value,
+            }
+        });
+        this.savePhaseDuration();
+    }
+
     savePhaseDuration=()=>{
         console.log('clicked save phase duration');
+        const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
+        this.props.dispatch({
+            type: 'UPDATE_PHASE_CLICK',
+        });
+        //this.props.dispatch({type: 'GET_TEMP_PHASE', payload: activePhaseId});
     }
 
 
@@ -110,15 +103,15 @@ class EditPhase extends Component {
     render(){
         //console.log('state is:', this.state);
         //console.log('this.props.store.phase:', this.props.store.phase);
-        const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
+        //const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
         //console.log('includedPhases', includedPhases);
-        const selectedPhase = includedPhases.filter(selected => selected.event_id === this.props.store.tempPhase.id)
+        //const selectedPhase = includedPhases.filter(selected => selected.event_id === this.props.store.tempPhase.id)
         //console.log('selectedPhase is', selectedPhase );
         //this.findActiveEvent();
-        if(this.props.store.tempPhase.event_id === undefined){
-            console.log('this.props.store.tempPhase.event_id', this.props.store.tempPhase.event_id);
-            //this.findActiveEvent()
-        }
+        // if(this.props.store.tempPhase.event_id === undefined){
+        //     console.log('this.props.store.tempPhase.event_id', this.props.store.tempPhase.event_id);
+        //     //this.findActiveEvent()
+        // }
         //this.findActivePhase();
 
         // console.log('recentCard state:',this.state);
@@ -134,42 +127,39 @@ class EditPhase extends Component {
         // console.log('user is:', this.props.store.user);
         console.log('EditEvent props:', this.props);
         console.log('this.props.store.tempPhase[0]', this.props.store.tempPhase[0]);
-        const phase = this.props.store.tempPhase[0];
+        const phase = this.props.store.tempPhase;
+        //const niceStartDate = phase.start_date.split('T', 1)[0];
+        //console.log('phase.start_date.split', phase.start_date.split('T', 1)[0]);
         return (  
             <div id="editEventDiv">
 
 
-                {/* <h1 className="centered">Event Name Here</h1> */}
+                {phase && <h1 className="centered">{phase.event_name}</h1>}
                 {/* <h1 className="centered">{this.props.store.temp.name}</h1> */}
-                {this.props.store.tempPhase.name === undefined ?
-                    <></>:
-                    <h2 className="centered">Editing Phase: {phase.name}  </h2>
-                }
+                {phase && <h2 className="centered">Editing Phase: {phase.name} </h2>}
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Phase Start
-                        {this.props.store.tempPhase.start_date === undefined ?
-                            <></> :
+                        {phase.start_date && 
                             <input
                                 type='date'
                                 name='campaignStart'
                                 required
-                                defaultValue={this.props.store.tempPhase.start_date.split('T', 1)[0]}
-                                onChange={(event) => this.handleChange(event, "start_date")}
+                                defaultValue={phase.start_date.split('T', 1)[0]}
+                                onChange={(event) => this.handleDateChange(event, "start_date")}
                             />
                         }
                     </label>
 
                     <label htmlFor='campaignEnd'>
                         Phase End
-                        {this.props.store.tempPhase.end_date === undefined ?
-                            <></> :
+                        {phase.end_date &&
                             <input
                                 type='date'
                                 name='campaignEnd'
                                 required
-                                defaultValue={this.props.store.tempPhase.end_date.split('T', 1)[0]}
-                                onChange={(event) => this.handleChange(event, "end_date")}
+                                defaultValue={phase.end_date.split('T', 1)[0]}
+                                onChange={(event) => this.handleDateChange(event, "end_date")}
                             />
                         }
                     </label> 
