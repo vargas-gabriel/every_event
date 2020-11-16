@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import EventList from '../EventList/EventList';
+import EventList from "../EventList/EventList";
 class UserPage extends Component {
 	state = {
 		hour: null,
 		greeting: "",
-		defaultImg: 'https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png',
-		userEvents: []
+		defaultImg:
+			"https://assets.stickpng.com/images/585e4bf3cb11b227491c339a.png",
+		userEvents: [],
 	};
 	componentDidMount() {
 		this.getGreeting();
-      this.props.dispatch({type: 'GET_USER_EVENT'});
+		this.props.dispatch({ type: "GET_USER_EVENT" });
 	}
 	// this sets the greeting for the user based on the time of day
 	getGreeting = () => {
@@ -36,48 +37,63 @@ class UserPage extends Component {
 		}
 	};
 
+	editUserNav = () => {
+		this.props.history.push("/edituser");
+	};
 
-	editUserNav=()=>{
-	  this.props.history.push('/edituser')
-	}
-
-	
 	// this component doesn't do much to start, just renders some user info to the DOM
 	render() {
 		return (
-			<div >
-				<div id="userDiv" >
-					<h2 id='welcome' className="centered">
+			<div>
+				<div id='userDiv'>
+					<h2 id='welcome' className='centered'>
 						{" "}
 						{this.state.greeting}, {this.props.store.user.first_name}
 					</h2>
-					<hr/>
+					<hr />
 					{/* <p>Your ID is: {this.props.store.user.id}</p> */}
-					<img id="userImage"  src={this.props.store.user.image} width='100px'></img>
-					
-					<div id="userBtns">
-						<button className="centeredImage" onClick={this.editUserNav}>Edit User</button><br/>
+					<img
+						id='userImage'
+						src={this.props.store.user.image}
+						width='100px'></img>
+
+					<div id='userBtns'>
+						<button className='centeredImage' onClick={this.editUserNav}>
+							Edit User
+						</button>
+						<br />
 						<LogOutButton className='log-in, centeredImage' />
 					</div>
-					<br/>
-				</div>
-				
-				<div  className="rounded">
-					<h1 className="centered">{this.props.store.user.first_name}'s Event's</h1>
-					<hr/>
-					<EventList/>
-					
-
+					<br />
 				</div>
 
-				<div id="outline">
+				<div className='rounded'>
+					<h1 className='centered'>
+						{this.props.store.user.first_name}'s Event's
+					</h1>
+					<hr />
+					<EventList />
+				</div>
+				<div>
+					<a
+						href='https://www.linkedin.com/oauth/v2/authorization'
+						target='blank'>
+						<h4>Log in with LinkedIn</h4>
+					</a>
+				</div>
+				<div>
+					<a href='http://www.google.com' target='blank'>
+						<h4>Log in with LinkedIn</h4>
+					</a>
+				</div>
+
+				<div id='outline'>
 					<h4>This is where we could put past events</h4>
 				</div>
 
-				<div id="outline">
+				<div id='outline'>
 					<h4>This is where we could put active/current events</h4>
 				</div>
-
 			</div>
 		);
 	}
