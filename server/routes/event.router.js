@@ -64,6 +64,8 @@ router.post('/', (req, res, next) => {
                 pool.query(insertDefaultPhases, [queryText2, 'Speakers', req.body.campaignStart, req.body.campaignEnd])
                 pool.query(insertDefaultPhases, [queryText2, 'Sponsors', req.body.campaignStart, req.body.campaignEnd])
                 pool.query(insertDefaultPhases, [queryText2, 'Post Event', req.body.campaignStart, req.body.campaignEnd])
+                //pool.query(insertDefaultPhases, [queryText2, 'Day Of Event', req.body.campaignStart, req.body.campaignEnd])
+
 
             })
             .catch((err) => {
