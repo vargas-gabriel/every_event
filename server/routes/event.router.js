@@ -52,8 +52,7 @@ router.post('/', (req, res, next) => {
                 res.sendStatus(201);
                 console.log("here is your success message");
             
-                console.log("3RD event id is:", queryText2);
-
+                // console.log("3RD event id is:", queryText2);
                 // const queryText3 = result.rows[0].id;
                 const insertDefaultPhases = `
                 INSERT INTO "phase" ( "event_id", "name", "start_date", "end_date")

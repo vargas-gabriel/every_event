@@ -15,10 +15,59 @@ class EditPhase extends Component {
         send_time: "",
         post_text:  "THIS TEXT IS CURRENTLY IN LOCAL STATE",
         image: "",
-        hashtags: "#YOLO, #HASHTAG, #FTW"
+        hashtags: "#YOLO, #HASHTAG, #FTW",
     }
 
+    componentDidMount = () => {
+        this.props.dispatch({type: 'GET_TEMP_PHASE', payload: 'yolo'});
+        this.props.dispatch({type: 'FETCH_PHASE'})
+    }
 
+    // findActiveEvent = () => {
+    //     const activeId = Number(this.props.history.location.pathname.split('/')[2]);
+    //     const userEvents = this.props.store.userEvent;
+    //     console.log('this.props.store.userEvent', this.props.store.userEvent);
+    //     console.log('userEvents', userEvents);
+    //     if(this.props.store.temp.id === undefined){
+    //         console.log('temp is 0');
+    //         for(let i=0; i<userEvents.length; i++){
+    //             console.log('in for id', userEvents[i].id);
+    //             console.log('activeId', activeId);
+    //             if(activeId === userEvents[i].id){
+    //                 console.log('match!');
+    //                 let eventToTemp = userEvents[i];
+    //                 console.log('eventToTemp', eventToTemp);
+    //                 this.props.dispatch({
+    //                     type: 'SET_TEMP',
+    //                     payload: eventToTemp,
+    //                 });
+    //             }
+    //         }
+    //     }
+    // }
+    findActivePhase=()=>{
+        const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
+        const tempPhase = this.props.store.phase;
+        console.log('activePhaseId', activePhaseId);
+        console.log('tempPhase',tempPhase);
+        if(this.props.store.tempPhase.id === undefined){
+            console.log('tempPhase is 0');
+            for(let i=0; i<tempPhase.length; i++){
+                console.log('in for id', tempPhase[i].id);
+                console.log('activePhaseId', activePhaseId);
+                if(activePhaseId === tempPhase[i].id){
+                    console.log('match!');
+                    let eventToTempPhase = tempPhase[i];
+                    console.log('eventToTempPhase', eventToTempPhase);
+                    this.props.dispatch({
+                        type: 'SET_TEMP_PHASE',
+                        payload: eventToTempPhase,
+                    });
+                }
+            }
+        }
+    }
+    
     seperateDateTime=()=>{
         console.log(this.state.send_date);
     }
@@ -66,6 +115,15 @@ class EditPhase extends Component {
         console.log('clicked upload post image');
     }
     render(){
+        console.log('state is:', this.state);
+        console.log('this.props.store.phase:', this.props.store.phase);
+        const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
+        console.log('includedPhases', includedPhases);
+        const selectedPhase = includedPhases.filter(selected => selected.event_id === this.props.store.tempPhase.id)
+        console.log('selectedPhase is', selectedPhase );
+        this.findActivePhase();
+        // this.findActiveEvent();
+
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
         // console.log('user is:', this.props.store.user);
@@ -75,7 +133,7 @@ class EditPhase extends Component {
                 {/* <h1 className="centered">Event Name Here</h1> */}
                 <h1 className="centered">{this.props.store.temp.name}</h1>
 
-                <h2 className="centered">Edit Phase (Title Here)</h2>
+                <h2 className="centered">Editing Phase: {this.props.store.tempPhase.name}  </h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Phase Start
@@ -83,7 +141,7 @@ class EditPhase extends Component {
                             type='date'
                             name='campaignStart'
                             required
-                            // value={this.state.campaignStart.split('T', 1)[0]}
+                            // value={this.props.store.tempPhase.start_date.split('T', 1)[0]}
                             onChange={(event) => this.handleChange(event, "start_date")}
                         />
                     </label>
@@ -94,7 +152,7 @@ class EditPhase extends Component {
                             type='date'
                             name='campaignEnd'
                             required
-                            // value={this.state.campaignEnd.split('T', 1)[0]}
+                            // value={this.props.store.tempPhase.end_date.split('T', 1)[0]}
                             onChange={(event) => this.handleChange(event, "end_date")}
                         />
                     </label> 
@@ -112,7 +170,7 @@ class EditPhase extends Component {
                             <input
                                 type='text'
                                 name='postText'
-                                value={this.state.name}
+                                // value={selectedPhase[0].name}
                                 placeholder='this.state.tempPhase.name'
                                 // value={this.state.postText}
                                 // required
