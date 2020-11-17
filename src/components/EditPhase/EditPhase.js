@@ -1,22 +1,22 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import axios from 'axios';
 
 
 class EditPhase extends Component {
 
     state = {
         event_id: this.props.store.tempPhase,
-        name: "selected post name",
-        start_date: "",
-        end_date: "",
-        phasee_id: "",
-        send_date: "",
-        send_time: "",
-        post_text:  "THIS TEXT IS CURRENTLY IN LOCAL STATE",
-        image: "",
-        hashtags: "#YOLO, #HASHTAG, #FTW",
-        loadedPost: {}
+        id: '',
+        image: '',
+        name: '',
+        phase_id: '',
+        post_text: '',
+        response_id: '',
+        send_date: '',
+        send_time: '',
+        hashtags: ''
     }
 
     componentDidMount = () => {
@@ -100,7 +100,15 @@ class EditPhase extends Component {
     loadPost=(action)=>{
         console.log('clicked load post', action);
         this.setState({
-            loadedPost: action
+            id: action.id,
+            image: action.image,
+            name: action.name,
+            phase_id: action.phase_id,
+            post_text: action.post_text,
+            response_id: action.response_id,
+            send_date: action.send_date,
+            send_time: action.send_time,
+            //hashtags: action.hashtags
         })
 
     }
@@ -110,16 +118,23 @@ class EditPhase extends Component {
 
     addHashtags=()=>{
         console.log('adding:', this.state.hashtags);
-        console.log(this.state.loadedPost.post_text);
+        console.log(this.state.post_text);
         this.setState({
-            ...this.state,
-            loadedPost:{
-                post_text: this.state.loadedPost.post_text + ' ' + this.state.hashtags
-            }
+            post_text: this.state.post_text + ' ' + this.props.store.tempPhase.hashtag
+            
         })
     }
     saveHashtags=()=>{
         console.log('clicked save hashtags with:', this.state.hashtags);
+        axios({
+            method: 'PUT',
+            url: '/api/hashtag',
+            data: {
+                hashtag: this.state.hashtags, 
+                event_id: this.props.store.tempPhase.event_id
+            }
+        })
+        this.findActivePhase()
     }
 
     uploadImage=()=>{
@@ -196,9 +211,7 @@ class EditPhase extends Component {
                         }
                     </label> 
                 </div>
-                <br/>
-                <button className="centeredImage" onClick={()=>this.savePhaseDuration()}>Save(necessary?)</button>
-                <hr/>
+                                <hr/>
 
                 <div id="eventPromotionDuration" className="rounded">
                     
@@ -210,21 +223,20 @@ class EditPhase extends Component {
                                 type='text'
                                 name='postText'
                                 // value={selectedPhase[0].name}
-                                placeholder='this.state.tempPhase.name'
-                                // value={this.state.postText}
-                                // required
+                                placeholder='Select a post'
+                                defaultValue={this.state.name}                                // required
                                 onChange={(event)=>this.handleChange(event, "name")}
                             />
                             </label>
                         </div>
                         <br/>
-                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')} value={this.state.loadedPost.post_text} rows="10" cols="60"></textarea>
+                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')} value={this.state.post_text} rows="10" cols="60"></textarea>
                         
                         
-                        {this.state.loadedPost.post_text === undefined ?
+                        {this.state.post_text === undefined ?
                         <p className="centered">Character Counter: 0</p>
                         :
-                        <p className="centered">Character Counter: {this.state.loadedPost.post_text.length}</p>
+                        <p className="centered">Character Counter: {this.state.post_text.length}</p>
     }
                         <button id="centeredButton" onClick={()=>this.addHashtags()}>Add Hashtags</button><br/>
                         <button id="centeredButton" onClick={()=>this.uploadImage()}>Upload Post Image</button>
@@ -271,7 +283,7 @@ class EditPhase extends Component {
                             
                             <tr key={post.id}>
                                 <td>
-                                <h4 className='' onClick={()=>this.loadPost(post)}>Post: {post.id}</h4>
+                                <h4 className='' onClick={()=>this.loadPost(post)}>{post.name}</h4>
                                 </td>
                                 <td>
                                 <button onClick={()=>this.deletePost(post.id)}>Delete Post</button>
@@ -297,10 +309,16 @@ class EditPhase extends Component {
                         className="centeredImage" 
                         rows="4" 
                         cols="35"
-                        defaultValue={this.state.hashtags} 
+                        defaultValue={this.props.store.tempPhase.hashtag} 
                         onChange={(event) => this.handleChange(event, "hashtags")}>
                     </textarea>
-                    <p className="centered">Hashtags Character Counter {this.state.hashtags.length}</p>
+
+
+                    {phase.hashtag === undefined ?
+                    <p className="centered">Hashtags Character Counter 0</p>
+                    :
+                    <p className="centered">Hashtags Character Counter {phase.hashtag.length}</p>
+                    }
                     <br/><br/>
                     <button className="centeredImage" onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>
                 </div>
