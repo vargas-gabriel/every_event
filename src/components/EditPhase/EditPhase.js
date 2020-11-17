@@ -16,6 +16,7 @@ class EditPhase extends Component {
         post_text:  "THIS TEXT IS CURRENTLY IN LOCAL STATE",
         image: "",
         hashtags: "#YOLO, #HASHTAG, #FTW",
+        loadedPost: {}
     }
 
     componentDidMount = () => {
@@ -26,8 +27,16 @@ class EditPhase extends Component {
         //this.props.dispatch({type: 'GET_TEMP_EVENT', payload: activeEventId});
         //this.props.dispatch({type: 'FETCH_PHASE'});
         this.findActivePhase();
+        this.getPosts();
     }
 
+
+
+    getPosts=()=>{
+        console.log('in get posts $$$$');
+        this.props.dispatch({type: 'GET_RELEVENT_POSTS'})
+
+    }
     // findActiveEvent = () => {
     //     const activeEventId = this.props.store.tempPhase.event_id;
     //     console.log('activeEventId', activeEventId);
@@ -74,13 +83,26 @@ class EditPhase extends Component {
 
 
     newPost=()=>{
-        console.log('clicked new post');
+        const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
+        console.log('clicked new post with:', activePhaseId);
+        this.props.dispatch({
+            type: 'CREATE_POST',
+            payload: activePhaseId
+        })
     }
-    deletePost=()=>{
-        console.log('clicked delete post');
+    deletePost=(action)=>{
+        console.log('clicked delete post', action);
+        this.props.dispatch({
+            type: 'DELETE_POST',
+            payload: action   
+        })
     }
-    loadPost=()=>{
-        console.log('clicked load post');
+    loadPost=(action)=>{
+        console.log('clicked load post', action);
+        this.setState({
+            loadedPost: action
+        })
+
     }
     savePost=()=>{
         console.log('clicked save post');
@@ -88,9 +110,12 @@ class EditPhase extends Component {
 
     addHashtags=()=>{
         console.log('adding:', this.state.hashtags);
+        console.log(this.state.loadedPost.post_text);
         this.setState({
             ...this.state,
-            post_text: this.state.post_text + ' ' + this.state.hashtags
+            loadedPost:{
+                post_text: this.state.loadedPost.post_text + ' ' + this.state.hashtags
+            }
         })
     }
     saveHashtags=()=>{
@@ -101,7 +126,7 @@ class EditPhase extends Component {
         console.log('clicked upload post image');
     }
     render(){
-        //console.log('state is:', this.state);
+        console.log('state is:', this.state);
         //console.log('this.props.store.phase:', this.props.store.phase);
         //const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
         //console.log('includedPhases', includedPhases);
@@ -130,6 +155,13 @@ class EditPhase extends Component {
         const phase = this.props.store.tempPhase;
         //const niceStartDate = phase.start_date.split('T', 1)[0];
         //console.log('phase.start_date.split', phase.start_date.split('T', 1)[0]);
+
+        const includedPosts = this.props.store.post.filter(post => post.phase_id === this.props.store.tempPhase.id)
+        console.log('includedPosts:',includedPosts);
+        
+        // const namedIncludedPosts = includedPosts.forEach((post, index) => post.id = index + 1);
+        // console.log('namedIncludedPosts', namedIncludedPosts);
+
         return (  
             <div id="editEventDiv">
 
@@ -186,8 +218,14 @@ class EditPhase extends Component {
                             </label>
                         </div>
                         <br/>
-                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')} value={this.state.post_text} rows="10" cols="60"></textarea>
-                        <p className="centered">Character Counter: {this.state.post_text.length}</p>
+                        <textarea className="centeredImage" onChange={(event)=>this.handleChange(event, 'post_text')} value={this.state.loadedPost.post_text} rows="10" cols="60"></textarea>
+                        
+                        
+                        {this.state.loadedPost.post_text === undefined ?
+                        <p className="centered">Character Counter: 0</p>
+                        :
+                        <p className="centered">Character Counter: {this.state.loadedPost.post_text.length}</p>
+    }
                         <button id="centeredButton" onClick={()=>this.addHashtags()}>Add Hashtags</button><br/>
                         <button id="centeredButton" onClick={()=>this.uploadImage()}>Upload Post Image</button>
 
@@ -228,14 +266,20 @@ class EditPhase extends Component {
                     <div>
                         <table  id="postTable">
                             <tbody>
-                            <tr>
+
+                            {includedPosts.map((post) =>
+                            
+                            <tr key={post.id}>
                                 <td>
-                                <h4 className='' onClick={()=>this.loadPost()}>post title</h4>
+                                <h4 className='' onClick={()=>this.loadPost(post)}>Post: {post.id}</h4>
                                 </td>
                                 <td>
-                                <button onClick={()=>this.deletePost()}>Delete Post</button>
+                                <button onClick={()=>this.deletePost(post.id)}>Delete Post</button>
                                 </td>
                             </tr>
+                            )}
+
+                            
                             </tbody>
                         </table>
                         

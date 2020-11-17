@@ -38,9 +38,9 @@ CREATE TABLE phase (
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
     phase_id INTEGER REFERENCES phase,
-    send_date DATE NOT NULL,
-    send_time TIME NOT NULL,
-    post_text TEXT NOT NULL,
+    send_date DATE,
+    send_time TIME,
+    post_text TEXT,
     image BYTEA,
     response_id VARCHAR(1000) -- will be inserted after post to Linkedin
 );
