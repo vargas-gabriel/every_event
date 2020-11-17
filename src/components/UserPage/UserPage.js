@@ -76,14 +76,14 @@ class UserPage extends Component {
 				</div>
 				<div>
 					<a
-						href='https://www.linkedin.com/oauth/v2/authorization'
+						href='http://localhost:5000/api/linkedin/auth/linkedin'
 						target='blank'>
 						<h4>Log in with LinkedIn</h4>
 					</a>
 				</div>
 				<div>
 					<a href='http://www.google.com' target='blank'>
-						<h4>Log in with LinkedIn</h4>
+						<h4>Go to google</h4>
 					</a>
 				</div>
 
