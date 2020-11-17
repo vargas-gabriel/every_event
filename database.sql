@@ -37,6 +37,7 @@ CREATE TABLE phase (
 );
 CREATE TABLE post (
     id SERIAL PRIMARY KEY,
+    name VARCHAR,
     phase_id INTEGER REFERENCES phase,
     send_date DATE,
     send_time TIME,

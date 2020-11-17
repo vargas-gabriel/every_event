@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import EventList from "../EventList/EventList";
+
 class UserPage extends Component {
 	state = {
 		hour: null,
@@ -14,6 +15,32 @@ class UserPage extends Component {
 	componentDidMount() {
 		this.getGreeting();
 		this.props.dispatch({ type: "GET_USER_EVENT" });
+		if(window.location.href.includes('=')){
+			console.log('token detected');
+			this.checkUrl();
+		}else{
+			console.log('no token detected');
+		}
+		
+	}
+
+	checkUrl = () => {
+		//console.log('url:', window.location.href.split('=')[1].split('#')[0]);
+		const linkedinToken = window.location.href.split('=')[1].split('#')[0];
+		console.log('linkedinToken', linkedinToken);
+		
+		this.props.dispatch({
+			type: 'UPDATE_USER',
+			payload: {
+				id: this.props.store.user.id,
+				firstName: this.props.store.user.first_name,
+				lastName: this.props.store.user.last_name,
+				email: this.props.store.user.email,
+				image: this.props.store.user.image,
+				linkedin_account: this.props.store.user.linkedin_account,
+				linkedin_oauth: linkedinToken
+			}
+	  })
 	}
 	// this sets the greeting for the user based on the time of day
 	getGreeting = () => {
