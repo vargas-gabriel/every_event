@@ -25,15 +25,16 @@ router.post('/', (req, res) => {
     console.log('in post POST with req.body:', req.body); 
     const queryText = `INSERT INTO "post"
     ("phase_id",
+    "name",
     "send_date",
     "send_time",
     "post_text",
     "image",
     "response_id")
-    VALUES ($1,$2,$3,$4,$5,$6)
+    VALUES ($1,$2,$3,$4,$5,$6,$7)
     RETURNING "id";`;
 
-pool.query(queryText, [req.body.payload, null, null, '', null, null])
+pool.query(queryText, [req.body.payload,'New Post', null, null, '', null, null])
 
     .then((result) => {
     //res.send(result)
