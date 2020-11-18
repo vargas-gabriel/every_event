@@ -19,18 +19,22 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
 router.post("/register", (req, res, next) => {
-	console.log("in register");
+	console.log("in register", req.body);
 	const email = req.body.email;
 	const firstname = req.body.firstname;
 	const lastname = req.body.lastname;
 	const password = encryptLib.encryptPassword(req.body.password);
-
-	const queryText = `INSERT INTO "user" (first_name, last_name, email, password)
-    VALUES ($1, $2, $3, $4) RETURNING id`;
+	const ayrshareapikey = req.body.ayrshareapikey;
+	const queryText = `INSERT INTO "user" (first_name, last_name, email, password, ayrshareapikey)
+	VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+	
 	pool
-		.query(queryText, [firstname, lastname, email, password])
+		.query(queryText, [firstname, lastname, email, password, ayrshareapikey])
 		.then(() => res.sendStatus(201))
-		.catch(() => res.sendStatus(500));
+		.catch(error => {
+			console.log('ERROR',error);
+			res.sendStatus(500);
+		})
 });
 
 // Handles login form authenticate/login POST
@@ -56,11 +60,10 @@ router.put('/:id', (req, res) => {
 	"first_name" = $1,
 	"last_name" = $2,
 	"image" = $3,
-	"linkedin_account"= $4,
-	"linkedin_oauth" = $5
-	WHERE "id" = $6
+	"ayrshareapikey"= $4
+	WHERE "id" = $5
 	;`;
-	pool.query(query, [req.body.firstName, req.body.lastName, req.body.image, req.body.linkedin_account, req.body.linkedin_oauth, req.body.id])
+	pool.query(query, [req.body.firstName, req.body.lastName, req.body.image, req.body.ayrshareapikey, req.body.id])
 	.then(() => 
 	res.sendStatus(200))
 	.catch(error => {

@@ -6,22 +6,19 @@ CREATE TABLE "user" (
     password VARCHAR(1000) NOT NULL,
     image VARCHAR(255), -- assumes img url
     auth_level VARCHAR(255), -- future use, do we want a default?
-    linkedin_account VARCHAR(512), -- what will this be?
-    linkedin_oauth VARCHAR(1000) -- will be inserted after token received
+    ayrshareApiKey VARCHAR(1000) -- what will this be?
 );
 CREATE TABLE event (
     id SERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     acronym VARCHAR(255),
-    event_image BYTEA,
+    event_image VARCHAR(255),
     type VARCHAR(128),
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     website VARCHAR(512),
     registration_link VARCHAR(512),
-    linkedin_account VARCHAR(512),
-    hashtag TEXT,
-    linkedin_oauth VARCHAR(1000) -- will be inserted after token received
+    hashtag TEXT
 );
 CREATE TABLE user_event (
     id SERIAL PRIMARY KEY,
@@ -42,6 +39,6 @@ CREATE TABLE post (
     send_date DATE,
     send_time TIME,
     post_text TEXT,
-    image BYTEA,
+    image VARCHAR(255),
     response_id VARCHAR(1000) -- will be inserted after post to Linkedin
 );
