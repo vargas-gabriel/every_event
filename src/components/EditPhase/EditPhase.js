@@ -133,8 +133,7 @@ class EditPhase extends Component {
                 hashtag: this.state.hashtags, 
                 event_id: this.props.store.tempPhase.event_id
             }
-        })
-        this.findActivePhase()
+        }).then(() => this.findActivePhase())
     }
 
     uploadImage=()=>{
