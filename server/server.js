@@ -7,7 +7,7 @@ const sessionMiddleware = require("./modules/session-middleware");
 
 const passport = require("./strategies/user.strategy");
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
-const config = require("../config.js");
+//const config = require("../config.js");
 const session = require("express-session");
 
 // Route includes
@@ -30,19 +30,19 @@ app.use(sessionMiddleware);
 // start up passport sessions
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(
-	new LinkedInStrategy(
-		{
-			clientID: config.linkedinAuth.clientID,
-			clientSecret: config.linkedinAuth.clientSecret,
-			callbackURL: config.linkedinAuth.callbackURL,
-			scope: ["r_emailaddress", "r_liteprofile"],
-		},
-		function (token, tokenSecret, profile, done) {
-			return done(null, profile);
-		}
-	)
-);
+// passport.use(
+// 	new LinkedInStrategy(
+// 		{
+// 			clientID: config.linkedinAuth.clientID,
+// 			clientSecret: config.linkedinAuth.clientSecret,
+// 			callbackURL: config.linkedinAuth.callbackURL,
+// 			scope: ["r_emailaddress", "r_liteprofile"],
+// 		},
+// 		function (token, tokenSecret, profile, done) {
+// 			return done(null, profile);
+// 		}
+// 	)
+// );
 app.use(
 	session({
 		resave: false,
