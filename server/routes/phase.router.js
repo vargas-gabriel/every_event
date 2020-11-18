@@ -29,14 +29,23 @@ router.put('/:id', (req, res) => {
     // POST route code here
     console.log('phase post', req.user.id, req.params.id);
     let checkParams = [req.user.id, req.params.id];
+    // let query = `
+    //     SELECT "phase"."id", "phase"."name", "event"."id" AS "event_id", "phase"."start_date", "phase"."end_date", "event"."name" AS "event_name", "event"."hashtag", "post"."name" AS "post_name", "post"."post_text" FROM "phase"
+    //     JOIN "event"
+    //     ON "phase"."event_id" = "event"."id"
+    //     JOIN "user_event"
+    //     ON "user_event"."event_id" = "event"."id"
+    //     JOIN "post" 
+    //     ON "phase"."id" = "post"."phase_id"
+    //     WHERE "user_id" = $1
+    //     AND "phase"."id" = $2;
+    //     `
     let query = `
-        SELECT "phase"."id", "phase"."name", "event"."id" AS "event_id", "phase"."start_date", "phase"."end_date", "event"."name" AS "event_name", "event"."hashtag", "post"."name" AS "post_name", "post"."post_text" FROM "phase"
+        SELECT "phase"."id", "phase"."name", "event"."id" AS "event_id", "phase"."start_date", "phase"."end_date", "event"."name" AS "event_name", "event"."hashtag" FROM "phase"
         JOIN "event"
         ON "phase"."event_id" = "event"."id"
         JOIN "user_event"
         ON "user_event"."event_id" = "event"."id"
-        JOIN "post" 
-        ON "phase"."id" = "post"."phase_id"
         WHERE "user_id" = $1
         AND "phase"."id" = $2;
         `
