@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-
+const SocialPost = require("social-post-api");
+const social = new SocialPost("J01SCTK-D7BM7ND-G6AHAPY-8A5RW18");
 class AyrShare extends Component {
 	state = {
         posts: we have all our posts
@@ -29,7 +30,7 @@ class AyrShare extends Component {
         console.log(json);
     };
     
-    //run();
+    run();
 
 	render() {
         console.log('this state:', this.state);
