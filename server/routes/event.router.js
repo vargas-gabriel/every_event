@@ -116,7 +116,7 @@ router.get('/:id', (req, res) => {
 
     pool.query(query, queryParams)
     .then(results => {
-        console.log('results', results.rows[0]);
+        console.log('results from get:id', results.rows[0]);
         res.send(results.rows[0]);
     })
     .catch((err) => {
