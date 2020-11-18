@@ -306,12 +306,12 @@ class EditEvent extends Component {
                 </div>
 
 
-                <div id="eventHashtags" className="rounded">
+                {/* <div id="eventHashtags" className="rounded">
                     <h4 className="centered">Event Hashtags</h4>
                     <textarea className="centeredImage" rows="8" defaultValue={this.props.store.temp.hashtag} 
                     ></textarea><br/><br/>
                     <button className="centeredImage">Save Hashtags</button><br/><br/>
-                </div>
+                </div> */}
 
 
                 {/* <button onClick={this.navHome}>Home</button> */}
