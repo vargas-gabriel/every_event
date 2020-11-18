@@ -12,8 +12,7 @@ class EditUser extends Component {
         lastName: this.props.store.user.last_name,
         email: this.props.store.user.email,
         image: this.props.store.user.image,
-        linkedin_account: this.props.store.user.linkedin_account,
-        linkedin_oauth: this.props.store.user.linkedin_oauth
+        ayrshareapikey: this.props.store.user.ayrshareapikey
     }
 
    
@@ -87,14 +86,15 @@ class EditUser extends Component {
                     onChange={(event)=>this.handleChange(event, 'email')}>
                     </input> 
 
-                    {/* <br/>
-                    <h6 id="editInfoTag">Password</h6>
+                    <br/>
+                    <h6 id="editInfoTag" className="centered">Ayrshare API Key</h6>
                     <input 
+                    className="centeredImage"
                     type="text"
-                    placeholder="password" 
-                    value={this.state.password} 
-                    onChange={(event)=>this.handleChange(event, 'password')}>
-                    </input>  */}
+                    placeholder="Ayrshare API Key" 
+                    value={this.state.ayrshareapikey} 
+                    onChange={(event)=>this.handleChange(event, 'ayrshareapikey')}>
+                    </input> 
 
                     <br/>
                     <button type="submit" className="centeredImage">Save Changes</button>

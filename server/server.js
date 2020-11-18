@@ -7,7 +7,7 @@ const sessionMiddleware = require("./modules/session-middleware");
 
 const passport = require("./strategies/user.strategy");
 const LinkedInStrategy = require("passport-linkedin-oauth2").Strategy;
-const config = require("../config");
+const config = require("../config.js");
 const session = require("express-session");
 
 // Route includes

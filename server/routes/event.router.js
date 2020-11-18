@@ -14,12 +14,11 @@ router.post('/', (req, res, next) => {
     "acronym",
     "website",
     "registration_link",
-    "linkedin_oauth",
     "start_date",
     "end_date",
     "hashtag",
     "type")
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
     RETURNING "id";`;
 
     // const eventId = result.rows[0]
@@ -30,7 +29,6 @@ router.post('/', (req, res, next) => {
             req.body.eventAcronym,
             req.body.eventWebsite,
             req.body.eventRegistration,
-            req.body.eventOAuth,
             req.body.campaignStart,
             req.body.campaignEnd,
             '#', // had to make this default hashtag value, null gave errors

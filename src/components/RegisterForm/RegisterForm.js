@@ -9,6 +9,7 @@ class RegisterForm extends Component {
 		email: "",
 		password: "",
 		verifypassword: "",
+		ayrshareapikey: ""
 	};
 
 	verifyPassword = (event) => {
@@ -29,6 +30,7 @@ class RegisterForm extends Component {
 				lastname: this.state.lastname,
 				email: this.state.email,
 				password: this.state.password,
+				ayrshareapikey: this.state.ayrshareapikey
 			},
 		});
 	}; // end registerUser
@@ -85,7 +87,18 @@ class RegisterForm extends Component {
 						/>
 					</label>
 				</div>
-
+				<div>
+					<label htmlFor='ayrshare api key'>
+					ayrshare api key:
+						<input
+							type='text'
+							name='ayrshareapikey'
+							value={this.state.ayrshareapikey}
+							required
+							onChange={this.handleInputChangeFor("ayrshareapikey")}
+						/>
+					</label>
+				</div>
 				<div>
 					<label htmlFor='password'>
 						Password:
