@@ -43,11 +43,23 @@ function* deletePost(action){
         type: 'GET_RELEVENT_POSTS'
     })
 }
+
+function* updatePost(action){
+    console.log('in updatePost', action);
+    let response = yield axios ({
+        method: 'PUT',
+        url: `/api/post/${action.payload}`,
+        data: action.payload
+    })
+    console.log('getTempPhase back with:', response.data);
+    // yield put({ type: 'SET_TEMP_PHASE', payload: response.data });
+}
+
 function* postSaga() {
   yield takeLatest('CREATE_POST', createPost);
   yield takeLatest('GET_RELEVENT_POSTS', getReleventPosts);
   yield takeLatest('DELETE_POST', deletePost);
-
+  yield takeLatest('UPDATE_POST', updatePost);
   
 }
 

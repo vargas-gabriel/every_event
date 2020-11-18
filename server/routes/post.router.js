@@ -58,4 +58,20 @@ router.delete('/:id', (req, res) => {
     })
 });
 
+router.put('/:id', (req, res) => {
+    console.log('in post PUT with req.body:', req.body); //body or params?
+    const queryText = `UPDATE "post" SET
+        "name" = $1,
+        "send_date" = $2,
+        "send_time" = $3,
+        "post_text" = $4
+        WHERE "id" = $5`;
+    pool.query(queryText, [req.body.name, req.body.send_date, req.body.send_time, req.body.post_text, req.body.id])
+    .then(() => 
+        res.sendStatus(200))
+    .catch(error => {
+        console.log('ERROR:', error);
+    })
+});
+
 module.exports = router;
