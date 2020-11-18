@@ -137,7 +137,8 @@ router.put('/:id', (req, res) => {
                         "website" = $3,
                         "start_date" = $5,
                         "end_date" = $6,
-                        "type" = $7
+                        "type" = $7,
+                        "name" = $8
                         WHERE "id" = $4;`;
     let queryParams = [
         req.body.event_image,
@@ -147,6 +148,7 @@ router.put('/:id', (req, res) => {
         req.body.start_date,
         req.body.end_date,
         req.body.type,
+        req.body.name
     ];
     //console.log('router put hit with queryText, queryParams', queryText, queryParams);
     pool.query(queryText, queryParams)

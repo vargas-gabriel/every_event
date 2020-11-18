@@ -153,11 +153,8 @@ class EditPhase extends Component {
     render(){
         console.log('state is:', this.state);
         const phase = this.props.store.tempPhase;
-        
-        
 
         const includedPosts = this.props.store.post.filter(post => post.phase_id === this.props.store.tempPhase.id)
-        
 
         return (  
             <div id="editEventDiv">
