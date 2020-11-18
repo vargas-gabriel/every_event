@@ -5,7 +5,7 @@ const tempReducer = (state = {}, action) => {
           ...action.payload,
         }
       case 'UPDATE_ACTIVE_EVENT':
-        console.log('UPDATE_ACTIVE_EVENT hit with:', action.payload);
+        //console.log('UPDATE_ACTIVE_EVENT hit with:', action.payload);
         return {
           ...state,
           ...action.payload,

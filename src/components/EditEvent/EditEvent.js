@@ -12,17 +12,19 @@ class EditEvent extends Component {
     }
 
     componentDidMount = () => {
-        this.props.dispatch({type: 'GET_USER_EVENT'});
+        //this.props.dispatch({type: 'GET_USER_EVENT'});
         this.props.dispatch({type: 'FETCH_PHASE'})
         //this.findActiveEvent();   moved this into render()
+        const activeEventId = Number(this.props.history.location.pathname.split('/')[2]);
+        this.props.dispatch({type: 'GET_ACTIVE_EVENT', payload: activeEventId})
     }
 
 
     findActiveEvent = () => {
         const activeId = Number(this.props.history.location.pathname.split('/')[2]);
         const userEvents = this.props.store.userEvent;
-        console.log('this.props.store.userEvent', this.props.store.userEvent);
-        console.log('userEvents', userEvents);
+        //console.log('this.props.store.userEvent', this.props.store.userEvent);
+        //console.log('userEvents', userEvents);
         if(this.props.store.temp.id === undefined){
             console.log('temp is 0');
             for(let i=0; i<userEvents.length; i++){
@@ -99,7 +101,7 @@ class EditEvent extends Component {
     }
 
     saveDate = () => {
-        console.log('save date triggered');
+        //console.log('save date triggered');
         this.props.dispatch({
             type: "UPDATE_EVENT",
             // payload: {
@@ -110,7 +112,7 @@ class EditEvent extends Component {
     }
 
     saveEdit = () => {
-        console.log('saveEdit trig');
+        //console.log('saveEdit trig');
         this.props.dispatch({
             type: "UPDATE_EVENT",
             payload: {
@@ -127,11 +129,14 @@ class EditEvent extends Component {
     render(){
 
         const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.temp.event_id);
-        console.log('includedPhases', includedPhases);
-        console.log('state is', this.state);
+        //console.log('includedPhases', includedPhases);
+        const activeEvent = this.props.store.temp
+        //console.log('activeEvent is:', activeEvent);
+        console.log('activeEvent.type is:', activeEvent.type);
+        //console.log('this.props.store.temp', this.props.store.temp);
         this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
-        console.log('EditEvent props:', this.props);
+        //console.log('EditEvent props:', this.props);
         return (  
             <div id="editEventDiv">
                 <h1 className="centered">{this.props.store.temp.name}</h1>                
@@ -169,11 +174,11 @@ class EditEvent extends Component {
                 
                 <div className="centered">
                 <label htmlFor="eventType">Event Type:</label>
-                <select name="eventType" defaultValue={this.props.store.temp.type} 
+                <select name="eventType" value={this.props.store.temp.type} 
                     id="eventType"
                     onChange={(event) => this.handleDateChange(event, "type")}
                     >Event Type
-                    <option value="InPerson">In Person</option>
+                    <option value="In Person">In Person</option>
                     <option value="Virtual">Virtual</option>
                     <option value="Hybrid">Hybrid</option>
                 </select> 

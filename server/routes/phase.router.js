@@ -27,7 +27,7 @@ router.get('/', (req, res) => {
  */
 router.put('/:id', (req, res) => {
     // POST route code here
-    console.log('phase post', req.user.id, req.params);
+    console.log('phase post', req.user.id, req.params.id);
     let checkParams = [req.user.id, req.params.id];
     let query = `
         SELECT "phase"."id", "phase"."name", "event"."id" AS "event_id", "phase"."start_date", "phase"."end_date", "event"."name" AS "event_name", "event"."hashtag", "post"."name" AS "post_name", "post"."post_text" FROM "phase"
@@ -42,7 +42,7 @@ router.put('/:id', (req, res) => {
         `
     pool.query(query, checkParams)
     .then(result => {
-        console.log('result.rows', result.rows[0]);
+        console.log('result.rows in phase.router put', result.rows[0]);
         //result.rows[0].start_date = result.rows[0].start_date.split('T', 1)[0];
         res.send(result.rows[0]);
     })

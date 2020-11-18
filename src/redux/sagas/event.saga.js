@@ -71,12 +71,22 @@ function* updateTempEvent(action){
     })
 }
 
+function* getActiveEvent(action){
+    //console.log('in getTempPhase', action);
+    let response = yield axios ({
+        method: 'GET',
+        url: `/api/event/${action.payload}`,
+    })
+    yield put({ type: 'UPDATE_ACTIVE_EVENT', payload: response.data });
+}
+
 function* eventSaga() {
   yield takeLatest('CREATE_EVENT', createEvent);
   yield takeLatest('GET_EVENT', getEvent);
   yield takeLatest('GET_USER_EVENT', getUserEvent);
   yield takeLatest('UPDATE_EVENT', updateEvent);
   yield takeLatest('GET_TEMP_EVENT', updateTempEvent);
+  yield takeLatest('GET_ACTIVE_EVENT', getActiveEvent);
 }
 
 export default eventSaga;

@@ -33,7 +33,7 @@ class EditPhase extends Component {
 
 
     getPosts=()=>{
-        console.log('in get posts $$$$');
+        //console.log('in get posts $$$$');
         this.props.dispatch({type: 'GET_RELEVENT_POSTS'})
 
     }
@@ -73,7 +73,7 @@ class EditPhase extends Component {
     }
 
     savePhaseDuration=()=>{
-        console.log('clicked save phase duration');
+        //console.log('clicked save phase duration');
         const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({
             type: 'UPDATE_PHASE_CLICK',
@@ -84,21 +84,21 @@ class EditPhase extends Component {
 
     newPost=()=>{
         const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
-        console.log('clicked new post with:', activePhaseId);
+        //console.log('clicked new post with:', activePhaseId);
         this.props.dispatch({
             type: 'CREATE_POST',
             payload: activePhaseId
         })
     }
     deletePost=(action)=>{
-        console.log('clicked delete post', action);
+        //console.log('clicked delete post', action);
         this.props.dispatch({
             type: 'DELETE_POST',
             payload: action   
         })
     }
     loadPost=(action)=>{
-        console.log('clicked load post', action);
+        //console.log('clicked load post', action);
         this.setState({
             id: action.id,
             image: action.image,
@@ -113,19 +113,30 @@ class EditPhase extends Component {
 
     }
     savePost=()=>{
-        console.log('clicked save post');
+        console.log('clicked save post', this.state.name, this.state.post_text, this.state.send_date);
+        //console.log('this.state.send_date.split', this.state.send_date.split('T', 2)[1]);
+        this.props.dispatch({
+            type: 'UPDATE_POST',
+            payload: {
+                id: this.state.id,
+                name: this.state.name,
+                post_text: this.state.post_text,
+                send_date: this.state.send_date.split('T', 1)[0],
+                send_time: this.state.send_time
+            }
+        })
     }
 
     addHashtags=()=>{
-        console.log('adding:', this.state.hashtags);
-        console.log(this.state.post_text);
+        //console.log('adding:', this.state.hashtags);
+        //console.log(this.state.post_text);
         this.setState({
             post_text: this.state.post_text + ' ' + this.props.store.tempPhase.hashtag
             
         })
     }
     saveHashtags=()=>{
-        console.log('clicked save hashtags with:', this.state.hashtags);
+        console.log('clicked save hashtags with:', this.state.hashtags, this.props.store.tempPhase.event_id);
         axios({
             method: 'PUT',
             url: '/api/hashtag',
@@ -133,8 +144,7 @@ class EditPhase extends Component {
                 hashtag: this.state.hashtags, 
                 event_id: this.props.store.tempPhase.event_id
             }
-        })
-        this.findActivePhase()
+        }).then(() => this.findActivePhase())
     }
 
     uploadImage=()=>{
@@ -142,40 +152,12 @@ class EditPhase extends Component {
     }
     render(){
         console.log('state is:', this.state);
-        //console.log('this.props.store.phase:', this.props.store.phase);
-        //const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
-        //console.log('includedPhases', includedPhases);
-        //const selectedPhase = includedPhases.filter(selected => selected.event_id === this.props.store.tempPhase.id)
-        //console.log('selectedPhase is', selectedPhase );
-        //this.findActiveEvent();
-        // if(this.props.store.tempPhase.event_id === undefined){
-        //     console.log('this.props.store.tempPhase.event_id', this.props.store.tempPhase.event_id);
-        //     //this.findActiveEvent()
-        // }
-        //this.findActivePhase();
-
-        // console.log('recentCard state:',this.state);
-        //console.log('state is', this.state);
-        //console.log('tempPhase is:', this.props.store.tempPhase);
-        //const phaseStartDate = this.props.store.tempPhase.start_date.split('T', 1)[0]
-        //const phaseEndDate = this.props.store.tempPhase.end_date.split('T', 1)[0]
-
-        
-        //console.log('phaseStartDate:',phaseStartDate);
-        //console.log('phaseEndDate:', phaseEndDate);
-
-        // console.log('user is:', this.props.store.user);
-        console.log('EditEvent props:', this.props);
-        console.log('this.props.store.tempPhase[0]', this.props.store.tempPhase[0]);
         const phase = this.props.store.tempPhase;
-        //const niceStartDate = phase.start_date.split('T', 1)[0];
-        //console.log('phase.start_date.split', phase.start_date.split('T', 1)[0]);
+        
+        
 
         const includedPosts = this.props.store.post.filter(post => post.phase_id === this.props.store.tempPhase.id)
-        console.log('includedPosts:',includedPosts);
         
-        // const namedIncludedPosts = includedPosts.forEach((post, index) => post.id = index + 1);
-        // console.log('namedIncludedPosts', namedIncludedPosts);
 
         return (  
             <div id="editEventDiv">
@@ -222,7 +204,7 @@ class EditPhase extends Component {
                             <input
                                 type='text'
                                 name='postText'
-                                // value={selectedPhase[0].name}
+                                defaultValue={this.state.event_id.name}
                                 placeholder='Select a post'
                                 defaultValue={this.state.name}                                // required
                                 onChange={(event)=>this.handleChange(event, "name")}
@@ -234,10 +216,10 @@ class EditPhase extends Component {
                         
                         
                         {this.state.post_text === undefined ?
-                        <p className="centered">Character Counter: 0</p>
-                        :
-                        <p className="centered">Character Counter: {this.state.post_text.length}</p>
-    }
+                            <p className="centered">Character Counter: 0</p>
+                            :
+                            <p className="centered">Character Counter: {this.state.post_text.length}</p>
+                        }
                         <button id="centeredButton" onClick={()=>this.addHashtags()}>Add Hashtags</button><br/>
                         <button id="centeredButton" onClick={()=>this.uploadImage()}>Upload Post Image</button>
 
@@ -258,14 +240,45 @@ class EditPhase extends Component {
 
                     <div>
                             <h6 className="centered">Post Scheduling</h6>
-                            <input
-                                className="centeredImage"
-                                type='datetime-local'
-                                name='postTime'
-                                required
-                                // value={this.state.campaignEnd.split('T', 1)[0]}
-                                onChange={(event) => this.handleChange(event, "send_date")}
-                            />
+                            {this.state.send_date === null ?
+                                <>
+                                    <input
+                                        className="centeredImage"
+                                        type='date'
+                                        name='postTime'
+                                        required
+                                        defaultValue={0}
+                                        onChange={(event) => this.handleChange(event, "send_date")}
+                                    />
+                                    <input
+                                        className="centeredImage"
+                                        type='time'
+                                        name='postTime'
+                                        required
+                                        defaultValue={0}
+                                        onChange={(event) => this.handleChange(event, "send_time")}
+                                    />
+                                </>
+                                :
+                                <>
+                                    <input
+                                        className="centeredImage"
+                                        type='date'
+                                        name='postTime'
+                                        required
+                                        defaultValue={this.state.send_date.split('T', 1)[0]}
+                                        onChange={(event) => this.handleChange(event, "send_date")}
+                                    />
+                                    <input
+                                        className="centeredImage"
+                                        type='time'
+                                        name='postTime'
+                                        required
+                                        defaultValue={this.state.send_time}
+                                        onChange={(event) => this.handleChange(event, "send_time")}
+                                    />
+                                </>
+                            }
                         <br/>                            
                         <hr/>
                         <button className="centeredImage" onClick={()=>this.savePost()}>Save Post</button><br/><br/>
@@ -315,9 +328,9 @@ class EditPhase extends Component {
 
 
                     {phase.hashtag === undefined ?
-                    <p className="centered">Hashtags Character Counter 0</p>
-                    :
-                    <p className="centered">Hashtags Character Counter {phase.hashtag.length}</p>
+                        <p className="centered">Hashtags Character Counter 0</p>
+                        :
+                        <p className="centered">Hashtags Character Counter {phase.hashtag.length}</p>
                     }
                     <br/><br/>
                     <button className="centeredImage" onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>

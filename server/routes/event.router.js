@@ -16,8 +16,10 @@ router.post('/', (req, res, next) => {
     "registration_link",
     "linkedin_oauth",
     "start_date",
-    "end_date")
-    VALUES ($1,$2,$3,$4,$5,$6,$7)
+    "end_date",
+    "hashtag",
+    "type")
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING "id";`;
 
     // const eventId = result.rows[0]
@@ -31,6 +33,8 @@ router.post('/', (req, res, next) => {
             req.body.eventOAuth,
             req.body.campaignStart,
             req.body.campaignEnd,
+            '#', // had to make this default hashtag value, null gave errors
+            'In Person' // had to make a default type to avoid errors
         ])
         .then((result)=>{
             console.log("new event id is:", result.rows[0].id);
@@ -81,18 +85,43 @@ router.post('/', (req, res, next) => {
     });
 });
 
-
     
 
 router.get('/', (req, res) => {
     console.log('req.user', req.user);
     console.log('in event GET');
-    const query = `SELECT * FROM user_event WHERE "id" = $1;`;
+    const query = `SELECT * FROM user_event WHERE "user_id" = $1;`;
     const queryParams = [req.user.id]    
 
     pool.query(query, queryParams)
     .then(results => {
         res.send(results.rows);
+    })
+    .catch((err) => {
+        console.log('err:', err);
+        res.sendStatus(500);
+    })
+});
+
+router.get('/:id', (req, res) => {
+    //console.log('in GET by id', req.user.id, req.params.id);
+    // const query = `SELECT "user_event"."event_id", "event"."name", "event"."acronym", "event"."event_image", "event"."type", "event"."start_date", 
+    //     "event"."end_date", "event"."website", "event"."registration_link", "event"."linkedin_account", "event"."hashtag" FROM "event" 
+    //     JOIN "user_event" 
+    //     ON "event"."id" = "user_event"."event_id"
+    //     WHERE "event"."id" = $1
+    //     AND "user_event"."user_id" = $2;`;
+    const query = `SELECT * FROM "event" 
+        JOIN "user_event" 
+        ON "event"."id" = "user_event"."event_id"
+        WHERE "event"."id" = $1
+        AND "user_event"."user_id" = $2;`;
+    const queryParams = [req.params.id, req.user.id]
+
+    pool.query(query, queryParams)
+    .then(results => {
+        console.log('results from get:id', results.rows[0]);
+        res.send(results.rows[0]);
     })
     .catch((err) => {
         console.log('err:', err);
