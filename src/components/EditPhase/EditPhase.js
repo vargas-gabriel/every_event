@@ -314,9 +314,9 @@ class EditPhase extends Component {
 
 
                     {phase.hashtag === undefined ?
-                    <p className="centered">Hashtags Character Counter 0</p>
-                    :
-                    <p className="centered">Hashtags Character Counter {phase.hashtag.length}</p>
+                        <p className="centered">Hashtags Character Counter 0</p>
+                        :
+                        <p className="centered">Hashtags Character Counter {phase.hashtag.length}</p>
                     }
                     <br/><br/>
                     <button className="centeredImage" onClick={()=>this.saveHashtags()}>Save Hashtags</button><br/><br/>

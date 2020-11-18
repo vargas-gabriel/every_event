@@ -16,8 +16,10 @@ router.post('/', (req, res, next) => {
     "registration_link",
     "linkedin_oauth",
     "start_date",
-    "end_date")
-    VALUES ($1,$2,$3,$4,$5,$6,$7)
+    "end_date",
+    "hashtag",
+    "type")
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING "id";`;
 
     // const eventId = result.rows[0]
@@ -31,6 +33,8 @@ router.post('/', (req, res, next) => {
             req.body.eventOAuth,
             req.body.campaignStart,
             req.body.campaignEnd,
+            '#', // had to make this default hashtag value, null gave errors
+            'In Person' // had to make a default type to avoid errors
         ])
         .then((result)=>{
             console.log("new event id is:", result.rows[0].id);
@@ -86,7 +90,7 @@ router.post('/', (req, res, next) => {
 router.get('/', (req, res) => {
     console.log('req.user', req.user);
     console.log('in event GET');
-    const query = `SELECT * FROM user_event WHERE "id" = $1;`;
+    const query = `SELECT * FROM user_event WHERE "user_id" = $1;`;
     const queryParams = [req.user.id]    
 
     pool.query(query, queryParams)
