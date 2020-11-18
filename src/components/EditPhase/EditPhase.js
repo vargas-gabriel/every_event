@@ -33,7 +33,7 @@ class EditPhase extends Component {
 
 
     getPosts=()=>{
-        console.log('in get posts $$$$');
+        //console.log('in get posts $$$$');
         this.props.dispatch({type: 'GET_RELEVENT_POSTS'})
 
     }
@@ -73,7 +73,7 @@ class EditPhase extends Component {
     }
 
     savePhaseDuration=()=>{
-        console.log('clicked save phase duration');
+        //console.log('clicked save phase duration');
         const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({
             type: 'UPDATE_PHASE_CLICK',
@@ -84,21 +84,21 @@ class EditPhase extends Component {
 
     newPost=()=>{
         const activePhaseId = Number(this.props.history.location.pathname.split('/')[2]);
-        console.log('clicked new post with:', activePhaseId);
+        //console.log('clicked new post with:', activePhaseId);
         this.props.dispatch({
             type: 'CREATE_POST',
             payload: activePhaseId
         })
     }
     deletePost=(action)=>{
-        console.log('clicked delete post', action);
+        //console.log('clicked delete post', action);
         this.props.dispatch({
             type: 'DELETE_POST',
             payload: action   
         })
     }
     loadPost=(action)=>{
-        console.log('clicked load post', action);
+        //console.log('clicked load post', action);
         this.setState({
             id: action.id,
             image: action.image,
@@ -117,15 +117,15 @@ class EditPhase extends Component {
     }
 
     addHashtags=()=>{
-        console.log('adding:', this.state.hashtags);
-        console.log(this.state.post_text);
+        //console.log('adding:', this.state.hashtags);
+        //console.log(this.state.post_text);
         this.setState({
             post_text: this.state.post_text + ' ' + this.props.store.tempPhase.hashtag
             
         })
     }
     saveHashtags=()=>{
-        console.log('clicked save hashtags with:', this.state.hashtags);
+        console.log('clicked save hashtags with:', this.state.hashtags, this.props.store.tempPhase.event_id);
         axios({
             method: 'PUT',
             url: '/api/hashtag',
@@ -141,7 +141,7 @@ class EditPhase extends Component {
         console.log('clicked upload post image');
     }
     render(){
-        console.log('state is:', this.state);
+        //console.log('state is:', this.state);
         //console.log('this.props.store.phase:', this.props.store.phase);
         //const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.tempPhase.event_id);
         //console.log('includedPhases', includedPhases);
@@ -165,14 +165,14 @@ class EditPhase extends Component {
         //console.log('phaseEndDate:', phaseEndDate);
 
         // console.log('user is:', this.props.store.user);
-        console.log('EditEvent props:', this.props);
-        console.log('this.props.store.tempPhase[0]', this.props.store.tempPhase[0]);
+        //console.log('EditEvent props:', this.props);
+        //console.log('this.props.store.tempPhase[0]', this.props.store.tempPhase[0]);
         const phase = this.props.store.tempPhase;
         //const niceStartDate = phase.start_date.split('T', 1)[0];
         //console.log('phase.start_date.split', phase.start_date.split('T', 1)[0]);
 
         const includedPosts = this.props.store.post.filter(post => post.phase_id === this.props.store.tempPhase.id)
-        console.log('includedPosts:',includedPosts);
+        //console.log('includedPosts:',includedPosts);
         
         // const namedIncludedPosts = includedPosts.forEach((post, index) => post.id = index + 1);
         // console.log('namedIncludedPosts', namedIncludedPosts);

@@ -56,6 +56,7 @@ function* getTempPhase(action){
     url: `/api/phase/${action.payload}`,
     data: action.payload
   })
+  console.log('getTempPhase back with:', response.date);
   yield put({ type: 'SET_TEMP_PHASE', payload: response.data });
 }
 

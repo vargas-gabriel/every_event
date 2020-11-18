@@ -42,7 +42,7 @@ router.put('/:id', (req, res) => {
         `
     pool.query(query, checkParams)
     .then(result => {
-        console.log('result.rows', result.rows[0]);
+        console.log('result.rows in phase.router put', result.rows[0]);
         //result.rows[0].start_date = result.rows[0].start_date.split('T', 1)[0];
         res.send(result.rows[0]);
     })

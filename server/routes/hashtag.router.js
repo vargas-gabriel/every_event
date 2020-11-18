@@ -18,7 +18,11 @@ router.put('/', (req, res) => {
     ;`;
     const queryParams = [req.body.hashtag, req.body.event_id]
     pool.query(queryText, queryParams)
-    .then(() => res.sendStatus(201))
+    .then(result => {
+      //console.log('result.rows', result.rows[0]);
+      //result.rows[0].start_date = result.rows[0].start_date.split('T', 1)[0];
+      res.sendStatus(201);
+    })
     .catch((err) => {
       console.log('err:', err);
       res.sendStatus(500);
