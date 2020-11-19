@@ -127,7 +127,6 @@ class EditEvent extends Component {
     }
 
     render(){
-
         const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.temp.event_id);
         //console.log('includedPhases', includedPhases);
         const activeEvent = this.props.store.temp
@@ -137,10 +136,11 @@ class EditEvent extends Component {
         this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
         //console.log('EditEvent props:', this.props);
+        console.log('end - start', activeEvent.end_date - activeEvent.start_date);
         return (  
             <div id="editEventDiv">
                 <h1 className="centered">{this.props.store.temp.name}</h1>                
-                <h2 className="centered">Edit Event</h2>
+                <h2 className="centered">Phases</h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Event Promotion Start
@@ -156,7 +156,7 @@ class EditEvent extends Component {
                         }
                     </label>
 
-                    <label htmlFor='campaignEnd'>
+                    <label htmlFor='campaignEnd' className="campaignEnd">
                         Event Promotion End
                         {this.props.store.temp.end_date === undefined ?
                             <></> :
@@ -176,8 +176,8 @@ class EditEvent extends Component {
                 <label htmlFor="eventType">Event Type:</label>
                 <select name="eventType" value={this.props.store.temp.type} 
                     id="eventType"
-                    onChange={(event) => this.handleDateChange(event, "type")}
-                    >Event Type
+                    onChange={(event) => this.handleDateChange(event, "type")}>
+                    {/* >Event Type */}
                     <option value="In Person">In Person</option>
                     <option value="Virtual">Virtual</option>
                     <option value="Hybrid">Hybrid</option>
@@ -190,19 +190,19 @@ class EditEvent extends Component {
                     <table className="phaseTable">
                         <thead>
                             <tr>
-                                <th></th>
-                                <th>Phase Title</th>
-                                <th>Phase Start Date</th>
-                                <th>Phase End Date</th>
+                                {/* <th></th> */}
+                                <th>Phase</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
                             </tr>
                         </thead>
                         <tbody>
 
                         {includedPhases.map((phase) =>
                         <tr key={phase.id}>
-                                <td>
+                                {/* <td>
                                     <button>Delete</button> 
-                                </td>
+                                </td> */}
                                 <td>
                                     <h4 className="hoverText"onClick={()=>this.phaseNav(phase)}>{phase.name}</h4>
                                 </td>
@@ -234,12 +234,12 @@ class EditEvent extends Component {
                             
                         </tbody>
                     </table>
-                    <button className="centeredImage">New Phase</button><br/>
+                    {/* <button className="centeredImage">New Phase</button><br/> */}
                     
                 </div>
 
                 <div id="eventSocial" className="rounded">
-                    <h4 className="centered">Event Social</h4>
+                    {/* <h4 className="centered">Event Social</h4> */}
                     <label className="switch">
                         <input type="checkbox" 
                             checked={this.state.toggleEdit} 
