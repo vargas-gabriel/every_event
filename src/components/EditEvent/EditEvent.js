@@ -14,12 +14,24 @@ class EditEvent extends Component {
     componentDidMount = () => {
         //this.props.dispatch({type: 'GET_USER_EVENT'});
         this.props.dispatch({type: 'FETCH_PHASE'})
+        this.props.dispatch({type: 'GET_OTHER_USERS'})
+
+    
         //this.findActiveEvent();   moved this into render()
         const activeEventId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({type: 'GET_ACTIVE_EVENT', payload: activeEventId})
     }
 
+    addCollaborator = (collaborator) =>{
+        const event_id = this.props.store.temp.event_id;
+        console.log('event id is',event_id);
+        console.log('adding collaborator:', collaborator);
+        this.props.dispatch({
+            type: 'ADD_COLLABORATOR',
+            payload: {collaborator, event_id}
+        })
 
+    }
     findActiveEvent = () => {
         const activeId = Number(this.props.history.location.pathname.split('/')[2]);
         const userEvents = this.props.store.userEvent;
@@ -128,6 +140,8 @@ class EditEvent extends Component {
 
     render(){
         const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.temp.event_id);
+
+        //const otherUsers = this.props.store.otherUsersReducer
         //console.log('includedPhases', includedPhases);
         const activeEvent = this.props.store.temp
         //console.log('activeEvent is:', activeEvent);
@@ -274,42 +288,65 @@ class EditEvent extends Component {
                     <br/><br/>
                 </div>
 
-                {/* <div id="eventCollaborators" className="rounded">
-                    <h4 className="centered">Event Collaborators</h4>
+                <div id="eventCollaborators" className="rounded">
+                    <h4 className="centered">Possible Collaborators</h4>
 
                     <div id="collabOutline" className="centeredImage">
                         <table className="collabTable">
                             <tbody >
-                            <tr>
-                                <td>
-                                    <h5> John Smith</h5>
-                                </td>
-                                <td>
-                                    <button>Remove</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <h5> John Smith</h5>
-                                </td>
-                                <td>
-                                    <button>Remove</button>
-                                </td>
-                            </tr><tr>
-                                <td>
-                                    <h5> John Smith</h5>
-                                </td>
-                                <td>
-                                    <button>Remove</button>
-                                </td>
-                            </tr>
+
+                            {this.props.store.otherUsersReducer.map((otherUser) =>
+
+                                <tr key ={otherUser.id}>
+                                    <td>
+                                        <h5> {otherUser.first_name}</h5>
+                                    </td>
+                                    <td>
+                                        <button onClick={()=>this.addCollaborator(otherUser)}>Add</button>
+                                        <button>Remove</button>
+
+                                    </td>
+                                </tr>
+                            )}
+                            
                             </tbody>
                         </table>
                        
                     </div><br/>
                     <button className="centeredImage">Add Collaborator</button><br/><br/>
 
-                </div> */}
+                </div>
+
+
+                <div id="eventCollaborators" className="rounded">
+                    <h4 className="centered">Current Collaborators</h4>
+
+                    <div id="collabOutline" className="centeredImage">
+                        <table className="collabTable">
+                            <tbody >
+
+                            {this.props.store.otherUsersReducer.map((otherUser) =>
+
+                                <tr key ={otherUser.id}>
+                                    <td>
+                                        <h5> {otherUser.first_name}</h5>
+                                    </td>
+                                    <td>
+                                        <button onClick={()=>this.addCollaborator(otherUser)}>Add</button>
+                                        <button>Remove</button>
+
+                                    </td>
+                                </tr>
+                            )}
+                            
+                            </tbody>
+                        </table>
+                       
+                    </div><br/>
+                    <button className="centeredImage">Add Collaborator</button><br/><br/>
+
+                </div>
+
 
 
                 {/* <div id="eventHashtags" className="rounded">

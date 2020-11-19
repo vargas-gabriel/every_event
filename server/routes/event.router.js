@@ -9,9 +9,30 @@ require("dotenv").config();
 
 const router = express.Router();
 
-router.post("/", rejectUnauthenticated, (req, res, next) => {
-	console.log("in event POST with req.body:", req.body);
-	const queryText = `INSERT INTO "event"
+router.post('/addCollaborator', rejectUnauthenticated, (req, res, next) => {
+    console.log('in add collaborator with:', req.body);
+    const collaborator = req.body.collaborator.id
+    const eventId = req.body.event_id
+    console.log(collaborator.id);
+    console.log(eventId);
+    const queryText = `INSERT INTO "user_event"
+    ("user_id",
+    "event_id")
+    VALUES ($1,$2)
+    RETURNING "id";`
+    pool
+    .query(queryText, [collaborator, eventId ])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('err:', err);
+      res.sendStatus(500);
+
+  })
+});
+
+router.post('/', (req, res, next) => {
+    console.log('in event POST with req.body:', req.body);
+    const queryText = `INSERT INTO "event"
     ("name",
     "acronym",
     "website",
@@ -120,24 +141,25 @@ router.post("/", rejectUnauthenticated, (req, res, next) => {
 		});
 });
 
-router.get("/", rejectUnauthenticated, (req, res) => {
-	console.log("req.user", req.user);
-	console.log("in event GET");
-	const query = `SELECT * FROM user_event WHERE "user_id" = $1;`;
-	const queryParams = [req.user.id];
+    
 
-	pool
-		.query(query, queryParams)
-		.then((results) => {
-			res.send(results.rows);
-		})
-		.catch((err) => {
-			console.log("err:", err);
-			res.sendStatus(500);
-		});
+router.get('/', rejectUnauthenticated, (req, res) => {
+    console.log('req.user', req.user);
+    console.log('in event GET');
+    const query = `SELECT * FROM user_event WHERE "user_id" = $1 ORDER BY "id" DESC;`;
+    const queryParams = [req.user.id]    
+
+    pool.query(query, queryParams)
+    .then(results => {
+        res.send(results.rows);
+    })
+    .catch((err) => {
+        console.log('err:', err);
+        res.sendStatus(500);
+    })
 });
 
-router.get("/:id", rejectUnauthenticated, (req, res) => {
+router.get("/:id", (req, res) => {
 	//console.log('in GET by id', req.user.id, req.params.id);
 	// const query = `SELECT "user_event"."event_id", "event"."name", "event"."acronym", "event"."event_image", "event"."type", "event"."start_date",
 	//     "event"."end_date", "event"."website", "event"."registration_link", "event"."linkedin_account", "event"."hashtag" FROM "event"

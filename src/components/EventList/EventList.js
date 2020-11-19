@@ -20,6 +20,8 @@ class EventList extends Component {
 	render() {
 		//console.log("this is our state:", this.state);
 		//console.log('EventList props:', this.props);
+		const orderedEvents =  this.props.store.userEvent
+		console.log('orderedEvents', orderedEvents)
 		return (
 			<div>
 				{this.props.store.userEvent.map(event => 
