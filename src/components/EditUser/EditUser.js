@@ -15,7 +15,14 @@ class EditUser extends Component {
         ayrshareapikey: this.props.store.user.ayrshareapikey
     }
 
-   
+    checkURL = (event) => {
+        event.preventDefault();
+        if(this.state.image.length > 1000){
+            alert("Image URL is too long")
+        }else{
+            this.editUser();
+        }
+    }
    
     editUser=() =>{
         console.log('clicked save user changes');
@@ -44,12 +51,12 @@ class EditUser extends Component {
     render(){
         // console.log('recentCard state:',this.state);
         console.log('state is', this.state);
-        // console.log('user is:', this.props.store.user);
+        console.log('length', this.state.image.length);
         return (  
             <div id="editUserDiv" className="rounded">
                 <h1 className="centered">Edit User</h1>
                 <hr/>
-                <form onSubmit={this.editUser}>
+                <form onSubmit={this.checkURL}>
                     <h6 id="editInfoTag" className="centered">First Name</h6>
                     <input 
                     className="centeredImage"

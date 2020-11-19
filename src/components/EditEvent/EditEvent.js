@@ -123,6 +123,15 @@ class EditEvent extends Component {
         });
     }
 
+    // checkURL = (event) => {
+    //     event.preventDefault();
+    //     if(this.state.image.length > 1000){
+    //         alert("Image URL is too long")
+    //     }else{
+    //         this.saveEdit();
+    //     }
+    // }
+
     saveEdit = () => {
         //console.log('saveEdit trig');
         this.props.dispatch({
@@ -142,15 +151,8 @@ class EditEvent extends Component {
         const includedPhases = this.props.store.phase.filter(phase => phase.event_id === this.props.store.temp.event_id);
 
         //const otherUsers = this.props.store.otherUsersReducer
-        //console.log('includedPhases', includedPhases);
-        const activeEvent = this.props.store.temp
-        //console.log('activeEvent is:', activeEvent);
-        //console.log('activeEvent.type is:', activeEvent.type);
-        //console.log('this.props.store.temp', this.props.store.temp);
+        const activeEvent = this.props.store.temp;
         this.findActiveEvent();
-        // console.log('user is:', this.props.store.user);
-        //console.log('EditEvent props:', this.props);
-        //console.log('end - start', activeEvent.end_date - activeEvent.start_date);
         return (  
             <div id="editEventDiv">
                 <h1 className="centered">{this.props.store.temp.name}</h1>                
