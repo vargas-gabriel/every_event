@@ -25,7 +25,7 @@ class EditUser extends Component {
             payload: this.state
         })
         alert('Saved!')
-       this.navHome();
+        this.navHome();
     }
     
 

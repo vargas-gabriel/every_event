@@ -4,13 +4,13 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class CreateEvent extends Component {
 	state = {
-        eventName: '',
-        eventAcronym: '',
-        eventWebsite: '',
-        eventRegistration: '',
-        eventOAuth: '',
-        campaignStart: '',
-        campaignEnd: '',
+		eventName: '',
+		eventAcronym: '',
+		eventWebsite: '',
+		eventRegistration: '',
+		eventOAuth: '',
+		campaignStart: '',
+		campaignEnd: '',
 	};
 
 	createEvent=()=>{
@@ -42,8 +42,8 @@ class CreateEvent extends Component {
 	render() {
         console.log('this state:', this.state);
 		return (
-            // <form className='formPanel' onSubmit={this.createEvent}>
-            <div>
+         // <form className='formPanel' onSubmit={this.createEvent}>
+         <div className="createEvent">
 				<h2>Create Event</h2>
 				
 				<div>
@@ -94,7 +94,7 @@ class CreateEvent extends Component {
 						/>
 					</label>
 				</div> 
-				<div>
+				{/* <div>
 					<label htmlFor='eventOAuth'>
 						Event OAuth:
 						<input
@@ -105,7 +105,7 @@ class CreateEvent extends Component {
 							onChange={this.handleInputChangeFor("eventOAuth")}
 						/>
 					</label>
-				</div>     
+				</div>      */}
 				<div>
 					<label htmlFor='campaignStart'>
 						Campaign Start:
@@ -135,7 +135,7 @@ class CreateEvent extends Component {
 					{/* <input className='btn' type='submit' name='submit' value='Create Event' /> */}
 				<button onClick={this.createEvent}>Create Event</button>
                 </div>
-                </div>
+         </div>
 			// </form>
 		);
 	}
