@@ -9,8 +9,10 @@ const userStrategy = require("../strategies/user.strategy");
 const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
+
 router.get("/",  (req, res) => {
 	console.log('in get user with:', req.body);
+
 	// Send back user object from the session (previously queried from the database)
 	res.send(req.user);
 });
