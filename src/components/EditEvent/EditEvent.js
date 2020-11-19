@@ -297,7 +297,7 @@ class EditEvent extends Component {
 
                             {this.props.store.otherUsersReducer.map((otherUser) =>
 
-                                <tr>
+                                <tr key ={otherUser.id}>
                                     <td>
                                         <h5> {otherUser.first_name}</h5>
                                     </td>
@@ -327,7 +327,7 @@ class EditEvent extends Component {
 
                             {this.props.store.otherUsersReducer.map((otherUser) =>
 
-                                <tr>
+                                <tr key ={otherUser.id}>
                                     <td>
                                         <h5> {otherUser.first_name}</h5>
                                     </td>
