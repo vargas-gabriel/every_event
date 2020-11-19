@@ -25,11 +25,13 @@ router.post("/register", rejectUnauthenticated, (req, res, next) => {
 	const lastname = req.body.lastname;
 	const password = encryptLib.encryptPassword(req.body.password);
 	const ayrshareapikey = req.body.ayrshareapikey;
-	const queryText = `INSERT INTO "user" (first_name, last_name, email, password, ayrshareapikey)
-	VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+	const image = req.body.image;
+	const queryText = `INSERT INTO "user" (first_name, last_name, email, password, ayrshareapikey, image)
+	VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
+	
 
 	pool
-		.query(queryText, [firstname, lastname, email, password, ayrshareapikey])
+		.query(queryText, [firstname, lastname, email, password, ayrshareapikey, image])
 		.then(() => res.sendStatus(201))
 		.catch((error) => {
 			console.log("ERROR", error);

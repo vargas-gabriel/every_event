@@ -36,6 +36,18 @@ function* updatePhase(action) {
   })
 }
 
+function* actuallyUpdatePhase(action) {
+  console.log('in actuallyUpdatePhase', action.payload.id);
+  yield axios ({
+    method: 'PUT',
+    url: `/api/phase/${action.payload.id}`,
+    data: action.payload
+  }) 
+  yield put ({
+    type: 'FETCH_PHASE'
+  })
+}
+
 function* updatePhaseClick(action){
   //console.log('updating event, sending:', action.payload);
 
@@ -66,6 +78,7 @@ function* phaseSaga() {
   yield takeLatest('UPDATE_PHASE', updatePhase);
   yield takeLatest('GET_TEMP_PHASE', getTempPhase);
   yield takeLatest('UPDATE_PHASE_CLICK', updatePhaseClick);
+  yield takeLatest('ACTUALLY_UPDATE_PHASE', actuallyUpdatePhase);
 }
 
 export default phaseSaga;

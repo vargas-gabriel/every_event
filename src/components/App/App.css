@@ -18,6 +18,21 @@ img {
   max-width: 100%;
 }
 
+.editHeader{
+  margin: 0px;
+  text-align: center;
+}
+
+.required{
+  margin-top: 0px;
+  margin-bottom: 4px;
+  color: red;
+}
+
+.requiredInput{
+  border: 2px solid red;
+}
+
 .createEvent{
   margin-left: 10px;
 }
@@ -253,6 +268,7 @@ For Edit Event social toggle switch
   display: inline-block;
   margin-top: 6px;
   margin-left: 6px;
+  margin-bottom: 10px;
   /* width: 60px; */
   width: 37px;
   /* height: 34px; */

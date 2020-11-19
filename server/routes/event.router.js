@@ -19,28 +19,31 @@ router.post("/", rejectUnauthenticated, (req, res, next) => {
     "start_date",
     "end_date",
     "hashtag",
-    "type")
-    VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
+    "type",
+    "event_image")
+    VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
     RETURNING "id";`;
 
-	// const eventId = result.rows[0]
+    // const eventId = result.rows[0]
 
-	pool //transaction
-		.query(queryText, [
-			req.body.eventName,
-			req.body.eventAcronym,
-			req.body.eventWebsite,
-			req.body.eventRegistration,
-			req.body.campaignStart,
-			req.body.campaignEnd,
-			"#", // had to make this default hashtag value, null gave errors
-			"In Person", // had to make a default type to avoid errors
-		])
-		.then((result) => {
-			console.log("new event id is:", result.rows[0].id);
+    pool //transaction
+        .query(queryText, [
+            req.body.eventName, 
+            req.body.eventAcronym,
+            req.body.eventWebsite,
+            req.body.eventRegistration,
+            req.body.campaignStart,
+            req.body.campaignEnd,
+            '#', // had to make this default hashtag value, null gave errors
+            'In Person', // had to make a default type to avoid errors
+            req.body.image,
+        ])
+        .then((result)=>{
+            console.log("new event id is:", result.rows[0].id);
 
-			const queryText2 = result.rows[0].id;
-			const insertEventJunctionQuery = `
+            const queryText2 = result.rows[0].id;
+            const insertEventJunctionQuery = `
+
             INSERT INTO "user_event" ("user_id", "event_id")
             VALUES  ($1, $2);
             `;
