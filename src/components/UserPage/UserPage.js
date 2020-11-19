@@ -101,13 +101,13 @@ class UserPage extends Component {
 					<EventList />
 				</div>
 
-				<div id='outline'>
+				{/* <div id='outline'>
 					<h4>This is where we could put past events</h4>
 				</div>
 
 				<div id='outline'>
 					<h4>This is where we could put active/current events</h4>
-				</div>
+				</div> */}
 			</div>
 		);
 	}
