@@ -17,6 +17,11 @@ img {
   display: inline-block;
   max-width: 100%;
 }
+
+.createEvent{
+  margin-left: 10px;
+}
+
 .centeredDiv{
   background: mediumseagreen;
 }
@@ -30,6 +35,7 @@ img {
   text-align: center;
 }
 .rounded{
+  display: inline-table;
   box-shadow: 0 0 1pt 1pt black;
   border-radius: 15px;
   width: 50%;
@@ -66,6 +72,7 @@ img {
   background-color: white;
   color: black;
   margin-left: 20px;
+  margin-right: 20px;
   float: left;
   border-radius: 15px;
   box-shadow: 0 0 1pt 1pt black;
@@ -234,14 +241,22 @@ input {
   margin-bottom: 10px;
 }
 
+.campaignEnd{
+  margin-left: 7px;
+}
+
 /*---------------
 For Edit Event social toggle switch
 ---------------*/
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  margin-top: 6px;
+  margin-left: 6px;
+  /* width: 60px; */
+  width: 37px;
+  /* height: 34px; */
+  height: 19px;
 }
 .switch input {
   opacity: 0;
@@ -263,10 +278,14 @@ For Edit Event social toggle switch
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
+  /* height: 26px; */
+  height: 13px;
+  /* width: 26px; */
+  width: 14px;
+  /* left: 4px;
+  bottom: 4px; */
+  left: 3px;
+  bottom: 3px;
   background-color: white;
   -webkit-transition: .4s;
   transition: .4s;
@@ -281,9 +300,12 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
+  /* -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  transform: translateX(26px); */
+  -webkit-transform: translateX(17px);
+  -ms-transform: translateX(17px);
+  transform: translateX(17px);
 }
 
 /* Rounded sliders */

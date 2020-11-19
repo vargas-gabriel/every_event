@@ -162,7 +162,7 @@ class EditPhase extends Component {
 
                 {phase && <h1 className="centered">{phase.event_name}</h1>}
                 {/* <h1 className="centered">{this.props.store.temp.name}</h1> */}
-                {phase && <h2 className="centered">Editing Phase: {phase.name} </h2>}
+                {phase && <h2 className="centered">Viewing Phase: {phase.name} </h2>}
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Phase Start

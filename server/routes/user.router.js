@@ -59,11 +59,12 @@ router.put('/:id', (req, res) => {
 	SET 
 	"first_name" = $1,
 	"last_name" = $2,
-	"image" = $3,
-	"ayrshareapikey"= $4
-	WHERE "id" = $5
+	"email" = $3,
+	"image" = $4,
+	"ayrshareapikey"= $5
+	WHERE "id" = $6
 	;`;
-	pool.query(query, [req.body.firstName, req.body.lastName, req.body.image, req.body.ayrshareapikey, req.body.id])
+	pool.query(query, [req.body.firstName, req.body.lastName, req.body.email, req.body.image, req.body.ayrshareapikey, req.body.id])
 	.then(() => 
 	res.sendStatus(200))
 	.catch(error => {
