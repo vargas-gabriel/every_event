@@ -106,7 +106,7 @@ class App extends Component {
 							exact
 							path='/home'
 							component={LandingPage}
-							authRedirect='/user'
+							authRedirect='/createevent'
 						/>
 						<ProtectedRoute
 							// with authRedirect:
