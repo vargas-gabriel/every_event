@@ -7,6 +7,7 @@ import userEvent from './userEvent.reducer';
 import tempPhase from './temp.phase.reducer';
 import phase from './phase.reducer';
 import post from './post.reducer';
+import otherUsersReducer from './otherUsers.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
   userEvent,
   tempPhase,
   phase,
-  post
+  post,
+  otherUsersReducer
   
 });
 

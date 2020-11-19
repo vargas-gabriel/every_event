@@ -28,6 +28,7 @@ class CreateEvent extends Component {
             }
             
         });
+		this.props.dispatch({ type: "GET_USER_EVENT" });
 
         alert('Event Created!')
         this.props.history.push('/user')//need condition to check if event was created 

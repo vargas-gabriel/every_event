@@ -10,10 +10,27 @@ const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
 router.get("/", rejectUnauthenticated, (req, res) => {
-	console.log('in get with:', req.body);
+	console.log('in get user with:', req.body);
 	// Send back user object from the session (previously queried from the database)
 	res.send(req.user);
 });
+
+
+//GET ALL
+router.get('/all', rejectUnauthenticated, (req, res) => {
+	console.log('in get all users');
+    const query = `SELECT "id", "first_name", "last_name" FROM "user" WHERE "id" <> $1;`;
+    const queryParams = [req.user.id]
+
+    pool.query(query, queryParams)
+    .then(results => {
+        res.send(results.rows);
+    })
+    .catch(error => {
+        console.log('ERROR', error);
+        res.sendStatus(500);
+    })	
+})
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen

@@ -7,6 +7,27 @@ require('dotenv').config();
 
 const router = express.Router();
 
+router.post('/addCollaborator', (req, res, next) => {
+    console.log('in add collaborator with:', req.body);
+    const collaborator = req.body.collaborator.id
+    const eventId = req.body.event_id
+    console.log(collaborator.id);
+    console.log(eventId);
+    const queryText = `INSERT INTO "user_event"
+    ("user_id",
+    "event_id")
+    VALUES ($1,$2)
+    RETURNING "id";`
+    pool
+    .query(queryText, [collaborator, eventId ])
+    .then(() => res.sendStatus(201))
+    .catch((err) => {
+      console.log('err:', err);
+      res.sendStatus(500);
+
+  })
+});
+
 router.post('/', (req, res, next) => {
     console.log('in event POST with req.body:', req.body);
     const queryText = `INSERT INTO "event"
@@ -96,7 +117,7 @@ router.post('/', (req, res, next) => {
 router.get('/', (req, res) => {
     console.log('req.user', req.user);
     console.log('in event GET');
-    const query = `SELECT * FROM user_event WHERE "user_id" = $1;`;
+    const query = `SELECT * FROM user_event WHERE "user_id" = $1 ORDER BY "id" DESC;`;
     const queryParams = [req.user.id]    
 
     pool.query(query, queryParams)
