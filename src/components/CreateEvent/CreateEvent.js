@@ -18,6 +18,8 @@ class CreateEvent extends Component {
 		//console.log('checking fields');
 		if(this.state.eventName === '' || this.state.campaignStart === '' || this.state.campaignEnd === ''){
 			alert('Fill all required fields');
+		}else if(this.state.image.length > 1000){
+			alert('image url is too long')
 		}else{
 			this.createEvent();
 		}
@@ -51,7 +53,8 @@ class CreateEvent extends Component {
 	};
 
 	render() {
-        console.log('this state:', this.state);
+		console.log('this state:', this.state);
+		console.log('url length', this.state.image.length);
 		return (
          // <form className='formPanel' onSubmit={this.createEvent}>
          <div className="createEvent">
