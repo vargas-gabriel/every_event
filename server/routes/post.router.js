@@ -73,7 +73,7 @@ router.delete("/:id", rejectUnauthenticated, (req, res) => {
 			console.log("ERROR:", error);
 		});
 });
-
+//THIS IS CURRENTLY SAVE AND DEPLOY POST TO AYRSHARE
 router.put("/:id", rejectUnauthenticated, async (req, res) => {
 	console.log("in post PUT with req.body:", req.body); //body or params?
 	const queryText = `UPDATE "post" SET
@@ -135,23 +135,40 @@ router.put("/:id", rejectUnauthenticated, async (req, res) => {
 		console.log(json);
 	};
 
-	// await axios.post('app.ayrshare.com/api/post'),{
-	//     headers:{
-	//         "Content-Type": "application/json",
-	//         "Authorization": `Bearer ${ayrshareToken}`
-	//       },
-	//       body: JSON.stringify({
-	//         post: req.body.post_text,
-	//         platforms: ["linkedin"],
-	//         //media_urls: ["https://image.com/img", "https://video.com/video"], //optional
-	//         //shorten_links: true, // optional
-	//         //unsplash: "random",  // optional
-	//         //auto_hashtag: true   // optional
-	//       }),
-	//     }
-	//     .then((res) => res.json())
-	//     .then((json) => console.log(json))
-	//     .catch(console.error);
+	// router.put("/:id", rejectUnauthenticated, async (req, res) => {
+    //     console.log("in post PUT with req.body:", req.body); //body or params?
+    //     const queryText = `UPDATE "post" SET
+    //         "name" = $1,
+    //         "send_date" = $2,
+    //         "send_time" = $3,
+    //         "post_text" = $4
+    //         WHERE "id" = $5`;
+    //     pool
+    //         .query(queryText, [
+    //             req.body.name,
+    //             req.body.send_date,
+    //             req.body.send_time,
+    //             req.body.post_text,
+    //             req.body.id,
+    //         ])
+    //         .then(() => res.sendStatus(200))
+    //         .catch((error) => {
+    //             console.log("ERROR:", error);
+    //         })
+    
+    //         //SEND POST TO AYRSHARE
+    //         //GET USER API KEY
+    //         //let dbRes = pool.query(`SELECT * FROM users WHERE id=req.user.id;`)
+    //         .then((result) => {
+    //             console.log("result", result.rows);
+    //             res.send(result.rows);
+    //             run();
+    //         })
+    //         .catch((err) => {
+    //             console.log("we have an error in update post", err);
+    //             res.sendStatus(500);
+    //         });
+    // });
 });
 
 module.exports = router;

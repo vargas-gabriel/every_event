@@ -10,7 +10,7 @@ class RegisterForm extends Component {
 		password: "",
 		verifypassword: "",
 		ayrshareapikey: "",
-		image: ""
+		image: "",
 	};
 	// 		-----  required in inputs has a pop up on form submission. checkField for empty not needed  -----
 	checkUrl = (event) => {
@@ -31,7 +31,6 @@ class RegisterForm extends Component {
 	};
 
 	registerUser = () => {
-
 		this.props.dispatch({
 			type: "REGISTER",
 			payload: {
@@ -40,7 +39,7 @@ class RegisterForm extends Component {
 				email: this.state.email,
 				password: this.state.password,
 				ayrshareapikey: this.state.ayrshareapikey,
-				image: this.state.image
+				image: this.state.image,
 			},
 		});
 	}; // end registerUser
@@ -100,7 +99,10 @@ class RegisterForm extends Component {
 				</div>
 				<div>
 					<label htmlFor='ayrshare api key'>
-					ayrshare api key:
+						ayrshare api key:
+						<a href='https://www.ayrshare.com/' target='blank'>
+							Get your key here
+						</a>
 						<input
 							type='text'
 							name='ayrshareapikey'
@@ -112,7 +114,7 @@ class RegisterForm extends Component {
 				</div>
 				<div>
 					<label htmlFor='image'>
-						User Image URL (255 characters or less):
+						User Image URL
 						<input
 							type='text'
 							name='image'
