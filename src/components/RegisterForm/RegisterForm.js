@@ -9,8 +9,20 @@ class RegisterForm extends Component {
 		email: "",
 		password: "",
 		verifypassword: "",
-		ayrshareapikey: ""
+		ayrshareapikey: "",
+		image: ""
 	};
+
+	// checkFields = () => { 		-----  required in inputs has a pop up on form submission. checkFields not needed  -----
+	// 	console.log('checking fields');
+	// 	if(this.state.firstname === '' || this.state.lastname === '' || this.state.email === ''
+	// 		|| this.state.password === '' || this.state.verifypassword === '' || this.state.ayrshareapikey === ''){
+	// 		alert('Fill all fields');
+	// 	}else{
+	// 		alert('fields checkout');
+	// 		//this.verifyPassword();
+	// 	}
+	// }
 
 	verifyPassword = (event) => {
 		event.preventDefault();
@@ -30,7 +42,8 @@ class RegisterForm extends Component {
 				lastname: this.state.lastname,
 				email: this.state.email,
 				password: this.state.password,
-				ayrshareapikey: this.state.ayrshareapikey
+				ayrshareapikey: this.state.ayrshareapikey,
+				image: this.state.image
 			},
 		});
 	}; // end registerUser
@@ -96,6 +109,18 @@ class RegisterForm extends Component {
 							value={this.state.ayrshareapikey}
 							required
 							onChange={this.handleInputChangeFor("ayrshareapikey")}
+						/>
+					</label>
+				</div>
+				<div>
+					<label htmlFor='image'>
+						User Image URL (255 characters or less):
+						<input
+							type='text'
+							name='image'
+							value={this.state.image}
+							required
+							onChange={this.handleInputChangeFor("image")}
 						/>
 					</label>
 				</div>

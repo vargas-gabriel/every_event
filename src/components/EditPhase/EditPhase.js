@@ -190,7 +190,7 @@ class EditPhase extends Component {
                         }
                     </label> 
                 </div>
-                                <hr/>
+                    <hr/>
 
                 <div id="eventPromotionDuration" className="rounded">
                     
