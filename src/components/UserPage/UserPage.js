@@ -15,22 +15,21 @@ class UserPage extends Component {
 	componentDidMount() {
 		this.getGreeting();
 		this.props.dispatch({ type: "GET_USER_EVENT" });
-		if(window.location.href.includes('=')){
-			console.log('token detected');
+		if (window.location.href.includes("=")) {
+			console.log("token detected");
 			this.checkUrl();
-		}else{
-			console.log('no token detected');
+		} else {
+			console.log("no token detected");
 		}
-		
 	}
 
 	checkUrl = () => {
 		//console.log('url:', window.location.href.split('=')[1].split('#')[0]);
-		const linkedinToken = window.location.href.split('=')[1].split('#')[0];
-		console.log('linkedinToken', linkedinToken);
-		
+		const linkedinToken = window.location.href.split("=")[1].split("#")[0];
+		console.log("linkedinToken", linkedinToken);
+
 		this.props.dispatch({
-			type: 'UPDATE_USER',
+			type: "UPDATE_USER",
 			payload: {
 				id: this.props.store.user.id,
 				firstName: this.props.store.user.first_name,
@@ -38,10 +37,10 @@ class UserPage extends Component {
 				email: this.props.store.user.email,
 				image: this.props.store.user.image,
 				linkedin_account: this.props.store.user.linkedin_account,
-				linkedin_oauth: linkedinToken
-			}
-	  })
-	}
+				linkedin_oauth: linkedinToken,
+			},
+		});
+	};
 	// this sets the greeting for the user based on the time of day
 	getGreeting = () => {
 		const date = new Date();
@@ -100,18 +99,6 @@ class UserPage extends Component {
 					</h1>
 					<hr />
 					<EventList />
-				</div>
-				<div>
-					<a
-						href='http://localhost:5000/api/linkedin/auth/linkedin'
-						target='blank'>
-						<h4>Log in with LinkedIn</h4>
-					</a>
-				</div>
-				<div>
-					<a href='http://www.google.com' target='blank'>
-						<h4>Go to google</h4>
-					</a>
 				</div>
 
 				<div id='outline'>
