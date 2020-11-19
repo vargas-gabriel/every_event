@@ -12,22 +12,19 @@ class RegisterForm extends Component {
 		ayrshareapikey: "",
 		image: "",
 	};
-
-	// checkFields = () => { 		-----  required in inputs has a pop up on form submission. checkFields not needed  -----
-	// 	console.log('checking fields');
-	// 	if(this.state.firstname === '' || this.state.lastname === '' || this.state.email === ''
-	// 		|| this.state.password === '' || this.state.verifypassword === '' || this.state.ayrshareapikey === ''){
-	// 		alert('Fill all fields');
-	// 	}else{
-	// 		alert('fields checkout');
-	// 		//this.verifyPassword();
-	// 	}
-	// }
+	// 		-----  required in inputs has a pop up on form submission. checkField for empty not needed  -----
+	checkUrl = (event) => {
+		if(this.state.image.length > 1000){
+			alert('Image URL is too long');
+		}else{
+			this.registerUser();
+		}
+	}
 
 	verifyPassword = (event) => {
 		event.preventDefault();
 		if (this.state.password === this.state.verifypassword) {
-			this.registerUser();
+			this.checkUrl();
 		} else {
 			alert("password does not match");
 		}
@@ -54,7 +51,8 @@ class RegisterForm extends Component {
 	};
 
 	render() {
-		console.log("this is our state:", this.state);
+		//console.log("this is our state:", this.state);
+		console.log('url length', this.state.image.length);
 		return (
 			<form className='formPanel' onSubmit={this.verifyPassword}>
 				<h2>Register User</h2>
