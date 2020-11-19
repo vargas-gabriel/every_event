@@ -10,7 +10,7 @@ const router = express.Router();
 
 // Handles Ajax request for user information if user is authenticated
 router.get("/", rejectUnauthenticated, (req, res) => {
-	console.log('in get with:', req.body);
+	console.log("in get with:", req.body);
 	// Send back user object from the session (previously queried from the database)
 	res.send(req.user);
 });
@@ -18,7 +18,7 @@ router.get("/", rejectUnauthenticated, (req, res) => {
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
 // is that the password gets encrypted before being inserted
-router.post("/register", (req, res, next) => {
+router.post("/register", rejectUnauthenticated, (req, res, next) => {
 	console.log("in register", req.body);
 	const email = req.body.email;
 	const firstname = req.body.firstname;
@@ -27,14 +27,14 @@ router.post("/register", (req, res, next) => {
 	const ayrshareapikey = req.body.ayrshareapikey;
 	const queryText = `INSERT INTO "user" (first_name, last_name, email, password, ayrshareapikey)
 	VALUES ($1, $2, $3, $4, $5) RETURNING id`;
-	
+
 	pool
 		.query(queryText, [firstname, lastname, email, password, ayrshareapikey])
 		.then(() => res.sendStatus(201))
-		.catch(error => {
-			console.log('ERROR',error);
+		.catch((error) => {
+			console.log("ERROR", error);
 			res.sendStatus(500);
-		})
+		});
 });
 
 // Handles login form authenticate/login POST
@@ -52,8 +52,8 @@ router.post("/logout", (req, res) => {
 	res.sendStatus(200);
 });
 
-router.put('/:id', (req, res) => {
-	console.log('in edit user', req.body);
+router.put("/:id", (req, res) => {
+	console.log("in edit user", req.body);
 	const query = `
 	UPDATE "user"
 	SET 
@@ -64,16 +64,19 @@ router.put('/:id', (req, res) => {
 	"ayrshareapikey"= $5
 	WHERE "id" = $6
 	;`;
-	pool.query(query, [req.body.firstName, req.body.lastName, req.body.email, req.body.image, req.body.ayrshareapikey, req.body.id])
-	.then(() => 
-	res.sendStatus(200))
-	.catch(error => {
-	  console.log('ERROR:', error);
-	})
-  });
-
-
-
-
+	pool
+		.query(query, [
+			req.body.firstName,
+			req.body.lastName,
+			req.body.email,
+			req.body.image,
+			req.body.ayrshareapikey,
+			req.body.id,
+		])
+		.then(() => res.sendStatus(200))
+		.catch((error) => {
+			console.log("ERROR:", error);
+		});
+});
 
 module.exports = router;
