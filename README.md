@@ -68,4 +68,4 @@ If you would like to name your database something else, you will need to change 
 
 ## Technologies Used
 
-- Every event was built with: React, Redux, Express, Passport, and PostgreSQL.
+- Every event was built with: React, Redux, Sagas, Express, Passport, and PostgreSQL.
