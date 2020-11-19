@@ -42,16 +42,18 @@ router.post("/register", (req, res, next) => {
 	const lastname = req.body.lastname;
 	const password = encryptLib.encryptPassword(req.body.password);
 	const ayrshareapikey = req.body.ayrshareapikey;
-	const queryText = `INSERT INTO "user" (first_name, last_name, email, password, ayrshareapikey)
-	VALUES ($1, $2, $3, $4, $5) RETURNING id`;
+	const image = req.body.image;
+	const queryText = `INSERT INTO "user" (first_name, last_name, email, password, ayrshareapikey, image)
+	VALUES ($1, $2, $3, $4, $5, $6) RETURNING id`;
 	
+
 	pool
-		.query(queryText, [firstname, lastname, email, password, ayrshareapikey])
+		.query(queryText, [firstname, lastname, email, password, ayrshareapikey, image])
 		.then(() => res.sendStatus(201))
-		.catch(error => {
-			console.log('ERROR',error);
+		.catch((error) => {
+			console.log("ERROR", error);
 			res.sendStatus(500);
-		})
+		});
 });
 
 // Handles login form authenticate/login POST
@@ -69,8 +71,8 @@ router.post("/logout", (req, res) => {
 	res.sendStatus(200);
 });
 
-router.put('/:id', (req, res) => {
-	console.log('in edit user', req.body);
+router.put("/:id", (req, res) => {
+	console.log("in edit user", req.body);
 	const query = `
 	UPDATE "user"
 	SET 
@@ -81,16 +83,19 @@ router.put('/:id', (req, res) => {
 	"ayrshareapikey"= $5
 	WHERE "id" = $6
 	;`;
-	pool.query(query, [req.body.firstName, req.body.lastName, req.body.email, req.body.image, req.body.ayrshareapikey, req.body.id])
-	.then(() => 
-	res.sendStatus(200))
-	.catch(error => {
-	  console.log('ERROR:', error);
-	})
-  });
-
-
-
-
+	pool
+		.query(query, [
+			req.body.firstName,
+			req.body.lastName,
+			req.body.email,
+			req.body.image,
+			req.body.ayrshareapikey,
+			req.body.id,
+		])
+		.then(() => res.sendStatus(200))
+		.catch((error) => {
+			console.log("ERROR:", error);
+		});
+});
 
 module.exports = router;

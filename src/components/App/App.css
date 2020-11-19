@@ -5,7 +5,7 @@ body,
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Source Sans Pro', Tahoma, Geneva, Verdana, sans-serif;
   margin: 0px;
   background: rgb(36, 36, 36);
   color: white;
@@ -16,6 +16,21 @@ td{
 img {
   display: inline-block;
   max-width: 100%;
+}
+
+.editHeader{
+  margin: 0px;
+  text-align: center;
+}
+
+.required{
+  margin-top: 0px;
+  margin-bottom: 4px;
+  color: red;
+}
+
+.requiredInput{
+  border: 2px solid red;
 }
 
 .createEvent{
@@ -253,6 +268,7 @@ For Edit Event social toggle switch
   display: inline-block;
   margin-top: 6px;
   margin-left: 6px;
+  margin-bottom: 10px;
   /* width: 60px; */
   width: 37px;
   /* height: 34px; */

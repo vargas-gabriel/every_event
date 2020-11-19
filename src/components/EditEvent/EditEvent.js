@@ -145,19 +145,19 @@ class EditEvent extends Component {
         //console.log('includedPhases', includedPhases);
         const activeEvent = this.props.store.temp
         //console.log('activeEvent is:', activeEvent);
-        console.log('activeEvent.type is:', activeEvent.type);
+        //console.log('activeEvent.type is:', activeEvent.type);
         //console.log('this.props.store.temp', this.props.store.temp);
         this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
         //console.log('EditEvent props:', this.props);
-        console.log('end - start', activeEvent.end_date - activeEvent.start_date);
+        //console.log('end - start', activeEvent.end_date - activeEvent.start_date);
         return (  
             <div id="editEventDiv">
                 <h1 className="centered">{this.props.store.temp.name}</h1>                
                 <h2 className="centered">Phases</h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
-                        Event Promotion Start
+                        Campaign Start
                         {this.props.store.temp.start_date === undefined ?
                             <></> :
                             <input
@@ -171,7 +171,7 @@ class EditEvent extends Component {
                     </label>
 
                     <label htmlFor='campaignEnd' className="campaignEnd">
-                        Event Promotion End
+                        Campaign End
                         {this.props.store.temp.end_date === undefined ?
                             <></> :
                             <input
@@ -226,8 +226,9 @@ class EditEvent extends Component {
                                             type='date'
                                             name='phaseStart'
                                             required
+                                            disabled
                                             defaultValue={phase.start_date.split('T', 1)[0]}
-                                            // onChange={(event) => this.handleDateChange(event, "start_date")}
+                                            //onChange={(event) => this.handleDateChange(event, "start_date")}
             
                                         />
                                     </label>
@@ -238,8 +239,9 @@ class EditEvent extends Component {
                                             type='date'
                                             name='phaseEnd'
                                             required
+                                            disabled
                                             defaultValue={phase.end_date.split('T', 1)[0]}
-
+                                            //onChange={(event) => this.handleDateChange(event, "end_date")}
                                         />
                                     </label>
                                 </td>
@@ -272,9 +274,13 @@ class EditEvent extends Component {
                     }
                     {this.state.toggleEdit === true &&
                         <>
-                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "image")} placeholder={this.props.store.temp.event_image}/><br/>                        
+                            <h5 className="editHeader">Event Image URL</h5>
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "event_image")} placeholder={this.props.store.temp.event_image}/><br/>                        
+                            <h5 className="editHeader">Name</h5>
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/><br/>
+                            <h5 className="editHeader">Acronym</h5>
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "acronym")} placeholder={this.props.store.temp.acronym}/><br/>
+                            <h5 className="editHeader">Website</h5>
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "website")} placeholder={this.props.store.temp.website}/><br/>
                             <button className="centeredImage" onClick={this.saveEdit}>Save</button>
                         </>
