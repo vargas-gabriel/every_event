@@ -11,27 +11,38 @@ class CreateEvent extends Component {
 		eventOAuth: '',
 		campaignStart: '',
 		campaignEnd: '',
+		image: ''
 	};
 
-	createEvent=()=>{
-        console.log('creating event');
-        this.props.dispatch({
-            type: 'CREATE_EVENT',
-            payload: {
-                eventName: this.state.eventName,
-                eventAcronym: this.state.eventAcronym,
-                eventWebsite: this.state.eventWebsite,
-                eventRegistration: this.state.eventRegistration,
-                eventOAuth: this.state.eventOAuth,
-                campaignStart: this.state.campaignStart,
-                campaignEnd: this.state.campaignEnd,
-            }
-            
-        });
+	checkFields = () => {
+		//console.log('checking fields');
+		if(this.state.eventName === '' || this.state.campaignStart === '' || this.state.campaignEnd === ''){
+			alert('Fill all required fields');
+		}else{
+			this.createEvent();
+		}
+	}
 
-        alert('Event Created!')
-        this.props.history.push('/user')//need condition to check if event was created 
-    }
+	createEvent=()=>{
+		console.log('creating event');
+		this.props.dispatch({
+			type: 'CREATE_EVENT',
+			payload: {
+				eventName: this.state.eventName,
+				eventAcronym: this.state.eventAcronym,
+				eventWebsite: this.state.eventWebsite,
+				eventRegistration: this.state.eventRegistration,
+				eventOAuth: this.state.eventOAuth,
+				campaignStart: this.state.campaignStart,
+				campaignEnd: this.state.campaignEnd,
+				image: this.state.image
+			}
+			
+		});
+
+		alert('Event Created!')
+		this.props.history.push('/user')//need condition to check if event was created 
+	}
 
 	handleInputChangeFor = (propertyName) => (event) => {
 		this.setState({
@@ -50,6 +61,7 @@ class CreateEvent extends Component {
 					<label htmlFor='eventName'>
 						Event Name:
 						<input
+							className="requiredInput"
 							type='text'
 							name='eventName'
 							required
@@ -93,6 +105,18 @@ class CreateEvent extends Component {
 							onChange={this.handleInputChangeFor("eventRegistration")}
 						/>
 					</label>
+				</div>
+				<div>
+					<label htmlFor='image'>
+						Event Image URL (255 characters or less):
+						<input
+							type='text'
+							name='image'
+							required
+							value={this.state.image}
+							onChange={this.handleInputChangeFor("image")}
+						/>
+					</label>
 				</div> 
 				{/* <div>
 					<label htmlFor='eventOAuth'>
@@ -110,6 +134,7 @@ class CreateEvent extends Component {
 					<label htmlFor='campaignStart'>
 						Campaign Start:
 						<input
+							className="requiredInput"
 							type='date'
 							name='campaignStart'
 							required
@@ -122,6 +147,7 @@ class CreateEvent extends Component {
 					<label htmlFor='campaignEnd'>
 						Campaign End:
 						<input
+							className="requiredInput"
 							type='date'
 							name='campaignEnd'
 							required
@@ -130,11 +156,11 @@ class CreateEvent extends Component {
 						/>
 					</label>
 				</div>                                                          
-
+				<p className="required">required</p>
 				<div>
 					{/* <input className='btn' type='submit' name='submit' value='Create Event' /> */}
-				<button onClick={this.createEvent}>Create Event</button>
-                </div>
+				<button onClick={this.checkFields}>Create Event</button>
+            </div>
          </div>
 			// </form>
 		);

@@ -18,8 +18,8 @@ class EventList extends Component {
 	};
 
 	render() {
-		console.log("this is our state:", this.state);
-		console.log('EventList props:', this.props);
+		//console.log("this is our state:", this.state);
+		//console.log('EventList props:', this.props);
 		return (
 			<div>
 				{this.props.store.userEvent.map(event => 
