@@ -177,7 +177,7 @@ class EditPhase extends Component {
                         }
                     </label>
 
-                    <label htmlFor='campaignEnd'>
+                    <label htmlFor='campaignEnd' className="campaignEnd">
                         Phase End
                         {phase.end_date &&
                             <input
