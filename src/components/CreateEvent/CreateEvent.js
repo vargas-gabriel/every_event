@@ -94,7 +94,7 @@ class CreateEvent extends Component {
 						/>
 					</label>
 				</div> 
-				<div>
+				{/* <div>
 					<label htmlFor='eventOAuth'>
 						Event OAuth:
 						<input
@@ -105,7 +105,7 @@ class CreateEvent extends Component {
 							onChange={this.handleInputChangeFor("eventOAuth")}
 						/>
 					</label>
-				</div>     
+				</div>      */}
 				<div>
 					<label htmlFor='campaignStart'>
 						Campaign Start:
