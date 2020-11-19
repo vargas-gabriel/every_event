@@ -248,7 +248,8 @@ class EditEvent extends Component {
                     </label><br/>
                     {this.state.toggleEdit === false &&
                         <>
-                            <img className="centeredImage"src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/>
+                            {/* <img className="centeredImage"src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/> */}
+                            <img className="centeredImage"src={this.props.store.temp.event_image} width='100px'></img><br/>
                             <h5 className="centered">{this.props.store.temp.name}</h5>
                             <h5 className="centered">{this.props.store.temp.acronym}</h5>
                             <h5 className="centered">{this.props.store.temp.website}</h5>
@@ -257,8 +258,7 @@ class EditEvent extends Component {
                     }
                     {this.state.toggleEdit === true &&
                         <>
-                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "image")} placeholder={this.props.store.temp.image}/><br/>                        
-                            <br/><br/><br/><br/>
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "image")} placeholder={this.props.store.temp.event_image}/><br/>                        
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/><br/>
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "acronym")} placeholder={this.props.store.temp.acronym}/><br/>
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "website")} placeholder={this.props.store.temp.website}/><br/>
@@ -268,7 +268,7 @@ class EditEvent extends Component {
                     <br/><br/>
                 </div>
 
-                <div id="eventCollaborators" className="rounded">
+                {/* <div id="eventCollaborators" className="rounded">
                     <h4 className="centered">Event Collaborators</h4>
 
                     <div id="collabOutline" className="centeredImage">
@@ -303,7 +303,7 @@ class EditEvent extends Component {
                     </div><br/>
                     <button className="centeredImage">Add Collaborator</button><br/><br/>
 
-                </div>
+                </div> */}
 
 
                 {/* <div id="eventHashtags" className="rounded">
