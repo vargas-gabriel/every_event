@@ -99,8 +99,7 @@ class RegisterForm extends Component {
 				</div>
 				<div>
 					<label htmlFor='ayrshare api key'>
-						ayrshare api key:
-						<a href='https://www.ayrshare.com/' target='blank'>
+						ayrshare api key: <a href='https://www.ayrshare.com/' target='blank'>
 							Get your key here
 						</a>
 						<input
