@@ -35,7 +35,7 @@ function* getUserEvent(action){
         method: 'GET',
         url: 'api/user_event'
     })
-    console.log('back from get user_event with:', response.data);
+    console.log('back from get user_event with:', response.data.reverse());
     yield put({
         type: 'SET_USER_EVENTS',
         payload: response.data
@@ -80,6 +80,18 @@ function* getActiveEvent(action){
     yield put({ type: 'UPDATE_ACTIVE_EVENT', payload: response.data });
 }
 
+
+function* addCollaborator(action) {
+    console.log('creating event with', action);
+    yield axios({
+        method: 'POST',
+        url: '/api/event/addCollaborator',
+        data: action.payload
+    });
+    yield put ({
+        type: 'GET_USER_EVENT'
+    })
+  }
 function* eventSaga() {
   yield takeLatest('CREATE_EVENT', createEvent);
   yield takeLatest('GET_EVENT', getEvent);
@@ -87,6 +99,7 @@ function* eventSaga() {
   yield takeLatest('UPDATE_EVENT', updateEvent);
   yield takeLatest('GET_TEMP_EVENT', updateTempEvent);
   yield takeLatest('GET_ACTIVE_EVENT', getActiveEvent);
+  yield takeLatest('ADD_COLLABORATOR', addCollaborator);
 }
 
 export default eventSaga;
