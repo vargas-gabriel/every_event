@@ -131,7 +131,7 @@ class EditEvent extends Component {
         //console.log('includedPhases', includedPhases);
         const activeEvent = this.props.store.temp
         //console.log('activeEvent is:', activeEvent);
-        console.log('activeEvent.type is:', activeEvent.type);
+        //console.log('activeEvent.type is:', activeEvent.type);
         //console.log('this.props.store.temp', this.props.store.temp);
         this.findActiveEvent();
         // console.log('user is:', this.props.store.user);
@@ -261,7 +261,7 @@ class EditEvent extends Component {
                     {this.state.toggleEdit === true &&
                         <>
                             <h5 className="editHeader">Event Image URL</h5>
-                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "image")} placeholder={this.props.store.temp.event_image}/><br/>                        
+                            <input className="centeredImage" onChange={(event) => this.handleChange(event, "event_image")} placeholder={this.props.store.temp.event_image}/><br/>                        
                             <h5 className="editHeader">Name</h5>
                             <input className="centeredImage" onChange={(event) => this.handleChange(event, "name")} placeholder={this.props.store.temp.name}/><br/>
                             <h5 className="editHeader">Acronym</h5>
