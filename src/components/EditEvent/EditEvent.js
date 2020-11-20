@@ -148,7 +148,7 @@ class EditEvent extends Component {
             type: "UPDATE_EVENT",
             payload: {
                 event: this.props.store.temp,
-                id: this.props.store.temp.id,
+                id: this.props.store.temp.event_id,
             }
         });
         this.setState({
