@@ -86,6 +86,7 @@ class UserPage extends Component {
 
 					<div id='userBtns'>
 						<button className='centeredImage' onClick={this.editUserNav}>
+						{/* <button className='btn' id="editUserBtn" onClick={this.editUserNav}> */}
 							Edit User
 						</button>
 						<br />

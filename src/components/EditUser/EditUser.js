@@ -54,10 +54,10 @@ class EditUser extends Component {
         console.log('length', this.state.image.length);
         return (  
             <div id="editUserDiv" className="rounded">
-                <h1 className="centered">Edit User</h1>
+                <h1 className="centered" id="editUserHeader">Edit User</h1>
                 <hr/>
                 <form onSubmit={this.checkURL}>
-                    <h6 id="editInfoTag" className="centered">First Name</h6>
+                    <h4 id="editInfoTag" className="centered">First Name</h4>
                     <input 
                     className="centeredImage"
                     type="text"
@@ -66,7 +66,7 @@ class EditUser extends Component {
                     onChange={(event)=>this.handleChange(event, 'firstName')}>
                     </input>
                     
-                    <h6 id="editInfoTag" className="centered">Last Name</h6>
+                    <h4 id="editInfoTag" className="centered">Last Name</h4>
                     <input 
                     className="centeredImage"
                     type="text"
@@ -75,7 +75,7 @@ class EditUser extends Component {
                     onChange={(event)=>this.handleChange(event, 'lastName')}>
                     </input>
 
-                    <h6 id="editInfoTag" className="centered">Image URL</h6>
+                    <h4 id="editInfoTag" className="centered">Image URL</h4>
                     <input 
                     className="centeredImage"
                     type="text"
@@ -84,7 +84,7 @@ class EditUser extends Component {
                     onChange={(event)=>this.handleChange(event, 'image')}>
                     </input> 
 
-                    <h6 id="editInfoTag" className="centered">Email</h6>
+                    <h4 id="editInfoTag" className="centered">Email</h4>
                     <input 
                     className="centeredImage"
                     type="text"
@@ -93,8 +93,7 @@ class EditUser extends Component {
                     onChange={(event)=>this.handleChange(event, 'email')}>
                     </input> 
 
-                    <br/>
-                    <h6 id="editInfoTag" className="centered">Ayrshare API Key</h6>
+                    <h4 id="editInfoTag" className="centered">Ayrshare API Key</h4>
                     <input 
                     className="centeredImage"
                     type="text"

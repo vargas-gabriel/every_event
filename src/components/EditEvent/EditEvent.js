@@ -257,17 +257,18 @@ class EditEvent extends Component {
                 </div>
 
                 <div id="eventSocial" className="rounded">
-                    {/* <h4 className="centered">Event Social</h4> */}
                     <label className="switch">
                         <input type="checkbox" 
                             checked={this.state.toggleEdit} 
                             onChange={this.toggleEditSocial}/>
                         <span className="slider round"></span>
-                    </label><br/>
+                    </label>
+                    <h4 className="centered" id="eventInfo">Event Info</h4>
+                    <br/>
                     {this.state.toggleEdit === false &&
                         <>
                             {/* <img className="centeredImage"src='https://cdn.onlinewebfonts.com/svg/img_98811.png' width='100px'></img><br/> */}
-                            <img className="centeredImage"src={this.props.store.temp.event_image} width='100px'></img><br/>
+                            <img className="centeredImage"src={this.props.store.temp.event_image} width='170px'></img><br/>
                             <h5 className="centered">{this.props.store.temp.name}</h5>
                             <h5 className="centered">{this.props.store.temp.acronym}</h5>
                             <h5 className="centered">{this.props.store.temp.website}</h5>

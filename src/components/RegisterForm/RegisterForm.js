@@ -54,104 +54,107 @@ class RegisterForm extends Component {
 		//console.log("this is our state:", this.state);
 		console.log('url length', this.state.image.length);
 		return (
-			<form className='formPanel' onSubmit={this.verifyPassword}>
-				<h2>Register User</h2>
-				{this.props.store.errors.registrationMessage && (
-					<h3 className='alert' role='alert'>
-						{this.props.store.errors.registrationMessage}
-					</h3>
-				)}
-				<div>
-					<label htmlFor='firstname'>
-						First name:
-						<input
-							type='text'
-							name='firstname'
-							value={this.state.firstname}
-							required
-							onChange={this.handleInputChangeFor("firstname")}
-						/>
-					</label>
-				</div>
-				<div>
-					<label htmlFor='Lastname'>
-						Last name:
-						<input
-							type='text'
-							name='Lastname'
-							value={this.state.lastname}
-							required
-							onChange={this.handleInputChangeFor("lastname")}
-						/>
-					</label>
-				</div>
-				<div>
-					<label htmlFor='email'>
-						Email:
-						<input
-							type='text'
-							name='email'
-							value={this.state.email}
-							required
-							onChange={this.handleInputChangeFor("email")}
-						/>
-					</label>
-				</div>
-				<div>
-					<label htmlFor='ayrshare api key'>
-						ayrshare api key: <a href='https://www.ayrshare.com/' target='blank'>
-							Get your key here
-						</a>
-						<input
-							type='text'
-							name='ayrshareapikey'
-							value={this.state.ayrshareapikey}
-							required
-							onChange={this.handleInputChangeFor("ayrshareapikey")}
-						/>
-					</label>
-				</div>
-				<div>
-					<label htmlFor='image'>
-						User Image URL
-						<input
-							type='text'
-							name='image'
-							value={this.state.image}
-							required
-							onChange={this.handleInputChangeFor("image")}
-						/>
-					</label>
-				</div>
-				<div>
-					<label htmlFor='password'>
-						Password:
-						<input
-							type='password'
-							name='password'
-							value={this.state.password}
-							required
-							onChange={this.handleInputChangeFor("password")}
-						/>
-					</label>
-				</div>
-				<div>
-					<label htmlFor='Verifypassword'>
-						Verify password:
-						<input
-							type='password'
-							name='verifypassword'
-							value={this.state.verifypassword}
-							required
-							onChange={this.handleInputChangeFor("verifypassword")}
-						/>
-					</label>
-				</div>
+			<>
+				<br/>
+				<form className='formPanel' onSubmit={this.verifyPassword}>
+					<h2>Register User</h2>
+					{this.props.store.errors.registrationMessage && (
+						<h3 className='alert' role='alert'>
+							{this.props.store.errors.registrationMessage}
+						</h3>
+					)}
+					<div>
+						<label htmlFor='firstname'>
+							First name:
+							<input
+								type='text'
+								name='firstname'
+								value={this.state.firstname}
+								required
+								onChange={this.handleInputChangeFor("firstname")}
+							/>
+						</label>
+					</div>
+					<div>
+						<label htmlFor='Lastname'>
+							Last name:
+							<input
+								type='text'
+								name='Lastname'
+								value={this.state.lastname}
+								required
+								onChange={this.handleInputChangeFor("lastname")}
+							/>
+						</label>
+					</div>
+					<div>
+						<label htmlFor='email'>
+							Email:
+							<input
+								type='text'
+								name='email'
+								value={this.state.email}
+								required
+								onChange={this.handleInputChangeFor("email")}
+							/>
+						</label>
+					</div>
+					<div>
+						<label htmlFor='ayrshare api key'>
+							ayrshare api key: <a href='https://www.ayrshare.com/' target='blank'>
+								Get your key here
+							</a>
+							<input
+								type='text'
+								name='ayrshareapikey'
+								value={this.state.ayrshareapikey}
+								required
+								onChange={this.handleInputChangeFor("ayrshareapikey")}
+							/>
+						</label>
+					</div>
+					<div>
+						<label htmlFor='image'>
+							User Image URL
+							<input
+								type='text'
+								name='image'
+								value={this.state.image}
+								required
+								onChange={this.handleInputChangeFor("image")}
+							/>
+						</label>
+					</div>
+					<div>
+						<label htmlFor='password'>
+							Password:
+							<input
+								type='password'
+								name='password'
+								value={this.state.password}
+								required
+								onChange={this.handleInputChangeFor("password")}
+							/>
+						</label>
+					</div>
+					<div>
+						<label htmlFor='Verifypassword'>
+							Verify password:
+							<input
+								type='password'
+								name='verifypassword'
+								value={this.state.verifypassword}
+								required
+								onChange={this.handleInputChangeFor("verifypassword")}
+							/>
+						</label>
+					</div>
 
-				<div>
-					<input className='btn' type='submit' name='submit' value='Register' />
-				</div>
-			</form>
+					<div>
+						<input className='btn' type='submit' name='submit' value='Register' />
+					</div>
+				</form>
+			</>
 		);
 	}
 }

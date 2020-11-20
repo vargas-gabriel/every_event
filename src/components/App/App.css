@@ -18,6 +18,15 @@ img {
   max-width: 100%;
 }
 
+/* a{
+  color: #3948a0;
+} */
+
+#eventInfo{
+  display: inherit;
+  margin-left: 4px;
+}
+
 .editHeader{
   margin: 0px;
   text-align: center;
@@ -60,7 +69,7 @@ img {
   color: black;
 }
 .hoverText:hover{
-  color: teal;
+  color: #3948a0;
   text-decoration: underline;
 }
 #outline{
@@ -121,16 +130,19 @@ img {
 
 #eventSocial{
   margin-left: 30px;
+  margin-top: 12px;
   width: 30%;
 }
 
 #eventCollaborators{
   margin-left: 30px;
+  margin-top: 12px;
   width: 30%;
 }
 
 #eventHashtags{
   margin-left: 30px;
+  margin-top: 12px;
   width: 30%;
 }
 
@@ -143,7 +155,7 @@ img {
   border-radius: 15px;
 }
 #eventItemDiv:hover{
-  box-shadow: 0 0 2pt 2pt teal;
+  box-shadow: 0 0 2pt 2pt #3948a0;
 
 }
 /* --------------------------------------------------------------------------------
@@ -158,13 +170,22 @@ Container
 Button
 -------------------------------------------------------------------------------- */
 
+#editUserHeader{
+  padding-top: 20px;
+}
+
+#editUserBtn{
+  padding: 5px 10px;
+}
+
 .btn {
   display: inline-block;
   padding: 10px 20px;
-  border-color: #014041;
+  /* border-color: #014041; */
+  border-color: black;
   border-width: 1px 1px 3px;
   border-radius: 4px;
-  background-color: #00acb0;
+  background-color: #3948a0;
   color: #f8f8f8;
   font-size: 1.1rem;
   outline: 0;
@@ -187,7 +208,7 @@ Button
 }
 
 .btn:hover {
-  background-color: #008183;
+  background-color: #3948a0;
   text-decoration: none;
 }
 
@@ -204,8 +225,8 @@ Button
 
 .btn_asLink:hover {
   background-color: transparent;
-  border-color: #008183;
-  color: #008183;
+  border-color: #3948a0;
+  color: #3948a0;
 }
 
 #userBtns{
@@ -246,6 +267,7 @@ Form Treatment
   max-width: 100%;
   padding: 25px;
   margin: 0 auto 20px;
+  /* margin-top: 4px; */
   background-color: #efefef;
   border-radius: 3px;
   box-shadow: 0 1px 2px rgb(0, 0, 0, 0.4);
