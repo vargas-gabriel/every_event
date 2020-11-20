@@ -160,7 +160,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-	//console.log('in GET by id', req.user.id, req.params.id);
+	console.log('in GET by id', req.user.id, req.params.id);
 	// const query = `SELECT "user_event"."event_id", "event"."name", "event"."acronym", "event"."event_image", "event"."type", "event"."start_date",
 	//     "event"."end_date", "event"."website", "event"."registration_link", "event"."linkedin_account", "event"."hashtag" FROM "event"
 	//     JOIN "user_event"
@@ -201,7 +201,7 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
 		req.body.event_image,
 		req.body.acronym,
 		req.body.website,
-		req.body.id,
+		req.body.event_id,
 		req.body.start_date,
 		req.body.end_date,
 		req.body.type,

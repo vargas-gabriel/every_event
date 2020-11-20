@@ -21,9 +21,10 @@ const Nav = (props) => {
 			{/* Show the link to the nav bar if the user is logged in */}
 			{props.store.user.id && (
 				<div className='nav'>
-					<Link to='/home'>
+					{/* <Link to='/home'>
 						<h2 className='nav-title'>Every Event</h2>
-					</Link>
+					</Link> */}
+					<h2 className='nav-title'>Every Event</h2>
 					<div className='nav-right'>
 						<Link className='nav-link' to={loginLinkData.path}>
 							{/* Show this link if they are logged in or not,

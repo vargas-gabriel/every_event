@@ -58,7 +58,7 @@ class CreateEvent extends Component {
 		console.log('url length', this.state.image.length);
 		return (
          // <form className='formPanel' onSubmit={this.createEvent}>
-         <div className="createEvent">
+         <div className="rounded" id="createEvent">
 				<h2>Create Event</h2>
 				
 				<div>
@@ -112,7 +112,7 @@ class CreateEvent extends Component {
 				</div>
 				<div>
 					<label htmlFor='image'>
-						Event Image URL (255 characters or less):
+						Event Image URL (1000 characters or less):
 						<input
 							type='text'
 							name='image'

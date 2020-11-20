@@ -13,6 +13,7 @@ class UserPage extends Component {
 		userEvents: [],
 	};
 	componentDidMount() {
+		window.scrollTo(0, 0)
 		this.getGreeting();
 		this.props.dispatch({ type: "GET_USER_EVENT" });
 		if (window.location.href.includes("=")) {
@@ -86,6 +87,7 @@ class UserPage extends Component {
 
 					<div id='userBtns'>
 						<button className='centeredImage' onClick={this.editUserNav}>
+						{/* <button className='btn' id="editUserBtn" onClick={this.editUserNav}> */}
 							Edit User
 						</button>
 						<br />

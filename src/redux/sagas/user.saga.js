@@ -37,22 +37,21 @@ function* updateUser(action) {
 }
 
 function* getOtherUsers(){
-  
-console.log('in get other users');
-try {
-  const config = {
-    headers: { 'Content-Type': 'application/json' },
-    withCredentials: true,
+  //console.log('in get other users');
+  try {
+    const config = {
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: true,
   };
-  const response = yield axios.get('/api/user/all', config);
-  //const response = yield axios.get('/api/user', config);
+    const response = yield axios.get('/api/user/all', config);
+    //const response = yield axios.get('/api/user', config);
 
-  // now that the session has given us a user object
-  // with an id and username set the client-side user object to let
-  // the client-side code know the user is logged in
+    // now that the session has given us a user object
+    // with an id and username set the client-side user object to let
+    // the client-side code know the user is logged in
   yield put({ type: 'SET_OTHER_USERS', payload: response.data });
   } catch (error) {
-  console.log('User get request failed', error);
+    console.log('User get request failed', error);
   }
 }
 
