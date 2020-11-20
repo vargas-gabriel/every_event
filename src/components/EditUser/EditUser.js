@@ -106,7 +106,8 @@ class EditUser extends Component {
                     <button type="submit" className="centeredImage">Save Changes</button>
                     <br/>
                 </form>
-                {/* <button onClick={this.navHome}>Home</button> */}
+                <button className="centeredImage" onClick={this.navHome}>Back</button>
+                <br/>
             </div>
         );
     }

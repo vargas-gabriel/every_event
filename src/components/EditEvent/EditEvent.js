@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 // import {connect} from 'react-redux';
 import { connect } from 'react-redux';
 import mapStoreToProps from '../../redux/mapStoreToProps';
+import axios from 'axios';
+import { put, takeLatest, select } from 'redux-saga/effects';
 
 
 
@@ -12,12 +14,14 @@ class EditEvent extends Component {
     }
 
     componentDidMount = () => {
+        //console.log('mounting');
         //this.props.dispatch({type: 'GET_USER_EVENT'});
-        this.props.dispatch({type: 'FETCH_PHASE'})
-        this.props.dispatch({type: 'GET_OTHER_USERS'})
 
+
+        this.props.dispatch({type: 'FETCH_PHASE'});
+        this.props.dispatch({type: 'GET_OTHER_USERS'});
     
-        //this.findActiveEvent();   moved this into render()
+        //this.findActiveEvent();   //moved this into render()
         const activeEventId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({type: 'GET_ACTIVE_EVENT', payload: activeEventId})
     }
@@ -33,17 +37,23 @@ class EditEvent extends Component {
 
     }
     findActiveEvent = () => {
+        if(this.props.store.userEvent.length === 0){
+            console.log('no user events');
+            this.props.dispatch({type: 'GET_USER_EVENT'});
+        }
+        
         const activeId = Number(this.props.history.location.pathname.split('/')[2]);
         const userEvents = this.props.store.userEvent;
+        console.log('finding active event using id:', activeId);
         //console.log('this.props.store.userEvent', this.props.store.userEvent);
         //console.log('userEvents', userEvents);
         if(this.props.store.temp.id === undefined){
-            console.log('temp is 0');
+            //console.log('temp is 0');
             for(let i=0; i<userEvents.length; i++){
                 console.log('in for id', userEvents[i].id);
-                console.log('activeId', activeId);
+                //console.log('activeId', activeId);
                 if(activeId === userEvents[i].id){
-                    console.log('match!');
+                    //console.log('match!');
                     let eventToTemp = userEvents[i];
                     console.log('eventToTemp', eventToTemp);
                     this.props.dispatch({
@@ -156,7 +166,7 @@ class EditEvent extends Component {
         return (  
             <div id="editEventDiv">
                 <h1 className="centered">{this.props.store.temp.name}</h1>                
-                <h2 className="centered">Phases</h2>
+                <h2 className="centered" id="phases">Phases</h2>
                 <div className="centered">
                     <label htmlFor='campaignStart'>
                         Campaign Start

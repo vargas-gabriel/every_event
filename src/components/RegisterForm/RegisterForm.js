@@ -15,7 +15,7 @@ class RegisterForm extends Component {
 	// 		-----  required in inputs has a pop up on form submission. checkField for empty not needed  -----
 	checkUrl = (event) => {
 		if(this.state.image.length > 1000){
-			alert('Image URL is too long');
+			alert('Image must be 1000 characters or less');
 		}else{
 			this.registerUser();
 		}

@@ -27,6 +27,15 @@ img {
   margin-left: 4px;
 }
 
+#phases{
+  /* background-color: #1d2654; */
+}
+
+#createEvent{
+  display: block;
+  padding: 10px;
+}
+
 .editHeader{
   margin: 0px;
   text-align: center;
@@ -153,6 +162,7 @@ img {
   width: 35%;
   margin-bottom: 25px;
   border-radius: 15px;
+  vertical-align: top;
 }
 #eventItemDiv:hover{
   box-shadow: 0 0 2pt 2pt #3948a0;

@@ -158,8 +158,7 @@ class EditPhase extends Component {
 
         return (  
             <div id="editEventDiv">
-
-
+                {/* <button id="backToPhases" onClick={this.props.history.push(`/editevent/${this.props.store.temp.id}`)}>Back to Phases</button> */}
                 {phase && <h1 className="centered">{phase.event_name}</h1>}
                 {/* <h1 className="centered">{this.props.store.temp.name}</h1> */}
                 {phase && <h2 className="centered">Viewing Phase: {phase.name} </h2>}
