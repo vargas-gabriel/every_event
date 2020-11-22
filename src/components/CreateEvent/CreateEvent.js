@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import swal from "sweetalert";
 
 class CreateEvent extends Component {
 	state = {
@@ -21,9 +22,9 @@ class CreateEvent extends Component {
 			this.state.campaignStart === "" ||
 			this.state.campaignEnd === ""
 		) {
-			alert("Fill all required fields");
+			swal("Fill all required fields");
 		} else if (this.state.image.length > 1000) {
-			alert("image url is too long");
+			swal("image url is too long");
 		} else {
 			this.createEvent();
 		}
@@ -46,7 +47,7 @@ class CreateEvent extends Component {
 		});
 		this.props.dispatch({ type: "GET_USER_EVENT" });
 
-		alert("Event Created!");
+		swal("Event Created!");
 		this.props.history.push("/user"); //need condition to check if event was created
 	};
 

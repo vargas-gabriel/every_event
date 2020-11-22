@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // import {connect} from 'react-redux';
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import swal from "sweetalert";
 
 class EditUser extends Component {
 	state = {
@@ -16,7 +17,7 @@ class EditUser extends Component {
 	checkURL = (event) => {
 		event.preventDefault();
 		if (this.state.image.length > 1000) {
-			alert("Image URL is too long");
+			swal("Image URL is too long");
 		} else {
 			this.editUser();
 		}
@@ -29,7 +30,7 @@ class EditUser extends Component {
 			type: "UPDATE_USER",
 			payload: this.state,
 		});
-		alert("Saved!");
+		swal("Saved!");
 		this.navHome();
 	};
 
