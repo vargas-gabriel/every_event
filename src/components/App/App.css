@@ -89,6 +89,12 @@ img {
 	text-decoration: underline;
 	cursor: pointer;
 }
+.btn-all {
+	background-color: #3948a0;
+	color: white;
+	cursor: pointer;
+	border-radius: 7px;
+}
 .postTableh4 {
 	cursor: pointer;
 }
