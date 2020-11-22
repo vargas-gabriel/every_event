@@ -4,31 +4,35 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class CreateEvent extends Component {
 	state = {
-		eventName: '',
-		eventAcronym: '',
-		eventWebsite: '',
-		eventRegistration: '',
-		eventOAuth: '',
-		campaignStart: '',
-		campaignEnd: '',
-		image: ''
+		eventName: "",
+		eventAcronym: "",
+		eventWebsite: "",
+		eventRegistration: "",
+		eventOAuth: "",
+		campaignStart: "",
+		campaignEnd: "",
+		image: "",
 	};
 
 	checkFields = () => {
 		//console.log('checking fields');
-		if(this.state.eventName === '' || this.state.campaignStart === '' || this.state.campaignEnd === ''){
-			alert('Fill all required fields');
-		}else if(this.state.image.length > 1000){
-			alert('image url is too long')
-		}else{
+		if (
+			this.state.eventName === "" ||
+			this.state.campaignStart === "" ||
+			this.state.campaignEnd === ""
+		) {
+			alert("Fill all required fields");
+		} else if (this.state.image.length > 1000) {
+			alert("image url is too long");
+		} else {
 			this.createEvent();
 		}
-	}
+	};
 
-	createEvent=()=>{
-		console.log('creating event');
+	createEvent = () => {
+		console.log("creating event");
 		this.props.dispatch({
-			type: 'CREATE_EVENT',
+			type: "CREATE_EVENT",
 			payload: {
 				eventName: this.state.eventName,
 				eventAcronym: this.state.eventAcronym,
@@ -37,15 +41,14 @@ class CreateEvent extends Component {
 				eventOAuth: this.state.eventOAuth,
 				campaignStart: this.state.campaignStart,
 				campaignEnd: this.state.campaignEnd,
-				image: this.state.image
-			}
-			
+				image: this.state.image,
+			},
 		});
 		this.props.dispatch({ type: "GET_USER_EVENT" });
 
-		alert('Event Created!')
-		this.props.history.push('/user')//need condition to check if event was created 
-	}
+		alert("Event Created!");
+		this.props.history.push("/user"); //need condition to check if event was created
+	};
 
 	handleInputChangeFor = (propertyName) => (event) => {
 		this.setState({
@@ -54,18 +57,18 @@ class CreateEvent extends Component {
 	};
 
 	render() {
-		console.log('this state:', this.state);
-		console.log('url length', this.state.image.length);
+		console.log("this state:", this.state);
+		console.log("url length", this.state.image.length);
 		return (
-         // <form className='formPanel' onSubmit={this.createEvent}>
-         <div className="rounded" id="createEvent">
+			// <form className='formPanel' onSubmit={this.createEvent}>
+			<div className='rounded' id='createEvent'>
 				<h2>Create Event</h2>
-				
+
 				<div>
 					<label htmlFor='eventName'>
 						Event Name:
 						<input
-							className="requiredInput"
+							className='requiredInput'
 							type='text'
 							name='eventName'
 							required
@@ -121,7 +124,7 @@ class CreateEvent extends Component {
 							onChange={this.handleInputChangeFor("image")}
 						/>
 					</label>
-				</div> 
+				</div>
 				{/* <div>
 					<label htmlFor='eventOAuth'>
 						Event OAuth:
@@ -138,7 +141,7 @@ class CreateEvent extends Component {
 					<label htmlFor='campaignStart'>
 						Campaign Start:
 						<input
-							className="requiredInput"
+							className='requiredInput'
 							type='date'
 							name='campaignStart'
 							required
@@ -146,12 +149,12 @@ class CreateEvent extends Component {
 							onChange={this.handleInputChangeFor("campaignStart")}
 						/>
 					</label>
-				</div>         
+				</div>
 				<div>
 					<label htmlFor='campaignEnd'>
 						Campaign End:
 						<input
-							className="requiredInput"
+							className='requiredInput'
 							type='date'
 							name='campaignEnd'
 							required
@@ -159,13 +162,15 @@ class CreateEvent extends Component {
 							onChange={this.handleInputChangeFor("campaignEnd")}
 						/>
 					</label>
-				</div>                                                          
-				<p className="required">required</p>
+				</div>
+				<p className='required'>required</p>
 				<div>
 					{/* <input className='btn' type='submit' name='submit' value='Create Event' /> */}
-				<button onClick={this.checkFields}>Create Event</button>
-            </div>
-         </div>
+					<button className='btn-all' onClick={this.checkFields}>
+						Create Event
+					</button>
+				</div>
+			</div>
 			// </form>
 		);
 	}
