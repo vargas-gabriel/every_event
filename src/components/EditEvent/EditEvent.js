@@ -47,6 +47,7 @@ class EditEvent extends Component {
     findActiveCollaborators = () => {
         console.log('in findActiveCollaborators', this.props.store.temp.event_id);
         console.log(this.props.store.collaborators);
+        
         if(this.props.store.collaborators.length === 0){
             const collaborationId = Number(this.props.store.temp.event_id);
             console.log('****collaborationId',collaborationId);//payload will ultimately collaboratorId
