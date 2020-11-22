@@ -125,7 +125,9 @@ class EditPhase extends Component {
 				send_date: this.state.send_date.split("T", 1)[0],
 				send_time: this.state.send_time,
 			},
-		});
+        });
+        alert('Success!')
+
 	};
 	saveAndPost = () => {
 		//console.log('clicked save and post');
@@ -139,7 +141,8 @@ class EditPhase extends Component {
 				send_date: this.state.send_date.split("T", 1)[0],
 				send_time: this.state.send_time,
 			},
-		});
+        });
+        alert('Success!')
 	};
 	saveAndSchedule = () => {
 		//console.log('clicked save & schedule', this.state.name, this.state.post_text, this.state.send_date);
@@ -154,7 +157,9 @@ class EditPhase extends Component {
 				send_date: this.state.send_date.split("T", 1)[0],
 				send_time: this.state.send_time,
 			},
-		});
+        });
+        alert('Success!')
+
 	};
 
 	addHashtags = () => {

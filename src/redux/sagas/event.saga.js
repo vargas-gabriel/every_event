@@ -83,15 +83,28 @@ function* getActiveEvent(action){
 
 function* addCollaborator(action) {
     console.log('creating event with', action);
-    yield axios({
+    let response = yield axios({
         method: 'POST',
         url: '/api/event/addCollaborator',
         data: action.payload
     });
-    yield put ({
-        type: 'GET_USER_EVENT'
-    })
-  }
+    // yield put ({
+    //     type: 'SET_COLLABORATORS'
+    // })
+}
+//then this needs to call GET_COLLABORATORS which will then call SET_COLLABORATORS
+//getCollaborators
+function* getCollaborators(action) {
+    console.log('in get collaborators with', action);
+    let response = yield axios({
+        method: 'GET',
+        url: `/api/event/geteventcollaborators/${action.payload}`,
+    });
+    yield put({ type: 'SET_COLLABORATORS', payload: response.data });
+    
+}
+
+//geteventcollaborators/:id will be GET_COLLABORATORS
 function* eventSaga() {
   yield takeLatest('CREATE_EVENT', createEvent);
   yield takeLatest('GET_EVENT', getEvent);
@@ -100,6 +113,8 @@ function* eventSaga() {
   yield takeLatest('GET_TEMP_EVENT', updateTempEvent);
   yield takeLatest('GET_ACTIVE_EVENT', getActiveEvent);
   yield takeLatest('ADD_COLLABORATOR', addCollaborator);
+  yield takeLatest('GET_COLLABORATORS', getCollaborators);
+
 }
 
 export default eventSaga;

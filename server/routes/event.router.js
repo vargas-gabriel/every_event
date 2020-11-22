@@ -160,7 +160,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-	console.log('in GET by id', req.user.id, req.params.id);
+	console.log('in GET by id with user id | event id', req.user.id, Number(req.params.id));
 	// const query = `SELECT "user_event"."event_id", "event"."name", "event"."acronym", "event"."event_image", "event"."type", "event"."start_date",
 	//     "event"."end_date", "event"."website", "event"."registration_link", "event"."linkedin_account", "event"."hashtag" FROM "event"
 	//     JOIN "user_event"
@@ -170,7 +170,7 @@ router.get("/:id", (req, res) => {
 	const query = `SELECT * FROM "event" 
         JOIN "user_event" 
         ON "event"."id" = "user_event"."event_id"
-        WHERE "event"."id" = $1
+        WHERE "user_event"."id" = $1
         AND "user_event"."user_id" = $2;`;
 	const queryParams = [req.params.id, req.user.id];
 
@@ -219,4 +219,30 @@ router.put("/:id", rejectUnauthenticated, (req, res) => {
 		});
 });
 
+
+
+//get collaborators
+
+router.get('/geteventcollaborators/:id',  (req, res) => {
+    console.log('in geteventcollaborators with req.params', req.params);
+    const query = `   
+    SELECT "user"."id", "user"."first_name", "user"."last_name", "user_event"."id" 
+    AS "event_id"  
+    FROM "user" 
+    JOIN "user_event" 
+    ON "user"."id" = "user_event"."user_id" 
+    WHERE "event_id" = $1;
+    `;
+    const queryParams = [req.params.id]
+
+    pool.query(query, queryParams)
+    .then(results => {
+        console.log('collaborator results.rows', results.rows);
+    	res.send(results.rows);
+    })
+    .catch(error => {
+    	console.log('ERROR', error);
+    	res.sendStatus(500);
+    })	
+})
 module.exports = router;

@@ -24,6 +24,15 @@ class EditEvent extends Component {
         //this.findActiveEvent();   //moved this into render()
         const activeEventId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({type: 'GET_ACTIVE_EVENT', payload: activeEventId})
+        //const collaboratorId = this.props.store.temp.event_id;
+        //console.log('collaboratorId',collaboratorId);
+        
+        
+        
+        //WORKING ON THIS MOVING TO RENDER()
+        //this.props.dispatch({type: 'GET_COLLABORATORS', payload: '4'})
+        //GET_COLLABORATORS is in event saga
+        
     }
 
     addCollaborator = (collaborator) =>{
@@ -34,8 +43,22 @@ class EditEvent extends Component {
             type: 'ADD_COLLABORATOR',
             payload: {collaborator, event_id}
         })
-
+        //ADD_COLLABORATOR is in event saga
     }
+
+    
+    findActiveCollaborators = () => {
+        console.log('in findActiveCollaborators', this.props.store.temp.event_id);
+        console.log(this.props.store.collaborators);
+        if(this.props.store.collaborators.length === 0){
+            const collaborationId = Number(this.props.store.temp.event_id);
+            console.log('****collaborationId',collaborationId);//payload will ultimately collaboratorId
+            this.props.dispatch({type: 'GET_COLLABORATORS', payload: collaborationId});
+            return;
+        }
+        
+    }
+
     findActiveEvent = () => {
         if(this.props.store.userEvent.length === 0){
             console.log('no user events');
@@ -163,6 +186,7 @@ class EditEvent extends Component {
         //const otherUsers = this.props.store.otherUsersReducer
         const activeEvent = this.props.store.temp;
         this.findActiveEvent();
+        this.findActiveCollaborators();
         return (  
             <div id="editEventDiv">
                 <h1 className="centered">{this.props.store.temp.name}</h1>                
@@ -300,7 +324,7 @@ class EditEvent extends Component {
                     }
                     <br/><br/>
                 </div>
-
+                    
                 <div id="eventCollaborators" className="rounded">
                     <h4 className="centered">Possible Collaborators</h4>
 
@@ -316,7 +340,7 @@ class EditEvent extends Component {
                                     </td>
                                     <td>
                                         <button onClick={()=>this.addCollaborator(otherUser)}>Add</button>
-                                        <button>Remove</button>
+                                        {/* <button>Remove</button> */}
 
                                     </td>
                                 </tr>
@@ -326,10 +350,11 @@ class EditEvent extends Component {
                         </table>
                        
                     </div><br/>
-                    <button className="centeredImage">Add Collaborator</button><br/><br/>
+                    {/* <button className="centeredImage">Add Collaborator</button> */}
+                    <br/>
 
                 </div>
-
+                <br/>
 
                 <div id="eventCollaborators" className="rounded">
                     <h4 className="centered">Current Collaborators</h4>
@@ -338,14 +363,14 @@ class EditEvent extends Component {
                         <table className="collabTable">
                             <tbody >
 
-                            {this.props.store.otherUsersReducer.map((otherUser) =>
+                            {this.props.store.collaborators.map((collaborator) =>
 
-                                <tr key ={otherUser.id}>
+                                <tr key ={collaborator.id}>
                                     <td>
-                                        <h5> {otherUser.first_name}</h5>
+                                        <h5> {collaborator.first_name}</h5>
                                     </td>
                                     <td>
-                                        <button onClick={()=>this.addCollaborator(otherUser)}>Add</button>
+                                        {/* <button onClick={()=>this.addCollaborator(collaborator)}>Add</button> */}
                                         <button>Remove</button>
 
                                     </td>
@@ -356,7 +381,8 @@ class EditEvent extends Component {
                         </table>
                        
                     </div><br/>
-                    <button className="centeredImage">Add Collaborator</button><br/><br/>
+                    {/* <button className="centeredImage">Add Collaborator</button> */}
+                    <br/>
 
                 </div>
 
