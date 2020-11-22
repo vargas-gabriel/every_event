@@ -15,6 +15,15 @@ Before you get started, make sure you have the following software installed on y
 - Go to (https://ayrshare.com) and sign up for an account (you can login with github)
 - Generate an API key
 
+## Lay of the Land
+
+Directory Structure:
+
+- `src/` contains the React application
+- `public/` contains static assets for the client-side
+- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
+- `server/` contains the Express App
+
 ## Create database
 
 Create a new database called `every_event`.
@@ -77,15 +86,6 @@ Before pushing to Heroku, run `npm run build` in terminal. This will create a bu
 - Start postgres if not running already by using `brew services start postgresql`
 - Run `npm start`
 - Navigate to `localhost:5000`
-
-## Lay of the Land
-
-Directory Structure:
-
-- `src/` contains the React application
-- `public/` contains static assets for the client-side
-- `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-- `server/` contains the Express App
 
 ## Deployment
 
