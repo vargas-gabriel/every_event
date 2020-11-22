@@ -14,25 +14,10 @@ class EditEvent extends Component {
     }
 
     componentDidMount = () => {
-        //console.log('mounting');
-        //this.props.dispatch({type: 'GET_USER_EVENT'});
-
-
         this.props.dispatch({type: 'FETCH_PHASE'});
         this.props.dispatch({type: 'GET_OTHER_USERS'});
-    
-        //this.findActiveEvent();   //moved this into render()
         const activeEventId = Number(this.props.history.location.pathname.split('/')[2]);
         this.props.dispatch({type: 'GET_ACTIVE_EVENT', payload: activeEventId})
-        //const collaboratorId = this.props.store.temp.event_id;
-        //console.log('collaboratorId',collaboratorId);
-        
-        
-        
-        //WORKING ON THIS MOVING TO RENDER()
-        //this.props.dispatch({type: 'GET_COLLABORATORS', payload: '4'})
-        //GET_COLLABORATORS is in event saga
-        
     }
 
     addCollaborator = (collaborator) =>{
@@ -43,10 +28,22 @@ class EditEvent extends Component {
             type: 'ADD_COLLABORATOR',
             payload: {collaborator, event_id}
         })
-        //ADD_COLLABORATOR is in event saga
+        const collaborationId = Number(this.props.store.temp.event_id);
+        this.props.dispatch({type: 'GET_COLLABORATORS', payload: collaborationId});    }
+
+    removeCollaborator = (collaborator) =>{
+        const event_id = this.props.store.temp.event_id;
+        console.log('event id is',event_id);
+        console.log('deleting collaborator:', collaborator);
+        this.props.dispatch({
+            type: 'DELETE_COLLABORATOR',
+            payload: {collaborator, event_id}
+        })
+        const collaborationId = Number(this.props.store.temp.event_id);
+        this.props.dispatch({type: 'GET_COLLABORATORS', payload: collaborationId});
+
     }
 
-    
     findActiveCollaborators = () => {
         console.log('in findActiveCollaborators', this.props.store.temp.event_id);
         console.log(this.props.store.collaborators);
@@ -340,7 +337,6 @@ class EditEvent extends Component {
                                     </td>
                                     <td>
                                         <button onClick={()=>this.addCollaborator(otherUser)}>Add</button>
-                                        {/* <button>Remove</button> */}
 
                                     </td>
                                 </tr>
@@ -350,7 +346,6 @@ class EditEvent extends Component {
                         </table>
                        
                     </div><br/>
-                    {/* <button className="centeredImage">Add Collaborator</button> */}
                     <br/>
 
                 </div>
@@ -371,7 +366,7 @@ class EditEvent extends Component {
                                     </td>
                                     <td>
                                         {/* <button onClick={()=>this.addCollaborator(collaborator)}>Add</button> */}
-                                        <button>Remove</button>
+                                        <button onClick={()=>this.removeCollaborator(collaborator)}>Remove</button>
 
                                     </td>
                                 </tr>
@@ -387,16 +382,6 @@ class EditEvent extends Component {
                 </div>
 
 
-
-                {/* <div id="eventHashtags" className="rounded">
-                    <h4 className="centered">Event Hashtags</h4>
-                    <textarea className="centeredImage" rows="8" defaultValue={this.props.store.temp.hashtag} 
-                    ></textarea><br/><br/>
-                    <button className="centeredImage">Save Hashtags</button><br/><br/>
-                </div> */}
-
-
-                {/* <button onClick={this.navHome}>Home</button> */}
             </div>
         );
     }

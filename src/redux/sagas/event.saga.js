@@ -88,6 +88,7 @@ function* addCollaborator(action) {
         url: '/api/event/addCollaborator',
         data: action.payload
     });
+    console.log('response from addCollaborator', response.data);
     // yield put ({
     //     type: 'SET_COLLABORATORS'
     // })
@@ -95,14 +96,31 @@ function* addCollaborator(action) {
 //then this needs to call GET_COLLABORATORS which will then call SET_COLLABORATORS
 //getCollaborators
 function* getCollaborators(action) {
-    console.log('in get collaborators with', action);
+    console.log('in get collaborators with', action.payload);
+    const collaborationId = Number(action.payload);
+    console.log(collaborationId);
     let response = yield axios({
         method: 'GET',
-        url: `/api/event/geteventcollaborators/${action.payload}`,
+        url: `/api/event/geteventcollaborators/${collaborationId}`,
     });
     yield put({ type: 'SET_COLLABORATORS', payload: response.data });
     
 }
+
+function* deleteCollaborator(action) {
+    console.log('in deleteCollaborator collaborator with', action.payload.collaborator.event_id);
+    const collaborationId = Number(action.payload.collaborator.event_id)
+    let response = yield axios({
+        method: 'DELETE',
+        url: `/api/event/deletecollaborator/${collaborationId}`,
+    });
+    // yield put({ type: 'SET_COLLABORATORS', payload: response.data });
+    
+}
+
+
+
+
 
 //geteventcollaborators/:id will be GET_COLLABORATORS
 function* eventSaga() {
@@ -112,8 +130,12 @@ function* eventSaga() {
   yield takeLatest('UPDATE_EVENT', updateEvent);
   yield takeLatest('GET_TEMP_EVENT', updateTempEvent);
   yield takeLatest('GET_ACTIVE_EVENT', getActiveEvent);
+
   yield takeLatest('ADD_COLLABORATOR', addCollaborator);
   yield takeLatest('GET_COLLABORATORS', getCollaborators);
+  yield takeLatest('DELETE_COLLABORATOR', deleteCollaborator);
+
+  
 
 }
 

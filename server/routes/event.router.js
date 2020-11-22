@@ -245,4 +245,23 @@ router.get('/geteventcollaborators/:id',  (req, res) => {
     	res.sendStatus(500);
     })	
 })
+
+
+
+//delete
+router.delete('/deletecollaborator/:id', (req, res) => {
+    console.log( 'in delete router:', req.params.id)
+    const query = `DELETE FROM "user_event" WHERE "id"=$1;`
+    pool.query(query, [req.params.id])
+    .then(() => 
+        res.sendStatus(200))
+    .catch(error => {
+        console.log('ERROR:', error);
+    })
+});
+
+
+
+
+
 module.exports = router;
