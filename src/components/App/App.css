@@ -13,6 +13,13 @@ body {
 td{
   text-align: center ;
 }
+th{
+  padding-top: 13px;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-family: serif;
+  font-size: 20px;
+}
 img {
   display: inline-block;
   max-width: 100%;
