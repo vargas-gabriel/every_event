@@ -350,7 +350,9 @@ class EditPhase extends Component {
 								{includedPosts.map((post) => (
 									<tr key={post.id}>
 										<td>
-											<h4 className='' onClick={() => this.loadPost(post)}>
+											<h4
+												className='postTableh4'
+												onClick={() => this.loadPost(post)}>
 												{post.name}
 											</h4>
 										</td>
