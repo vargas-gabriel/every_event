@@ -14,12 +14,12 @@ class RegisterForm extends Component {
 	};
 	// 		-----  required in inputs has a pop up on form submission. checkField for empty not needed  -----
 	checkUrl = (event) => {
-		if(this.state.image.length > 1000){
-			alert('Image must be 1000 characters or less');
-		}else{
+		if (this.state.image.length > 1000) {
+			alert("Image must be 1000 characters or less");
+		} else {
 			this.registerUser();
 		}
-	}
+	};
 
 	verifyPassword = (event) => {
 		event.preventDefault();
@@ -52,10 +52,10 @@ class RegisterForm extends Component {
 
 	render() {
 		//console.log("this is our state:", this.state);
-		console.log('url length', this.state.image.length);
+		console.log("url length", this.state.image.length);
 		return (
 			<>
-				<br/>
+				<br />
 				<form className='formPanel' onSubmit={this.verifyPassword}>
 					<h2>Register User</h2>
 					{this.props.store.errors.registrationMessage && (
@@ -101,7 +101,8 @@ class RegisterForm extends Component {
 					</div>
 					<div>
 						<label htmlFor='ayrshare api key'>
-							ayrshare api key: <a href='https://www.ayrshare.com/' target='blank'>
+							ayrshare api key:{" "}
+							<a href='https://www.ayrshare.com/' target='blank'>
 								Get your key here
 							</a>
 							<input
@@ -151,7 +152,12 @@ class RegisterForm extends Component {
 					</div>
 
 					<div>
-						<input className='btn' type='submit' name='submit' value='Register' />
+						<input
+							className='btn'
+							type='submit'
+							name='submit'
+							value='Register'
+						/>
 					</div>
 				</form>
 			</>
