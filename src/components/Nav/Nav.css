@@ -5,9 +5,9 @@
   color: #f2f2f2;
   /* padding-left: 10px; */
   text-align: center;
-  margin-top: 10px;
+  margin-top: 5px;
   font-size: 40px;
-  margin-bottom: 6px;
+  margin-bottom: 10px;
 }
 
 .nav {
@@ -15,7 +15,9 @@
   /* background-color: #3948a0; */
   background-image: linear-gradient(45deg, black, #1d2654);
   overflow: hidden;
-  height: 138px;
+  height: 110px;
+  width: 100%;
+  /* position: fixed; */
 }
 
 .nav-link {
@@ -24,7 +26,8 @@
   /* background-color: #3948a0; */
   background-color: transparent;
   text-align: center;
-  padding: 24px 10px;
+  margin-top: 15px;
+  padding: 5px 10px;
   text-decoration: none;
   font-size: 15px;
 
@@ -37,11 +40,12 @@
 
 .nav-link:hover {
   background-color: #1d2654;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .nav-right {
   /* float: right; */
   display: flex;
   justify-content: center;
+  margin-top: -20px;
 }

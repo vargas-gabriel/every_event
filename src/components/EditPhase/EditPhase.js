@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
+import swal from "sweetalert";
 
 class EditPhase extends Component {
 	state = {
@@ -125,7 +126,9 @@ class EditPhase extends Component {
 				send_date: this.state.send_date.split("T", 1)[0],
 				send_time: this.state.send_time,
 			},
-		});
+        });
+        swal('Success!')
+
 	};
 	saveAndPost = () => {
 		//console.log('clicked save and post');
@@ -139,7 +142,8 @@ class EditPhase extends Component {
 				send_date: this.state.send_date.split("T", 1)[0],
 				send_time: this.state.send_time,
 			},
-		});
+        });
+        swal('Success!')
 	};
 	saveAndSchedule = () => {
 		//console.log('clicked save & schedule', this.state.name, this.state.post_text, this.state.send_date);
@@ -154,7 +158,9 @@ class EditPhase extends Component {
 				send_date: this.state.send_date.split("T", 1)[0],
 				send_time: this.state.send_time,
 			},
-		});
+        });
+        swal('Success!')
+
 	};
 
 	addHashtags = () => {
