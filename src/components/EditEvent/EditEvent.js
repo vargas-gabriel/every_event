@@ -332,7 +332,7 @@ class EditEvent extends Component {
 
                                 <tr key ={otherUser.id}>
                                     <td>
-                                        <h5> {otherUser.first_name}</h5>
+                                        <h5> {otherUser.first_name} {otherUser.last_name}</h5>
                                     </td>
                                     <td>
                                         <button className="btn-all" onClick={()=>this.addCollaborator(otherUser)}>Add</button>
@@ -361,7 +361,7 @@ class EditEvent extends Component {
 
                                 <tr key ={collaborator.id}>
                                     <td>
-                                        <h5> {collaborator.first_name}</h5>
+                                        <h5> {collaborator.first_name} {collaborator.last_name}</h5>
                                     </td>
                                     <td>
                                         {/* <button onClick={()=>this.addCollaborator(collaborator)}>Add</button> */}
