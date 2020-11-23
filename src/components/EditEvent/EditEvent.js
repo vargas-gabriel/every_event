@@ -254,7 +254,7 @@ class EditEvent extends Component {
                                 </td>
                                 <td>
                                     <label htmlFor='phaseStart'>
-                                        <input
+                                        {/* <input
                                             type='date'
                                             name='phaseStart'
                                             required
@@ -262,19 +262,22 @@ class EditEvent extends Component {
                                             defaultValue={phase.start_date.split('T', 1)[0]}
                                             //onChange={(event) => this.handleDateChange(event, "start_date")}
             
-                                        />
+                                        /> */}
+                                        <h4>{phase.start_date.split('T', 1)[0]}</h4>
                                     </label>
                                 </td>
                                 <td>
                                     <label htmlFor='phaseEnd'>
-                                        <input
+                                        {/* <input
                                             type='date'
                                             name='phaseEnd'
                                             required
                                             disabled
                                             defaultValue={phase.end_date.split('T', 1)[0]}
                                             //onChange={(event) => this.handleDateChange(event, "end_date")}
-                                        />
+                                        /> */}
+                                        <h4>{phase.end_date.split('T', 1)[0]}</h4>
+
                                     </label>
                                 </td>
                             </tr>
