@@ -23,7 +23,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
-    "social-post-api": "^1.0.7"
+    "social-post-api": "^1.0.7",
+    "sweetalert": "^2.1.2"
   },
   "scripts": {
     "start": "node server/server.js",

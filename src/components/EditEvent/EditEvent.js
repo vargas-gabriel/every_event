@@ -1,11 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 // import {connect} from 'react-redux';
-import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
-import axios from 'axios';
-import { put, takeLatest, select } from 'redux-saga/effects';
-
-
+import { connect } from "react-redux";
+import mapStoreToProps from "../../redux/mapStoreToProps";
+import axios from "axios";
+import { put, takeLatest, select } from "redux-saga/effects";
 
 class EditEvent extends Component {
 
@@ -337,7 +335,7 @@ class EditEvent extends Component {
                                         <h5> {otherUser.first_name}</h5>
                                     </td>
                                     <td>
-                                        <button onClick={()=>this.addCollaborator(otherUser)}>Add</button>
+                                        <button className="btn-all" onClick={()=>this.addCollaborator(otherUser)}>Add</button>
 
                                     </td>
                                 </tr>
@@ -367,7 +365,7 @@ class EditEvent extends Component {
                                     </td>
                                     <td>
                                         {/* <button onClick={()=>this.addCollaborator(collaborator)}>Add</button> */}
-                                        <button onClick={()=>this.removeCollaborator(collaborator)}>Remove</button>
+                                        <button className="btn-all" onClick={()=>this.removeCollaborator(collaborator)}>Remove</button>
 
                                     </td>
                                 </tr>
@@ -389,7 +387,7 @@ class EditEvent extends Component {
 }
 
 const mapStateToProps = (reduxStore) => ({
-  reduxStore
-})
+	reduxStore,
+});
 
 export default connect(mapStoreToProps)(EditEvent);

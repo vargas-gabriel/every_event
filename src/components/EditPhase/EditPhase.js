@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import axios from "axios";
+import swal from "sweetalert";
 
 class EditPhase extends Component {
 	state = {
@@ -126,7 +127,7 @@ class EditPhase extends Component {
 				send_time: this.state.send_time,
 			},
         });
-        alert('Success!')
+        swal('Success!')
 
 	};
 	saveAndPost = () => {
@@ -142,7 +143,7 @@ class EditPhase extends Component {
 				send_time: this.state.send_time,
 			},
         });
-        alert('Success!')
+        swal('Success!')
 	};
 	saveAndSchedule = () => {
 		//console.log('clicked save & schedule', this.state.name, this.state.post_text, this.state.send_date);
@@ -158,7 +159,7 @@ class EditPhase extends Component {
 				send_time: this.state.send_time,
 			},
         });
-        alert('Success!')
+        swal('Success!')
 
 	};
 
@@ -263,11 +264,17 @@ class EditPhase extends Component {
 								Character Counter: {this.state.post_text.length}
 							</p>
 						)}
-						<button id='centeredButton' onClick={() => this.addHashtags()}>
+						<button
+							id='centeredButton'
+							className='btn-all'
+							onClick={() => this.addHashtags()}>
 							Add Hashtags
 						</button>
 						<br />
-						<button id='centeredButton' onClick={() => this.uploadImage()}>
+						<button
+							id='centeredButton'
+							className='btn-all'
+							onClick={() => this.uploadImage()}>
 							Upload Post Image
 						</button>
 					</div>
@@ -328,18 +335,20 @@ class EditPhase extends Component {
 						)}
 						<br />
 						<hr />
-						<button className='centeredImage' onClick={() => this.savePost()}>
+						<button
+							className='centeredImage btn-all'
+							onClick={() => this.savePost()}>
 							Save
 						</button>
 						<br />
 						<button
-							className='centeredImage'
+							className='centeredImage btn-all'
 							onClick={() => this.saveAndPost()}>
 							Save & Post
 						</button>
 						<br />
 						<button
-							className='centeredImage'
+							className='centeredImage btn-all'
 							onClick={() => this.saveAndSchedule()}>
 							Save & Schedule
 						</button>
@@ -355,12 +364,16 @@ class EditPhase extends Component {
 								{includedPosts.map((post) => (
 									<tr key={post.id}>
 										<td>
-											<h4 className='' onClick={() => this.loadPost(post)}>
+											<h4
+												className='postTableh4'
+												onClick={() => this.loadPost(post)}>
 												{post.name}
 											</h4>
 										</td>
 										<td>
-											<button onClick={() => this.deletePost(post.id)}>
+											<button
+												className='btn-all'
+												onClick={() => this.deletePost(post.id)}>
 												Delete Post
 											</button>
 										</td>
@@ -370,7 +383,9 @@ class EditPhase extends Component {
 						</table>
 					</div>
 					<br />
-					<button className='centeredImage' onClick={() => this.newPost()}>
+					<button
+						className='centeredImage btn-all'
+						onClick={() => this.newPost()}>
 						New Post
 					</button>
 					<br />
@@ -397,7 +412,9 @@ class EditPhase extends Component {
 					)}
 					<br />
 					<br />
-					<button className='centeredImage' onClick={() => this.saveHashtags()}>
+					<button
+						className='centeredImage btn-all'
+						onClick={() => this.saveHashtags()}>
 						Save Hashtags
 					</button>
 					<br />

@@ -13,7 +13,7 @@ class UserPage extends Component {
 		userEvents: [],
 	};
 	componentDidMount() {
-		window.scrollTo(0, 0)
+		window.scrollTo(0, 0);
 		this.getGreeting();
 		this.props.dispatch({ type: "GET_USER_EVENT" });
 		if (window.location.href.includes("=")) {
@@ -70,7 +70,6 @@ class UserPage extends Component {
 
 	// this component doesn't do much to start, just renders some user info to the DOM
 	render() {
-		
 		return (
 			<div>
 				<div id='userDiv'>
@@ -86,12 +85,14 @@ class UserPage extends Component {
 						width='100px'></img>
 
 					<div id='userBtns'>
-						<button className='centeredImage' onClick={this.editUserNav}>
-						{/* <button className='btn' id="editUserBtn" onClick={this.editUserNav}> */}
+						<button
+							className='centeredImage btn-all'
+							onClick={this.editUserNav}>
+							{/* <button className='btn' id="editUserBtn" onClick={this.editUserNav}> */}
 							Edit User
 						</button>
 						<br />
-						<LogOutButton className='log-in, centeredImage' />
+						<LogOutButton className='log-in, centeredImage btn-all' />
 					</div>
 					<br />
 				</div>

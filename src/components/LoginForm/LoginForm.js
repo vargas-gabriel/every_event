@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class LoginForm extends Component {
@@ -19,6 +20,7 @@ class LoginForm extends Component {
 					password: this.state.password,
 				},
 			});
+			
 		} else {
 			this.props.dispatch({ type: "LOGIN_INPUT_ERROR" });
 		}
