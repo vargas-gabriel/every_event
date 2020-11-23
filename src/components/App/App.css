@@ -263,7 +263,8 @@ Button
 #userBtns {
 	width: 100px;
 	padding-top: 30px;
-	padding-right: 30px;
+  padding-right: 30px;
+  padding-bottom: 10px;
 	float: right;
 }
 #userImage {
