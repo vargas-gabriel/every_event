@@ -26,7 +26,7 @@ Directory Structure:
 
 ## Create database
 
-Create a new database called `every_event`.
+Create a new database called `every_event` and use the queries in the database.sql file
 
 If you would like to name your database something else, you will need to change `every_event` to the name of your new database name in `server/modules/pool.js`
 
@@ -50,7 +50,7 @@ If you would like to name your database something else, you will need to change 
 
 ## Using the app
 
-### Create and event
+### Create an event
 
 - The user is brought to the homepage upon logging in: it is on this page
   where you'll create your first event.
